@@ -4,6 +4,7 @@ import Product from "./product.js";
 import Shop from "./shop.js";
 import Warehouse from "./warehouse.js";
 import Order from "./order.js";
+import 'dotenv/config'
 
 const {DB_USER, DB_PWD, DB_HOST, DB_PORT, DB_NAME} = process.env;
 

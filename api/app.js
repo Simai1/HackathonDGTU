@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import corsMiddleware from './middlewares/cors.js';
 import dbUtils from './utils/db.js';
 // import cronService from './services/cron.js';
-
+import 'dotenv/config';
 import authRoute from './routes/auth.js';
 
 const app = express();
