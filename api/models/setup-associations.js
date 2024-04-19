@@ -16,15 +16,15 @@ export default function () {
     Warehouse.hasOne(Coords);
     Coords.belongsTo(Warehouse);
 
-    Product.belongsToMany(Shop, { through: 'ProductInShop', foreignKey: 'productID' });
-    Shop.belongsToMany(Product, { through: 'ProductInShop', foreignKey: 'shopID' });
+    Product.belongsToMany(Shop, { through: 'ProductInShop', foreignKey: 'productId' });
+    Shop.belongsToMany(Product, { through: 'ProductInShop', foreignKey: 'shopId' });
 
-    Shop.belongsToMany(Warehouse, { through: 'ShopInWarehouse', foreignKey: 'shopID' });
-    Warehouse.belongsToMany(Shop, { through: 'ShopInWarehouse', foreignKey: 'warehouseID' });
+    Shop.belongsToMany(Warehouse, { through: 'ShopInWarehouse', foreignKey: 'shopId' });
+    Warehouse.belongsToMany(Shop, { through: 'ShopInWarehouse', foreignKey: 'warehouseId' });
 
-    Product.belongsToMany(Order, { through: 'ProductInOrder', foreignKey: 'productID' });
-    Order.belongsToMany(Product, { through: 'ProductInOrder', foreignKey: 'orderID' });
+    Product.belongsToMany(Order, { through: 'ProductInOrder', foreignKey: 'productId' });
+    Order.belongsToMany(Product, { through: 'ProductInOrder', foreignKey: 'orderId' });
 
-    Product.belongsToMany(Warehouse, { through: 'ProductInWarehouse', foreignKey: 'productID' });
-    Warehouse.belongsToMany(Product, { through: 'ProductInWarehouse', foreignKey: 'warehouseID' });
+    Product.belongsToMany(Warehouse, { through: 'ProductInWarehouse', foreignKey: 'productId' });
+    Warehouse.belongsToMany(Product, { through: 'ProductInWarehouse', foreignKey: 'warehouseId' });
 }

@@ -1,4 +1,4 @@
-import {DataTypes, Model} from "sequelize";
+import { DataTypes, Model } from 'sequelize';
 
 export default class Warehouse extends Model {
     static initialize(sequelize) {
@@ -22,7 +22,7 @@ export default class Warehouse extends Model {
                     type: DataTypes.UUID,
                     allowNull: false,
                 },
-                productID: {
+                productId: {
                     type: DataTypes.UUID,
                     allowNull: false,
                 },
@@ -41,4 +41,3 @@ export default class Warehouse extends Model {
         );
     }
 }
-
