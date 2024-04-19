@@ -2,12 +2,14 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import corsMiddleware from './middlewares/cors.js';
 import dbUtils from './utils/db.js';
-
+// import cronService from './services/cron.js';
+import 'dotenv/config';
 import authRoute from './routes/auth.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Init DB section //
 (async function initDb() {
     try {
         await dbUtils.initializeDbModels();
@@ -18,6 +20,11 @@ const PORT = process.env.PORT || 3000;
     }
 
 })();
+// ============== //
+
+// CronJob section //
+// cronService.agreementDecline.start();
+// ============== //
 
 app.use(express.json({limit: '10mb'}));
 app.use(express.urlencoded({extended: false}));
