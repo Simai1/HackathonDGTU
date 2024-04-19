@@ -1,0 +1,10 @@
+@import "./../../style/color.scss";
+
+.LeftMenu__inner{
+    background-color: var( --menu-color);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 200px;
+}
