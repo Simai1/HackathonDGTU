@@ -1,4 +1,7 @@
-import {DataTypes, Model} from "sequelize";
+import { DataTypes, Model } from 'sequelize';
+import EnumProductMeasure from '../enums/measure.js';
+import EnumStoreName from '../enums/store-name.js';
+import EnumProductsName from '../enums/product.js';
 
 export default class Product extends Model {
     static initialize(sequelize) {
@@ -10,20 +13,65 @@ export default class Product extends Model {
                     allowNull: false,
                     primaryKey: true,
                 },
-                name: {
+                productName: {
                     type: DataTypes.STRING,
                     allowNull: false,
+                    validate: {
+                        isIn: [Object.values(EnumProductsName)],
+                    },
                 },
-                count: {
+                productCost: {
                     type: DataTypes.INTEGER,
+                    allowNull: false,
+                },
+                manufactureDate: {
+                    type: DataTypes.DATE,
                     allowNull: false,
                 },
                 expiryDate: {
                     type: DataTypes.DATE,
                     allowNull: false,
                 },
-                manufactureDate: {
+                SKU: {
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                },
+                storeName: {
+                    type: DataTypes.STRING,
+                    allowNull: false,
+                    validate: {
+                        isIn: [Object.values(EnumStoreName)],
+                    },
+                },
+                storeAddress: {
+                    type: DataTypes.STRING,
+                    allowNull: false,
+                },
+                region: {
+                    type: DataTypes.STRING,
+                    allowNull: false,
+                },
+                saleDate: {
                     type: DataTypes.DATE,
+                    allowNull: false,
+                },
+                quantitySold: {
+                    type: DataTypes.REAL,
+                    allowNull: false,
+                },
+                productMeasure: {
+                    type: DataTypes.STRING,
+                    allowNull: false,
+                    validate: {
+                        isIn: [Object.values(EnumProductMeasure)],
+                    },
+                },
+                productVolume: {
+                    type: DataTypes.REAL,
+                    allowNull: false,
+                },
+                manufacture: {
+                    type: DataTypes.STRING,
                     allowNull: false,
                 },
             },
@@ -37,4 +85,3 @@ export default class Product extends Model {
         );
     }
 }
-

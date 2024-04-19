@@ -1,8 +1,8 @@
-import { DataTypes, Model } from 'sequelize';
+import {DataTypes, Model} from "sequelize";
 
-export default class Warehouse extends Model {
+export default class Coords extends Model {
     static initialize(sequelize) {
-        Warehouse.init(
+        Coords.init(
             {
                 id: {
                     type: DataTypes.UUID,
@@ -14,30 +14,31 @@ export default class Warehouse extends Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                coordsID: {
-                    type: DataTypes.UUID,
+                coordsX: {
+                    type: DataTypes.REAL,
                     allowNull: false,
                 },
-                shopID: {
-                    type: DataTypes.UUID,
+                coordsY: {
+                    type: DataTypes.REAL,
                     allowNull: false,
                 },
-                productId: {
-                    type: DataTypes.UUID,
+                iconCaption: {
+                    type: DataTypes.STRING,
                     allowNull: false,
                 },
-                quantity: {
-                    type: DataTypes.INTEGER,
+                marketColor: {
+                    type: DataTypes.STRING,
                     allowNull: false,
-                },
+                }
             },
             {
                 sequelize,
                 schema: 'public',
-                modelName: 'Warehouse',
-                tableName: 'warehouses',
+                modelName: 'Coords',
+                tableName: 'coords',
                 paranoid: true,
             }
         );
     }
 }
+
