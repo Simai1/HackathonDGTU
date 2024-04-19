@@ -8,6 +8,7 @@ import {
   ZoomControl,
   Placemark,
 } from "react-yandex-maps";
+import Point from "./Point";
 
 function MapBody(props) {
   return (
@@ -25,12 +26,12 @@ function MapBody(props) {
         <TrafficControl options={{ float: "right" }} />
         <ZoomControl options={{ float: "right" }} />
         {props.listPoints.map((item) => (
-          <Placemark
+          <Point
             key={item.id}
-            geometry={[
-              item.geometry.coordinates[1],
-              item.geometry.coordinates[0],
-            ]}
+            id={item.id}
+            coor={[item.geometry.coordinates[1], item.geometry.coordinates[0]]}
+            iconColor={item.properties["marker-color"]}
+            iconCaption={item.properties.iconCaption}
           />
         ))}
       </Map>
