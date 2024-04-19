@@ -74,6 +74,18 @@ export default class Product extends Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
+                orderId: {
+                    type: DataTypes.UUID,
+                    allowNull: true,
+                },
+                warehouseId: {
+                    type: DataTypes.UUID,
+                    allowNull: false,
+                },
+                shopId: {
+                    type: DataTypes.UUID,
+                    allowNull: false,
+                },
             },
             {
                 sequelize,
