@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { YMaps } from "react-yandex-maps";
 import MapBody from "./MapBody";
 import { coordinates } from "./Coordinates";
+import styles from "./Styles.module.scss";
 function MapComponent() {
   const [listPoints, setListPoints] = useState(coordinates);
   console.log("listPoints", listPoints);
