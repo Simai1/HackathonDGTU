@@ -1,8 +1,8 @@
-import {DataTypes, Model} from "sequelize";
+import { DataTypes, Model } from 'sequelize';
 
-export default class Coords extends Model {
+export default class Coord extends Model {
     static initialize(sequelize) {
-        Coords.init(
+        Coord.init(
             {
                 id: {
                     type: DataTypes.UUID,
@@ -29,16 +29,15 @@ export default class Coords extends Model {
                 marketColor: {
                     type: DataTypes.STRING,
                     allowNull: false,
-                }
+                },
             },
             {
                 sequelize,
                 schema: 'public',
-                modelName: 'Coords',
+                modelName: 'Coord',
                 tableName: 'coords',
                 paranoid: true,
             }
         );
     }
 }
-

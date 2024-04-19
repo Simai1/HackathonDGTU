@@ -1,8 +1,8 @@
 import { DataTypes, Model } from 'sequelize';
 
-export default class ProductIOrder extends Model {
+export default class ProductInOrder extends Model {
     static initialize(sequelize) {
-        ProductIOrder.init(
+        ProductInOrder.init(
             {
                 id: {
                     type: DataTypes.UUID,
@@ -10,12 +10,20 @@ export default class ProductIOrder extends Model {
                     allowNull: false,
                     primaryKey: true,
                 },
+                productId: {
+                    type: DataTypes.UUID,
+                    allowNull: false,
+                },
+                orderId: {
+                    type: DataTypes.UUID,
+                    allowNull: false,
+                },
             },
             {
                 sequelize,
                 schema: 'public',
-                modelName: 'ProductIOrder',
-                tableName: 'productIOrder',
+                modelName: 'ProductInOrder',
+                tableName: 'productInOrders',
                 paranoid: true,
             }
         );

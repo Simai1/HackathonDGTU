@@ -10,12 +10,20 @@ export default class ProductInShop extends Model {
                     allowNull: false,
                     primaryKey: true,
                 },
+                shopId: {
+                    type: DataTypes.UUID,
+                    allowNull: false,
+                },
+                productId: {
+                    type: DataTypes.UUID,
+                    allowNull: false,
+                },
             },
             {
                 sequelize,
                 schema: 'public',
                 modelName: 'ProductInShop',
-                tableName: 'productInShop',
+                tableName: 'productInShops',
                 paranoid: true,
             }
         );

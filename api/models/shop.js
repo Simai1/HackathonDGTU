@@ -18,6 +18,10 @@ export default class Shop extends Model {
                     type: DataTypes.UUID,
                     allowNull: false,
                 },
+                warehouseId: {
+                    type: DataTypes.UUID,
+                    allowNull: false,
+                },
                 quantity: {
                     type: DataTypes.INTEGER,
                     allowNull: false,
