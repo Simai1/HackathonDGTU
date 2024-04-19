@@ -3,6 +3,8 @@ import cookieParser from 'cookie-parser';
 import corsMiddleware from './middlewares/cors.js';
 import dbUtils from './utils/db.js';
 
+import authRoute from './routes/auth.js';
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -22,6 +24,6 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(corsMiddleware);
 
-// app.use('/auth', authRoute);
+app.use('/auth', authRoute);
 
 app.listen(PORT, () => console.log(`Listen on :${PORT}`));
