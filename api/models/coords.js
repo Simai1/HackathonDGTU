@@ -1,8 +1,8 @@
 import {DataTypes, Model} from "sequelize";
 
-export default class Order extends Model {
+export default class Coords extends Model {
     static initialize(sequelize) {
-        Order.init(
+        Coords.init(
             {
                 id: {
                     type: DataTypes.UUID,
@@ -10,36 +10,32 @@ export default class Order extends Model {
                     allowNull: false,
                     primaryKey: true,
                 },
-                from: {
-                    type: DataTypes.UUID,
-                    allowNull: false,
-                },
-                to: {
-                    type: DataTypes.UUID,
-                    allowNull: false,
-                },
-                quantity: {
-                    type: DataTypes.INTEGER,
-                    allowNull: false,
-                },
-                status: {
+                name: {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                warehouseID: {
-                    type: DataTypes.UUID,
-                    allowNull: true,
-                },
-                productID: {
-                    type: DataTypes.UUID,
+                coordsX: {
+                    type: DataTypes.REAL,
                     allowNull: false,
                 },
+                coordsY: {
+                    type: DataTypes.REAL,
+                    allowNull: false,
+                },
+                iconCaption: {
+                    type: DataTypes.STRING,
+                    allowNull: false,
+                },
+                marketColor: {
+                    type: DataTypes.STRING,
+                    allowNull: false,
+                }
             },
             {
                 sequelize,
                 schema: 'public',
-                modelName: 'Order',
-                tableName: 'orders',
+                modelName: 'Coords',
+                tableName: 'coords',
                 paranoid: true,
             }
         );

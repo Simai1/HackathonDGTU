@@ -18,6 +18,19 @@ export default class Shop extends Model {
                     type: DataTypes.UUID,
                     allowNull: false,
                 },
+                quantity: {
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                },
+                warehouseID: {
+                    type: DataTypes.UUID,
+                    allowNull: false,
+                },
+                coordsID: {
+                    type: DataTypes.UUID,
+                    allowNull: false,
+                },
+
             },
             {
                 sequelize,
