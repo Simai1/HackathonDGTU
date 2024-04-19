@@ -5,10 +5,11 @@ import HomePage from "./pages/HomePage/HomePage";
 function App() {
   return (
     <BrowserRouter>
-      <main className="App">React</main>;
-      <Routes>
-        <Route path="/" element={<HomePage />}></Route>
-      </Routes>
+      <main className="App">
+        <Routes>
+          <Route path="/" element={<HomePage />}></Route>
+        </Routes>
+      </main>
     </BrowserRouter>
   );
 }
