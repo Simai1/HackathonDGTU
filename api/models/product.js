@@ -1,7 +1,7 @@
-import {DataTypes, Model} from "sequelize";
-import { EnumProductMeasure } from "../enums/measure.js";
-import {EnumStoreName} from "../enums/store-name.js";
-import {EnumProductsName} from "../enums/product.js";
+import { DataTypes, Model } from 'sequelize';
+import EnumProductMeasure from '../enums/measure.js';
+import EnumStoreName from '../enums/store-name.js';
+import EnumProductsName from '../enums/product.js';
 
 export default class Product extends Model {
     static initialize(sequelize) {
@@ -18,7 +18,7 @@ export default class Product extends Model {
                     allowNull: false,
                     validate: {
                         isIn: [Object.values(EnumProductsName)],
-                    }
+                    },
                 },
                 productCost: {
                     type: DataTypes.INTEGER,
@@ -41,7 +41,7 @@ export default class Product extends Model {
                     allowNull: false,
                     validate: {
                         isIn: [Object.values(EnumStoreName)],
-                    }
+                    },
                 },
                 storeAddress: {
                     type: DataTypes.STRING,
@@ -64,7 +64,7 @@ export default class Product extends Model {
                     allowNull: false,
                     validate: {
                         isIn: [Object.values(EnumProductMeasure)],
-                    }
+                    },
                 },
                 productVolume: {
                     type: DataTypes.REAL,
@@ -73,7 +73,7 @@ export default class Product extends Model {
                 manufacture: {
                     type: DataTypes.STRING,
                     allowNull: false,
-                }
+                },
             },
             {
                 sequelize,
@@ -85,4 +85,3 @@ export default class Product extends Model {
         );
     }
 }
-

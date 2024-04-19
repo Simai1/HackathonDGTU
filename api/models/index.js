@@ -10,6 +10,8 @@ import ProductInWarehouse from './ProductInWarehouse.js';
 import ShopInWarehouse from './shopInWarehouse.js';
 import Coords from './coords.js';
 
+import 'dotenv/config';
+
 const { DB_USER, DB_PWD, DB_HOST, DB_PORT, DB_NAME } = process.env;
 
 export const models = {
