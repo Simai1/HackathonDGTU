@@ -27,7 +27,6 @@ export default {
 
     async getAllOrders(req, res) {
         try {
-            // Получаем все заказы включая связанные модели
             const orders = await Order.findAll({
                 include: [
                     {
@@ -36,21 +35,22 @@ export default {
                             exclude: ['password', 'role', 'deletedAt', 'login', 'createdAt', 'updatedAt'],
                         },
                     },
-                    { model: Shop },
-                    { model: Product, through: ProductInOrder }, // Включаем продукты через ассоциацию с ProductInOrder
+                    {
+                        model: Product,
+                        through: ProductInOrder,
+                    },
                 ],
             });
 
-            // Создаем DTO для каждого заказа
-            const ordersDtos = orders.map(order => {
-                // Получаем список продуктов в заказе
-                const products = order.Products.map(product => new ProductDto(product));
-
-                // Создаем DTO для склада отправки (fromWarehouse), если есть
-
-                // Создаем DTO для заказа
-                return new FullOrderDto(order, order.User, order.Shop, products);
-            });
+            const ordersDtos = await Promise.all(
+                orders.map(async order => {
+                    const productInOrder = await ProductInOrder.findAll({ where: { orderId: order.id } });
+                    const productIds = productInOrder.map(p => p.productId);
+                    const products = await Product.findAll({ where: { id: productIds } });
+                    const productDtos = products.map(product => new ProductDto(product));
+                    return new FullOrderDto(order, order.User, productDtos);
+                })
+            );
 
             res.json(ordersDtos);
         } catch (error) {

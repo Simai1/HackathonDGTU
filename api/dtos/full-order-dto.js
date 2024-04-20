@@ -5,14 +5,14 @@ export default class FullOrderDto {
     status;
     quantity;
     user;
-    shop;
     products;
-    constructor(order, user, fromWarehouse, shop, products) {
+    createdAt;
+    constructor(order, user, products) {
         this.id = order.id;
         this.status = statusMap[order.status];
         this.quantity = order.quantity;
         this.user = user;
-        this.shop = shop;
         this.products = products;
+        this.createdAt = order.createdAt;
     }
 }
