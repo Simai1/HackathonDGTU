@@ -46,6 +46,8 @@ export default {
             include: {
                 model: Warehouse,
             },
+            order: [['expiryDate', 'DESC']],
+
             where: {
                 expiryDate: {
                     [Op.lte]: fourDaysFromNow,
