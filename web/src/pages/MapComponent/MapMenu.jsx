@@ -1,19 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Styles.module.scss";
 import { Link } from "react-router-dom";
 
 function MapMenu(props) {
   const [filtredData, setFiltredData] = useState(props.listPoints);
+  const [sortData, setSortData] = useState(props.listPoints);
+  const [modalWindShow, setModalWindShow] = useState("Все");
+  const [modalWindText, setmodalWindText] = useState(false);
+
+  useEffect(() => {
+    const fd = props.listPoints;
+    if (modalWindShow === "Все") {
+      setSortData(fd);
+    }
+    if (modalWindShow === "Склады") {
+      setSortData(
+        fd.filter((item) => item.properties["marker-color"] === "#1e98ff")
+      );
+    } else if (modalWindShow === "Клиенты") {
+      setSortData(
+        fd.filter((item) => item.properties["marker-color"] !== "#1e98ff")
+      );
+    }
+  }, [modalWindShow]);
+  useEffect(() => {
+    setFiltredData(sortData);
+  }, [sortData]);
 
   const shearch = (el) => {
     console.log(el.target.value);
     const query = el.target.value;
-    const fd = props.listPoints;
+    const fd = sortData;
     setFiltredData(
       fd.filter((item) =>
         item.properties.iconCaption.toLowerCase().includes(query.toLowerCase())
       )
     );
+  };
+
+  const setModalFunck = (text) => {
+    setModalWindShow(text);
+    setmodalWindText(false);
   };
 
   return (
@@ -27,6 +54,22 @@ function MapMenu(props) {
       <div className={styles.shearch}>
         <input placeholder="Поиск..." type="text" onChange={shearch} />
       </div>
+      <div className={styles.button_container}>
+        <div
+          className={styles.all}
+          onClick={() => setmodalWindText(!modalWindText)}
+        >
+          <span>{modalWindShow}</span>
+          <img width={10} src="./img/arrow_bottom.png" alt=">"></img>
+        </div>
+      </div>
+      {modalWindText && (
+        <div className={styles.modalWind}>
+          <span onClick={() => setModalFunck("Все")}>Все</span>
+          <span onClick={() => setModalFunck("Склады")}>Склады</span>
+          <span onClick={() => setModalFunck("Клиенты")}>Клиенты</span>
+        </div>
+      )}
       <div className={styles.container}>
         <div>
           {filtredData.map((item) => (
