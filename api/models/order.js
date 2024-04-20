@@ -1,4 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
+import EnumStatus from '../enums/status.js';
 
 export default class Order extends Model {
     static initialize(sequelize) {
@@ -10,21 +11,17 @@ export default class Order extends Model {
                     allowNull: false,
                     primaryKey: true,
                 },
-                from: {
-                    type: DataTypes.UUID,
-                    allowNull: false,
-                },
-                to: {
-                    type: DataTypes.UUID,
-                    allowNull: false,
-                },
                 quantity: {
                     type: DataTypes.INTEGER,
                     allowNull: false,
                 },
                 status: {
-                    type: DataTypes.STRING,
+                    type: DataTypes.SMALLINT,
                     allowNull: false,
+                    defaultValue: 0,
+                    validate: {
+                        isIn: [Object.values(EnumStatus)],
+                    },
                 },
                 warehouseId: {
                     type: DataTypes.UUID,
@@ -33,6 +30,10 @@ export default class Order extends Model {
                 productId: {
                     type: DataTypes.UUID,
                     allowNull: false,
+                },
+                userId: {
+                    type: DataTypes.UUID,
+                    allowNull: true,
                 },
             },
             {

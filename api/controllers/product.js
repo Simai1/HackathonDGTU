@@ -40,18 +40,34 @@ export default {
     async getExpiryDateProduct(req, res) {
         const currentDate = new Date();
         const fourDaysFromNow = new Date(currentDate);
-        fourDaysFromNow.setDate(fourDaysFromNow.getDate() + 4);
+        fourDaysFromNow.setDate(fourDaysFromNow.getDate() + 4); // добавляем 4 дня к текущей дате
 
         const products = await Product.findAll({
             include: {
                 model: Warehouse,
-            },
-            where: {
-                expiryDate: {
-                    [Op.lte]: fourDaysFromNow,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'deletedAt', 'CoordId'],
                 },
             },
+            where: {
+                [Op.or]: [
+                    {
+                        expiryDate: {
+                            [Op.lte]: currentDate, // срок годности истек
+                        },
+                    },
+                    {
+                        expiryDate: {
+                            [Op.lte]: fourDaysFromNow, // срок годности истекает через 4 дня и менее
+                        },
+                    },
+                ],
+            },
+            order: [
+                ['expiryDate', 'ASC'], // сортировка по expiryDate в порядке возрастания
+            ],
         });
+
         res.send(products);
     },
 };
