@@ -7,6 +7,7 @@ import dbUtils from './utils/db.js';
 import 'dotenv/config';
 import authRoute from './routes/auth.js';
 import parserRouter from './routes/parser.js';
+import shopRouter from "./routes/shop.js";
 import testUtils from './utils/test-data.js';
 
 const app = express();
@@ -47,5 +48,6 @@ app.use(corsMiddleware);
 
 app.use('/auth', authRoute);
 app.use('/parser', parserRouter);
+app.use('/shop', shopRouter);
 
 app.listen(PORT, () => console.log(`Listen on :${PORT}`));
