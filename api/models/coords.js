@@ -1,8 +1,8 @@
 import { DataTypes, Model } from 'sequelize';
 
-export default class Shop extends Model {
+export default class Coord extends Model {
     static initialize(sequelize) {
-        Shop.init(
+        Coord.init(
             {
                 id: {
                     type: DataTypes.UUID,
@@ -10,24 +10,28 @@ export default class Shop extends Model {
                     allowNull: false,
                     primaryKey: true,
                 },
-                name: {
+                coordsX: {
+                    type: DataTypes.REAL,
+                    allowNull: false,
+                },
+                coordsY: {
+                    type: DataTypes.REAL,
+                    allowNull: false,
+                },
+                iconCaption: {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                quantity: {
-                    type: DataTypes.INTEGER,
-                    allowNull: false,
-                },
-                coordsId: {
-                    type: DataTypes.UUID,
+                markerColor: {
+                    type: DataTypes.STRING,
                     allowNull: false,
                 },
             },
             {
                 sequelize,
                 schema: 'public',
-                modelName: 'Shop',
-                tableName: 'shops',
+                modelName: 'Coord',
+                tableName: 'coords',
                 paranoid: true,
             }
         );

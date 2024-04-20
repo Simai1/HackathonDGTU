@@ -43,6 +43,21 @@ function MapMenu(props) {
     setmodalWindText(false);
   };
 
+  const funMarshrut = () => {
+    const pointB = [
+      props.listPoints[0].geometry.coordinates[1],
+      props.listPoints[0].geometry.coordinates[0],
+    ]; // координаты точки А
+    const pointA = [
+      props.listPoints[1].geometry.coordinates[1],
+      props.listPoints[1].geometry.coordinates[0],
+    ]; // координаты точки Б
+    console.log(pointB, pointA);
+    const url = `https://yandex.ru/maps/?rtext=${pointA}~${pointB}&rtt=auto`;
+
+    window.open(url, "_blank");
+  };
+
   return (
     <div className={styles.MapMenu}>
       <div className={styles.back}>
@@ -63,6 +78,7 @@ function MapMenu(props) {
           <img width={10} src="./img/arrow_bottom.png" alt=">"></img>
         </div>
       </div>
+      <button onClick={funMarshrut}>Маршрут </button>
       {modalWindText && (
         <div className={styles.modalWind}>
           <span onClick={() => setModalFunck("Все")}>Все</span>
