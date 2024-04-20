@@ -32,6 +32,7 @@ async function fillWarehouse() {
             });
             const warehouse = await Warehouse.create({
                 name: testData.warehouse[i].name,
+                quantity: testData.warehouse[i].quantity,
                 coordId: coord2.id,
             });
             await ShopInWarehouse.create({

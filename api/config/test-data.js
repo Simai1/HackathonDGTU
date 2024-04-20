@@ -2,12 +2,15 @@ export default {
     warehouse: [
         {
             name: 'Склад 1',
+            quantity: 50,
         },
         {
             name: 'Склад 2',
+            quantity: 50,
         },
         {
             name: 'Склад 3',
+            quantity: 50,
         }
     ],
     shop: [

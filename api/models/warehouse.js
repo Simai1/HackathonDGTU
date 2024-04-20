@@ -14,6 +14,10 @@ export default class Warehouse extends Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
+                quantity: {
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                },
                 coordId: {
                     type: DataTypes.UUID,
                     allowNull: true,
