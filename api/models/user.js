@@ -24,7 +24,7 @@ export default class User extends Model {
                     validate: {
                         isIn: [Object.values(EnumRoles)],
                     },
-                    defaultValue: EnumRoles.ADMIN,
+                    defaultValue: EnumRoles.Администратор,
                 },
                 password: { type: DataTypes.STRING, allowNull: false },
                 name: { type: DataTypes.STRING, allowNull: false },

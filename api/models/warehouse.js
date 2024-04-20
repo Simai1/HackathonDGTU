@@ -24,7 +24,7 @@ export default class Warehouse extends Model {
                 },
                 productId: {
                     type: DataTypes.UUID,
-                    allowNull: false,
+                    allowNull: true,
                 },
                 quantity: {
                     type: DataTypes.INTEGER,

@@ -10,10 +10,6 @@ export default class Coord extends Model {
                     allowNull: false,
                     primaryKey: true,
                 },
-                name: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
                 coordsX: {
                     type: DataTypes.REAL,
                     allowNull: false,
@@ -26,7 +22,7 @@ export default class Coord extends Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                marketColor: {
+                markerColor: {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
