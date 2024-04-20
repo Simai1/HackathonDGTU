@@ -22,6 +22,9 @@
         left: -20px;
        
     }
+    a{
+        text-decoration: none;
+    }
     li{
         padding: 16px 0px 16px 10px;
         width:  158px;
@@ -32,6 +35,8 @@
         font-size: 18px;
         font-weight: 500;
         line-height: 21.94px;
+        text-decoration: none;
+        color: #000;
         img{
             position: absolute;
             right: 10px;
