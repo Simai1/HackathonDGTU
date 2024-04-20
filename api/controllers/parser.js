@@ -5,6 +5,7 @@ import Warehouse from "../models/warehouse.js";
 import Product from "../models/product.js";
 import mapProduct from "../enums/product.js"
 import fs from "fs"
+import ProductDto from "../dtos/product-dto.js";
 
 export default {
     async parseFromXlsx(req, res) {
@@ -126,17 +127,27 @@ export default {
             // "quantity": 100, - количетсво позиций на складе
             // "orderId": null - привязка к ордеру
             // Добавление заголовков столбцов
-            //Column1	Product_Name	Product_Cost	Manufacture_Date	Expiry_Date	SKU	Region	Product_Amount	Product_Measure	Product_Volume	Manufacturer	Product_Quantity	Name_Warehouse
+            // Product_Name	Product_Cost	Manufacture_Date	Expiry_Date	SKU	Region	Product_Amount	Product_Measure	Product_Volume	Manufacturer	Product_Quantity	Name_Warehouse
 
             worksheet.columns = [
-                { header: 'City ID', key: 'city_id', width: 10 },
-                { header: 'Name', key: 'name', width: 20 },
-                { header: 'City Rank', key: 'city_rank', width: 15 },
+                { header: 'Product_Name', key: 'name', },
+                { header: 'Product_Cost', key: '', },
+                { header: 'Manufacture_Date', key: '', },
+                { header: 'Expiry_Date', key: '', },
+                { header: 'SKU', key: '', },
+                { header: 'Region', key: '', },
+                { header: 'Product_Amount', key: '', },
+                { header: 'Product_Measure', key: '', },
+                { header: 'Product_Volume', key: '', },
+                { header: 'Manufacturer', key: '', },
+                { header: 'Product_Quantity', key: '', },
+                { header: 'Name_Warehouse', key: '', },
             ];
 
             // Добавление данных в таблицу
-            cities.forEach(city => {
-
+            products.forEach(product => {
+                const productDto = new ProductDto(product);
+                console.log(productDto);
                 const { city_id, ...cityData } = city.dataValues;
                 worksheet.addRow(cityData);
             });
