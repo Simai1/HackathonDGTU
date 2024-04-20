@@ -35,6 +35,10 @@ export default class Order extends Model {
                     type: DataTypes.UUID,
                     allowNull: true,
                 },
+                shopId: {
+                    type: DataTypes.UUID,
+                    allowNull: false,
+                },
             },
             {
                 sequelize,

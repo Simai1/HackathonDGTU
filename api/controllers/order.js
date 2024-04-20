@@ -6,6 +6,8 @@ import roles from '../config/roles.js';
 import ProductInOrder from '../models/productInOrder.js';
 import Warehouse from '../models/warehouse.js';
 import Shop from '../models/shop.js';
+import { Op } from 'sequelize';
+import Product from '../models/product.js';
 
 export default {
     async getAllUserOrders(req, res) {
@@ -36,6 +38,7 @@ export default {
                 productId: productIds[0],
                 // Добавляем суммарное количество в свойство quantity
                 quantity: totalQuantity,
+                shopId,
             });
 
             // Создаем записи в таблице ProductInOrder для связи заказа с товарами и их количеством
@@ -49,11 +52,29 @@ export default {
                         productId,
                         quantity,
                     });
+                })
+            );
+
+            // Обновляем orderId для продуктов в таблице Product
+            await Promise.all(
+                productIds.map(async productId => {
+                    await Product.update({ orderId: order.id }, { where: { id: productId } });
+                })
+            );
+
+            // Обновляем количество товара на складе и в магазине
+            await Promise.all(
+                productIds.map(async (productId, index) => {
+                    const quantity = quantities[index];
 
                     // Обновляем количество товара на складе (уменьшаем)
                     const warehouse = await Warehouse.findOne({ where: { id: warehouseId } });
                     if (!warehouse) {
                         throw new Error('Warehouse not found for product');
+                    }
+
+                    if (quantity > warehouse.quantity) {
+                        throw new Error('Not enough quantity in the warehouse');
                     }
                     await warehouse.decrement('quantity', { by: quantity });
 
@@ -62,7 +83,7 @@ export default {
                     if (!shop) {
                         throw new Error('Shop not found');
                     }
-                    await shop.increment(['productQuantities', productId], { by: quantity });
+                    await shop.increment('quantity', { by: quantity });
                 })
             );
 
@@ -83,28 +104,31 @@ export default {
                 throw new Error('Order not found');
             }
 
-            if (!Object.values(status).includes(newStatus)) {
+            if (isNaN(newStatus) || !Object.values(status).includes(parseInt(newStatus))) {
                 throw new Error('Invalid status');
             }
 
-            await order.update({ status: newStatus });
+            await order.update({ status: parseInt(newStatus) });
 
-            // Если новый статус равен 1 (Доставляется), присваиваем заказу перевозчика
-            if (newStatus === status['Доставляется']) {
-                // Проверяем, что перевозчик с указанным идентификатором существует
+            if (parseInt(newStatus) === status['Доставляется']) {
                 const carrier = await User.findByPk(carrierId);
                 if (!carrier) {
                     throw new Error('Carrier not found');
                 }
 
-                // Проверяем, что перевозчик является поставщиком
                 if (carrier.role !== roles['Поставщик']) {
                     throw new Error('The carrier must be a supplier');
                 }
 
                 // Присваиваем перевозчика заказу
                 order.userId = carrier.id;
-                await order.save();
+
+                // Обновляем поля warehouseId и shopId для каждого продукта этого заказа
+                await Promise.all(
+                    order.Products.map(async product => {
+                        await product.update({ warehouseId: null, shopId: order.shopId });
+                    })
+                );
             }
 
             res.json({ message: 'Order status updated successfully' });

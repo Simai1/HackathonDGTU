@@ -20,6 +20,10 @@ export default function () {
     Shop.hasMany(Product);
     Product.belongsTo(Shop);
 
+    //
+    Shop.hasMany(Order);
+    Order.belongsTo(Shop);
+
     // Warehouse OneToMany Product
     Warehouse.hasMany(Product);
     Product.belongsTo(Warehouse);
