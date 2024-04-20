@@ -1,8 +1,7 @@
-import Order from '../models/order';
-import User from '../models/user';
-import OrderDto from '../dtos/order-dto';
-import status from '../enums/status';
-import AppErrorInvalid from '../utils/errors.js';
+import Order from '../models/order.js';
+import User from '../models/user.js';
+import OrderDto from '../dtos/order-dto.js';
+import status from '../enums/status.js';
 import roles from '../config/roles.js';
 import ProductInOrder from '../models/productInOrder.js';
 import Warehouse from '../models/warehouse.js';
@@ -26,6 +25,12 @@ export default {
             if (!quantities || !Array.isArray(quantities) || quantities.length !== productIds.length) {
                 throw new Error('Product quantities not provided or invalid');
             }
+
+            // Вычисляем суммарное количество товаров в заказе
+            const totalQuantity = quantities.reduce((acc, quantity) => acc + quantity, 0);
+
+            // Добавляем суммарное количество в свойство quantity объекта orderData
+            orderData.quantity = totalQuantity;
 
             // Создаем заказ
             const order = await Order.create(orderData);

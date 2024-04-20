@@ -8,9 +8,10 @@ import 'dotenv/config';
 
 import authRoute from './routes/auth.js';
 import parserRouter from './routes/parser.js';
-import shopRouter from "./routes/shop.js";
+import shopRouter from './routes/shop.js';
 import productRouter from './routes/product.js';
-import warehouseRouter from "./routes/warehouse.js";
+import warehouseRouter from './routes/warehouse.js';
+import orderRouter from './routes/order.js';
 
 import testUtils from './utils/test-data.js';
 
@@ -53,4 +54,5 @@ app.use('/parser', parserRouter);
 app.use('/product', productRouter);
 app.use('/shop', shopRouter);
 app.use('/warehouse', warehouseRouter);
+app.use('/order', orderRouter);
 app.listen(PORT, () => console.log(`Listen on :${PORT}`));

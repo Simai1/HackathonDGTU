@@ -1,3 +1,5 @@
+import { mapObjectKeys } from '../utils/map.js';
+
 const status = {
     'В ожидании перевозчика': 0,
     Доставляется: 1,
@@ -6,3 +8,5 @@ const status = {
 };
 
 export default status;
+
+export const map = mapObjectKeys(status);

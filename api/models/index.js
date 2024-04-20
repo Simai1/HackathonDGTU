@@ -4,7 +4,7 @@ import Product from './product.js';
 import Shop from './shop.js';
 import Warehouse from './warehouse.js';
 import Order from './order.js';
-import ProductInOrder from './ProductInOrder.js';
+import ProductInOrder from './productInOrder.js';
 import ShopInWarehouse from './shopInWarehouse.js';
 import Coord from './coords.js';
 
