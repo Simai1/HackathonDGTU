@@ -120,7 +120,7 @@ const HomePage = () => {
   return (
     <div className={style.HomePage}>
       <LeftMenu setActiveMenu={setActiveMenu} activeMenu={activeMenu} />
-      <ProfileUser/>
+      {/* <ProfileUser/> */}
       <div className={style.HomePage__inner}>
       {activeMenu === "Главная" &&(
         <HomePageData/>

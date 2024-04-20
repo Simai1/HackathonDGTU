@@ -62,11 +62,12 @@
             right: 10px;
             top: 23px;
         }
+        li:hover {
+            cursor: pointer;
+            // opacity: 0.8;
+            background: hsla(22, 90%, 54%, 0.4) !important;
+        }
     }
-    li:hover {
-        cursor: pointer;
-        // opacity: 0.8;
-        background: hsla(22, 90%, 54%, 0.4) !important;
-}
+   
 }
 }
