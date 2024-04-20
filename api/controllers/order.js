@@ -13,18 +13,6 @@ import WarehouseDto from '../dtos/warehouse-dto.js';
 import FullOrderDto from '../dtos/full-order-dto.js';
 
 export default {
-    // async getAllOrders(req, res) {
-    //     const orders = await Order.findAll();
-    //     const warehouses = await Warehouse.findAll({ where: { shopId: orders.shopId } });
-    //     const ordersDtos = [];
-
-    //     for (const order of orders) {
-    //         ordersDtos.push(new OrderDto(order, warehouses));
-    //     }
-
-    //     res.json(ordersDtos);
-    // },
-
     async getAllOrders(req, res) {
         try {
             const orders = await Order.findAll({
