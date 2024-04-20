@@ -13,12 +13,8 @@ export default class Product extends Model {
                     allowNull: false,
                     primaryKey: true,
                 },
-                Column1: {
-                    type: DataTypes.INTEGER,
-                    allowNull: false,
-                },
                 productName: {
-                    type: DataTypes.STRING,
+                    type: DataTypes.SMALLINT,
                     allowNull: false,
                     validate: {
                         isIn: [Object.values(EnumProductsName)],
@@ -36,10 +32,10 @@ export default class Product extends Model {
                     type: DataTypes.DATE,
                     allowNull: false,
                 },
-                uploadingDate: {
-                    type: DataTypes.DATE,
-                    allowNull: false,
-                },
+                // uploadingDate: {
+                //     type: DataTypes.DATE,
+                //     allowNull: false,
+                // },
                 sku: {
                     type: DataTypes.INTEGER,
                     allowNull: false,
@@ -73,7 +69,7 @@ export default class Product extends Model {
                 },
                 orderId: {
                     type: DataTypes.UUID,
-                    allowNull: false,
+                    allowNull: true,
                 },
                 warehouseId: {
                     type: DataTypes.UUID,
