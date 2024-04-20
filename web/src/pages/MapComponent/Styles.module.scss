@@ -1,4 +1,5 @@
 .MapComponent {
+  overflow: hidden;
   display: flex;
   .map {
     display: flex;
@@ -10,13 +11,14 @@
     position: absolute;
     z-index: 200;
     top: 0;
-    left: 20px;
-    width: 250px;
-    height: 80vh;
+    left: 0px;
+    width: 280px;
+    height: 100%;
     background-color: rgb(255, 255, 255);
     padding: 15px 10px;
-    margin-top: 50px;
+    padding-left: 20px;
     border-radius: 8px;
+    box-sizing: border-box;
     .back {
       display: flex;
       align-items: center;
@@ -82,6 +84,7 @@
         width: 100%;
         cursor: pointer;
         padding: 3px;
+        padding-right: 10px;
       }
     }
     .button_container {
@@ -97,8 +100,11 @@
         padding: 0 10px;
         background-color: #eeeeee;
         border-radius: 8px;
-        width: 80px;
+        width: 100px;
         height: 32px;
+        span {
+          padding-right: 10px;
+        }
       }
     }
   }

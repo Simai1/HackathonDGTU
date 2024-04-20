@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { YMaps } from "react-yandex-maps";
 import MapBody from "./MapBody";
 import { coordinates } from "./Coordinates";
@@ -6,7 +6,37 @@ import styles from "./Styles.module.scss";
 import MapMenu from "./MapMenu";
 function MapComponent() {
   const [listPoints, setListPoints] = useState(coordinates);
-  console.log("listPoints", listPoints);
+  const [myCoor, setMyCoor] = useState([]);
+  if (!navigator.geolocation) {
+    alert("браузер не поддерживает геолокацию");
+  } else {
+    navigator.geolocation.watchPosition(
+      function (position) {
+        setMyCoor(position);
+      },
+      function (error) {
+        if (error.code == error.PERMISSION_DENIED)
+          alert("Дайте разрешение на определение местоположения");
+      }
+    );
+  }
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setMyCoor([position.coords.latitude, position.coords.longitude]);
+        },
+        (error) => {
+          // alert('Ошибка при определении местоположения', error);
+          setMyCoor([47.222078, 39.720358]);
+        }
+      );
+    } else {
+      alert("Геолокация не поддерживается вашим браузером");
+    }
+  }, []);
+
   return (
     <div className={styles.MapComponent}>
       <div className={styles.menu}>

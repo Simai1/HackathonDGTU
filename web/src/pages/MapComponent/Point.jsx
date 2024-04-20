@@ -1,19 +1,22 @@
 import React from "react";
 import styles from "./Styles.module.scss";
 import { Placemark } from "react-yandex-maps";
+import "./stye.css";
 function Point(props) {
+  const title = `<div class="iconCaption"> ${props.iconCaption} </div>`;
   return (
     <div className={styles.Point}>
       <Placemark
         geometry={props.coor}
         properties={{
-          iconCaption: props.iconCaption,
+          iconContent: title,
         }}
         options={{
           iconColor: `${props.iconColor}`,
-          //   iconImageHref: props.icomUrl, // Путь к вашему изображению
-          //   iconLayout: "default#image",
-          //   iconImageSize: [30, 30], // Размеры изображения
+          iconImageHref: props.icomUrl, // Путь к вашему изображению
+          iconLayout: "default#imageWithContent",
+          iconImageSize: [30, 30], // Размеры изображения
+          iconImageOffset: [-3, -42],
         }}
       />
     </div>
