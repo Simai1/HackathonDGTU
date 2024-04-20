@@ -1,5 +1,30 @@
 .ProfileUser{
     position: fixed;
     top: 0;
-    right: 0;
+    right: 64px;
+    .ProfileUser__inner{
+        display: flex;
+        margin-top: 24px;
+        img{
+            width: 54px;
+            height: 54px;
+        }
+        .ProfileUser__imgUwedomletion{
+            margin-right: 24px;
+        }
+        p{
+            margin: 0;
+        }
+        .ProfileUser__DataUser{
+            display: block;
+            margin-left: 16px;
+        }
+        .ProfileUser__DataUserName{
+            margin-bottom: 6px;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 24.38px;
+            text-align: left;
+        }
+    }
 }

@@ -30,7 +30,7 @@ function Auth() {
              <div className={style.Auth__inner}>
                 <div>
                     <h1 className={style.Auth__title}>Авторизация</h1>
-                    <Input placeholder="ivanov@gmail.com" type="text" labelText="Эл.почта" setData={setLoginData} defaultValue="mbuchnev@mail.com"/>
+                    <Input placeholder="ivanov@gmail.com" type="text" labelText="Эл.почта" setData={setLoginData} defaultValue="admin@mail.com"/>
                     <Input placeholder="****" type="text" labelText="Пароль" setData={setpasswordData}/>
                     <Button Bg="#F37022" text="Войти" textColot="#fff" w="288px" h="58px" handleLogin={handleLogin} />
                 </div>
