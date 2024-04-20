@@ -24,7 +24,27 @@ export const GetDataWarehouse = async () => {
     }
   };
 
-  export const GetdataShops = async () => {
+  export const GetdataWarehouse = async () => {
+    try {
+      const response = await axios.get(`${server}/warehouse`);
+      return response;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
+  export const GetProductsDataWarehouse = async (data) => {
+    try {
+      const response = await axios.get(`${server}/warehouse/${data}/products`);
+      return response.data;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
+  export const GetdataShop = async () => {
     try {
       const response = await axios.get(`${server}/shop`);
       return response;
@@ -34,9 +54,9 @@ export const GetDataWarehouse = async () => {
     }
   };
 
-  export const GetProductsDataShops = async (data) => {
+  export const GetProductsDataShop = async (data) => {
     try {
-      const response = await axios.get(`${server}/warehouse/${data}/products`);
+      const response = await axios.get(`${server}/shop/${data}/products`);
       return response.data;
     } catch (error) {
       console.error("Error:", error);
