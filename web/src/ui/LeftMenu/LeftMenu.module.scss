@@ -6,7 +6,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 200px;
+  width: 210px;
   display: flex;
   justify-content: center;
   .logo {
@@ -20,8 +20,9 @@
     left: -20px;
   }
   li {
-    padding: 16px 0px 16px 10px;
-    width:  158px;
+    margin: 10px 0;
+    padding: 10px 0px 10px 10px;
+    width: 158px;
     border-radius: 8px;
     transform: 0.15s linear all;
     box-sizing: border-box;
@@ -31,26 +32,25 @@
     line-height: 21.94px;
     text-decoration: none;
     color: #000;
-        img {
-            position: absolute;
-            right: 10px;
-            top: 23px;
-        }
-        ul{
-            list-style: none;
-            width:  158px;
-            margin: 0;
-            position: relative;
-            left: -20px;
-            a{
-                text-decoration: none;
-            }    
-        }
-          
+    img {
+      position: absolute;
+      right: 10px;
+      top: 23px;
     }
-    li:hover {
-        cursor: pointer;
-        // opacity: 0.8;
-        background: hsla(22, 90%, 54%, 0.4) !important;
+    ul {
+      list-style: none;
+      width: 158px;
+      margin: 0;
+      position: relative;
+      left: -20px;
+      a {
+        text-decoration: none;
+      }
     }
+  }
+  li:hover {
+    cursor: pointer;
+    // opacity: 0.8;
+    background: hsla(22, 90%, 54%, 0.4) !important;
+  }
 }
