@@ -9,13 +9,56 @@ import Shop from '../models/shop.js';
 import { Op } from 'sequelize';
 import Product from '../models/product.js';
 import ProductDto from '../dtos/product-dto.js';
+import WarehouseDto from '../dtos/warehouse-dto.js';
+import FullOrderDto from '../dtos/full-order-dto.js';
 
 export default {
+    // async getAllOrders(req, res) {
+    //     const orders = await Order.findAll();
+    //     const warehouses = await Warehouse.findAll({ where: { shopId: orders.shopId } });
+    //     const ordersDtos = [];
+
+    //     for (const order of orders) {
+    //         ordersDtos.push(new OrderDto(order, warehouses));
+    //     }
+
+    //     res.json(ordersDtos);
+    // },
+
     async getAllOrders(req, res) {
-        const orders = await Order.findAll({ include: [{ model: User }] });
-        const orderDto = orders.map(order => new OrderDto(order));
-        res.json(orderDto);
+        try {
+            // Получаем все заказы включая связанные модели
+            const orders = await Order.findAll({
+                include: [
+                    {
+                        model: User,
+                        attributes: {
+                            exclude: ['password', 'role', 'deletedAt', 'login', 'createdAt', 'updatedAt'],
+                        },
+                    },
+                    { model: Shop },
+                    { model: Product, through: ProductInOrder }, // Включаем продукты через ассоциацию с ProductInOrder
+                ],
+            });
+
+            // Создаем DTO для каждого заказа
+            const ordersDtos = orders.map(order => {
+                // Получаем список продуктов в заказе
+                const products = order.Products.map(product => new ProductDto(product));
+
+                // Создаем DTO для склада отправки (fromWarehouse), если есть
+
+                // Создаем DTO для заказа
+                return new FullOrderDto(order, order.User, order.Shop, products);
+            });
+
+            res.json(ordersDtos);
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+            res.status(500).json({ error: 'Failed to fetch orders' });
+        }
     },
+
     // пофиксить проверку на достаточность товаров
     async createOrder({ body: { quantities, productIds, shopId, status, warehouseId, userId } }, res) {
         try {
