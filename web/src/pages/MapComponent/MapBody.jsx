@@ -33,7 +33,7 @@ function MapBody(props) {
           zoom: 13,
         }}
       >
-        <GeolocationControl options={{ float: "left" }} />
+        <GeolocationControl options={{ float: "right" }} />
         <RouteButton options={{ float: "right" }} />
         <SearchControl options={{ float: "right" }} />
         <TrafficControl options={{ float: "right" }} />
