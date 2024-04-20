@@ -69,7 +69,7 @@ export default class Product extends Model {
                 },
                 orderId: {
                     type: DataTypes.UUID,
-                    allowNull: true,
+                    allowNull: false,
                 },
                 warehouseId: {
                     type: DataTypes.UUID,
