@@ -6,7 +6,7 @@ import redaction from "./../../img/redaction.svg";
 import Editing from "./Editing";
 
 function Transfer(props) {
-  const [activeButton, setActiveButton] = useState("Грядущие");
+  const [activeButton, setActiveButton] = useState("Ожидаемые");
   const [editingShow, setEditingShow] = useState(false);
   const [editingShowData, setEditingShowData] = useState([]);
 
@@ -28,21 +28,27 @@ function Transfer(props) {
 
   const handleButtonClick = (text) => {
     console.log(text);
-    setActiveButton(text === "Грядущие" ? "Активные" : "Грядущие");
+    setActiveButton(text === "Ожидаемые" ? "Активные" : "Ожидаемые");
   };
   return (
     <div>
       <h1>Перевозки</h1>
       <div>
-        <div>
+        <div
+          style={{
+            display: "flex",
+            width: " 270px",
+            justifyContent: "space-between",
+          }}
+        >
           <Button
-            text="Грядущие"
-            Bg={activeButton === "Грядущие" ? "#F37022" : "#fff"}
+            text="Ожидаемые"
+            Bg={activeButton === "Ожидаемые" ? "#F37022" : "#fff"}
             w="127px"
             h="42px"
-            textColot={activeButton === "Грядущие" ? "#fff" : "#000"}
+            textColot={activeButton === "Ожидаемые" ? "#fff" : "#000"}
             handleLogin={() => handleButtonClick("Активные")}
-            // onClick={() => handleButtonClick("Грядущие")}
+            // onClick={() => handleButtonClick("Ожидаемые")}
           />
           <Button
             text="Активные"
@@ -50,7 +56,7 @@ function Transfer(props) {
             w="127px"
             h="42px"
             textColot={activeButton === "Активные" ? "#fff" : "#000"}
-            handleLogin={() => handleButtonClick("Грядущие")}
+            handleLogin={() => handleButtonClick("Ожидаемые")}
           />
         </div>
         <div className={style.TableScroll}>

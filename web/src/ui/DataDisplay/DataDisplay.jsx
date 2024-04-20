@@ -1,13 +1,13 @@
-import React from 'react';
-import style from "./DataDisplay.module.scss"
+import React from "react";
+import style from "./DataDisplay.module.scss";
 function DataDisplay(props) {
   return (
     <table className={style.DataDisplay}>
       <thead>
         <tr>
-          <th>ID</th>
+          <th>Номер</th>
           <th>Продукт</th>
-          <th>Адрес</th>
+          <th>Место</th>
           <th>Годен до</th>
         </tr>
       </thead>
@@ -17,7 +17,9 @@ function DataDisplay(props) {
             <td>{item.id}</td>
             <td>{item.prosd}</td>
             <td>{item.adress}</td>
-            <td className={style.date}>{item.date}</td>
+            <td className={style.date}>
+              <p>{item.date}</p>
+            </td>
           </tr>
         ))}
       </tbody>

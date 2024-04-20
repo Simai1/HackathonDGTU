@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./LeftMenu.module.scss";
 import arrowIMG from "./../../img/arrow.png";
-import logo from "./../../img/logo.png";
 import { Link } from "react-router-dom";
 
 function LeftMenu(props) {
