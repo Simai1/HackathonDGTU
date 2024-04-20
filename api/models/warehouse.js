@@ -25,11 +25,7 @@ export default class Warehouse extends Model {
                 productId: {
                     type: DataTypes.UUID,
                     allowNull: false,
-                },
-                quantity: {
-                    type: DataTypes.INTEGER,
-                    allowNull: false,
-                },
+                }
             },
             {
                 sequelize,

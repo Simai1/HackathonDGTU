@@ -21,7 +21,7 @@ export default class Product extends Model {
                     },
                 },
                 productCost: {
-                    type: DataTypes.INTEGER,
+                    type: DataTypes.REAL,
                     allowNull: false,
                 },
                 manufactureDate: {
@@ -36,31 +36,16 @@ export default class Product extends Model {
                     type: DataTypes.INTEGER,
                     allowNull: false,
                 },
-                storeName: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                    validate: {
-                        isIn: [Object.values(EnumStoreName)],
-                    },
-                },
-                storeAddress: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
                 region: {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                saleDate: {
-                    type: DataTypes.DATE,
-                    allowNull: false,
-                },
-                quantitySold: {
+                productAmount: {
                     type: DataTypes.REAL,
                     allowNull: false,
                 },
                 productMeasure: {
-                    type: DataTypes.STRING,
+                    type: DataTypes.SMALLINT,
                     allowNull: false,
                     validate: {
                         isIn: [Object.values(EnumProductMeasure)],
@@ -74,6 +59,10 @@ export default class Product extends Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
+                productQuantity:{
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                }
             },
             {
                 sequelize,
