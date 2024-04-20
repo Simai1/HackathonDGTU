@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import EnumProductMeasure from '../enums/measure.js';
-import EnumStoreName from '../enums/store-name.js';
+// import EnumStoreName from '../enums/store-name.js';
 import EnumProductsName from '../enums/product.js';
 
 export default class Product extends Model {
@@ -73,7 +73,7 @@ export default class Product extends Model {
                 },
                 warehouseId: {
                     type: DataTypes.UUID,
-                    allowNull: false,
+                    allowNull: true,
                 },
                 shopId: {
                     type: DataTypes.UUID,

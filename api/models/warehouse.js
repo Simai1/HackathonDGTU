@@ -18,10 +18,6 @@ export default class Warehouse extends Model {
                     type: DataTypes.UUID,
                     allowNull: true,
                 },
-                shopId: {
-                    type: DataTypes.UUID,
-                    allowNull: true,
-                },
             },
             {
                 sequelize,

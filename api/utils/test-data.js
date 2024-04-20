@@ -3,6 +3,7 @@ import Warehouse from '../models/warehouse.js';
 import Coord from "../models/coords.js";
 import Shop from "../models/shop.js";
 import User from "../models/user.js";
+import ShopInWarehouse from "../models/shopInWarehouse.js";
 
 async function fillWarehouse() {
     for (let i = 0; i<3; i++) {
@@ -29,10 +30,13 @@ async function fillWarehouse() {
                 iconCaption: testData.warehouse[i].name,
                 markerColor: "#1e98ff",
             });
-            await Warehouse.create({
+            const warehouse = await Warehouse.create({
                 name: testData.warehouse[i].name,
                 coordId: coord2.id,
+            });
+            await ShopInWarehouse.create({
                 shopId: newShop.id,
+                warehouseId: warehouse.id,
             })
         }
     }

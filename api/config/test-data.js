@@ -14,6 +14,8 @@ export default {
         {
             name: 'Магазин 1',
             quantity: 50,
+            products: [
+            ]
         },
         {
             name: 'Магазин 2',
