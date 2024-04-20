@@ -2,7 +2,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import corsMiddleware from './middlewares/cors.js';
 import dbUtils from './utils/db.js';
-import session from 'express-session';
+// import session from 'express-session';
 // import cronService from './services/cron.js';
 import 'dotenv/config';
 import authRoute from './routes/auth.js';
@@ -16,10 +16,9 @@ const PORT = process.env.PORT || 3000;
 (async function initDb() {
     try {
         await dbUtils.initializeDbModels();
-        if (process.env.NODE_ENV === 'development') {
-            await testUtils.fillWarehouse();
-            
-        }
+        // if (process.env.NODE_ENV === 'development') {
+        await testUtils.fillWarehouse();
+        // }
 
     } catch (e) {
         console.log(e);

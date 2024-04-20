@@ -8,12 +8,12 @@ import Product from './product.js';
 
 export default function () {
     // Shop oneToOne Coords
-    Shop.hasOne(Coords);
-    Coords.belongsTo(Shop);
+    Coords.hasOne(Shop);
+    Shop.belongsTo(Coords);
 
     // Warehouse oneToOne Coords
-    Warehouse.hasOne(Coords);
-    Coords.belongsTo(Warehouse);
+    Coords.hasOne(Warehouse);
+    Warehouse.belongsTo(Coords);
 
     // Shop OneToMany Product
     Shop.hasMany(Product);

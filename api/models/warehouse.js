@@ -14,7 +14,7 @@ export default class Warehouse extends Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                coordsId: {
+                coordId: {
                     type: DataTypes.UUID,
                     allowNull: true,
                 },
@@ -22,10 +22,6 @@ export default class Warehouse extends Model {
                     type: DataTypes.UUID,
                     allowNull: true,
                 },
-                productId: {
-                    type: DataTypes.UUID,
-                    allowNull: true,
-                }
             },
             {
                 sequelize,

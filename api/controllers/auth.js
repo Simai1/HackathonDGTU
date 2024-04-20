@@ -42,6 +42,37 @@ export default {
         });
     },
 
+    async test(req, res){
+        // await Coord.create({
+        //     coordsX: 39.733434772582854,
+        //     coordsY: 47.15389020591696,
+        //     iconCaption: "Склад 1",
+        //     markerColor: "#1e98ff"
+        //     }
+        // );
+        // await Coord.create({
+        //         coordsX: 39.66504917153893,
+        //         coordsY: 47.27843879132772,
+        //         iconCaption: "Магазин 1",
+        //         markerColor: "#1e98ff"
+        //     }
+        // );
+        // await Shop.create({
+        //     name: 'Магазин 1',
+        //     quantity: 50,
+        //     coordsId: 'fb7ad6b2-03a2-4661-af33-b1b74b3b2d9d',
+        // })
+        // await Warehouse.create({
+        //     name: 'Склад 1',
+        //     coordsId: 'f20a2fb1-3d8c-44e0-8a65-1b895ead9bc0',
+        //     shopId: '86c15d41-81e5-42e7-be76-de6c306767e6',
+        //     quantity: 50
+        // })
+        await
+
+        res.json('ok');
+    },
+
     // async logout(req, res) {
     //     const {refreshToken} = req.cookies;
     //     await jwt.removeToken(refreshToken);

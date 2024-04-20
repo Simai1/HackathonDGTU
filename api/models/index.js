@@ -13,14 +13,14 @@ import 'dotenv/config';
 const { DB_USER, DB_PWD, DB_HOST, DB_PORT, DB_NAME } = process.env;
 
 export const models = {
+    Coord,
+    Warehouse,
     User,
     Shop,
-    Warehouse,
     Product,
     Order,
     ProductInOrder,
     ShopInWarehouse,
-    Coord,
 };
 export const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PWD, {
     host: DB_HOST,

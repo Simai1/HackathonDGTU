@@ -18,7 +18,7 @@ export default class Shop extends Model {
                     type: DataTypes.INTEGER,
                     allowNull: false,
                 },
-                coordsId: {
+                coordId: {
                     type: DataTypes.UUID,
                     allowNull: false,
                 },
