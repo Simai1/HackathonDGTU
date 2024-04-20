@@ -3,6 +3,7 @@ import Shop from '../models/shop.js';
 import Warehouse from '../models/warehouse.js';
 import ProductInWarehouseDto from '../dtos/productInWarehours-dto.js';
 import { Op } from 'sequelize';
+import ProductDtoWithShop from '../dtos/product-dto-with-shop.js';
 
 export default {
     async getProductsWithWarehouse(req, res) {
@@ -69,5 +70,30 @@ export default {
         });
 
         res.send(products);
+    },
+
+    // Импортируем функцию mapProductDto из модуля productDto
+
+    async getProductsWithShop(req, res) {
+        try {
+            // Получаем первые пять продуктов с магазинами
+            const products = await Product.findAll({
+                limit: 5,
+                include: [
+                    {
+                        model: Shop,
+                        attributes: {
+                            exclude: ['createdAt', 'updatedAt', 'CoordId', 'deletedAt'],
+                        },
+                    },
+                ],
+            });
+
+            const productWithShopDto = products.map(product => new ProductDtoWithShop(product));
+            res.json(productWithShopDto);
+        } catch (error) {
+            console.error('Error fetching products with shop:', error);
+            res.status(500).json({ error: 'Failed to fetch products with shop' });
+        }
     },
 };

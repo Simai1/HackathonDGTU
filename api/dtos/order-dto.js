@@ -1,4 +1,4 @@
-export default class OfferDto {
+export default class OrderDto {
     id;
     quantity;
     status;
@@ -9,7 +9,7 @@ export default class OfferDto {
 
     constructor(model) {
         this.id = model.id;
-        this.quantity = model.quantity;
+        this.quantities = model.quantity;
         this.status = model.status;
         this.warehouseId = model.warehouseId;
         this.shopId = model.shopId;

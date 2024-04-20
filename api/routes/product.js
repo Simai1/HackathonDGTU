@@ -7,4 +7,5 @@ const router = Router();
 router.get('/getAllProducts', asyncRoute(productController.getProductsWithWarehouse));
 router.get('/getExpiryProducts', asyncRoute(productController.getExpiryDateProduct));
 // router.route('/:shopId').delete(asyncRoute(productController.deleteRandomProduct));
+router.get('/getProductsWithShop', asyncRoute(productController.getProductsWithShop));
 export default router;
