@@ -1,4 +1,4 @@
-export default class OrderDto {
+export default class OfferDto {
     id;
     quantity;
     status;
@@ -12,6 +12,6 @@ export default class OrderDto {
         this.status = model.status;
         this.warehouseId = model.warehouseId;
         this.productId = model.productId;
-        this.userId = model.userId;
+        this.userId = model.userId !== undefined ? model.userId : null; // Устанавливаем userId в null, если его нет в модели
     }
 }

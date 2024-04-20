@@ -14,10 +14,8 @@ export default {
         res.json({ orders });
     },
 
-    async createOrder(req, res) {
+    async createOrder({ body: { quantities, productIds, shopId, status, warehouseId, userId } }, res) {
         try {
-            const { quantities, productIds, shopId, ...orderData } = req.body;
-
             if (!productIds || !Array.isArray(productIds) || productIds.length === 0) {
                 throw new Error('Product IDs not provided or invalid');
             }
@@ -29,11 +27,16 @@ export default {
             // Вычисляем суммарное количество товаров в заказе
             const totalQuantity = quantities.reduce((acc, quantity) => acc + quantity, 0);
 
-            // Добавляем суммарное количество в свойство quantity объекта orderData
-            orderData.quantity = totalQuantity;
-
             // Создаем заказ
-            const order = await Order.create(orderData);
+            const order = await Order.create({
+                status,
+                warehouseId,
+                userId,
+                // Первый элемент массива productIds будет использоваться в качестве productId
+                productId: productIds[0],
+                // Добавляем суммарное количество в свойство quantity
+                quantity: totalQuantity,
+            });
 
             // Создаем записи в таблице ProductInOrder для связи заказа с товарами и их количеством
             await Promise.all(
@@ -48,7 +51,7 @@ export default {
                     });
 
                     // Обновляем количество товара на складе (уменьшаем)
-                    const warehouse = await Warehouse.findOne({ where: { productId } });
+                    const warehouse = await Warehouse.findOne({ where: { id: warehouseId } });
                     if (!warehouse) {
                         throw new Error('Warehouse not found for product');
                     }
@@ -72,6 +75,7 @@ export default {
             res.status(500).json({ error: 'Failed to create order' });
         }
     },
+
     async changeStatusOrder({ params: { orderId }, body: { status: newStatus, carrierId } }, res) {
         try {
             const order = await Order.findByPk(orderId);
