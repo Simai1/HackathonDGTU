@@ -11,9 +11,8 @@ import Product from '../models/product.js';
 import ProductDto from '../dtos/product-dto.js';
 
 export default {
-    
     async getAllOrders(req, res) {
-        const orders = await Order.findAll();
+        const orders = await Order.findAll({ include: [{ model: User }] });
         const orderDto = orders.map(order => new OrderDto(order));
         res.json(orderDto);
     },
@@ -27,10 +26,9 @@ export default {
             if (!quantities || !Array.isArray(quantities) || quantities.length !== productIds.length) {
                 throw new Error('Product quantities not provided or invalid');
             }
-            //проверка на достаточность товара
             // Вычисляем суммарное количество товаров в заказе
             const totalQuantity = quantities.reduce((acc, quantity) => acc + quantity, 0);
-            
+
             await Promise.all(
                 productIds.map(async (productId, index) => {
                     const quantity = quantities[index];
@@ -41,12 +39,12 @@ export default {
                         throw new Error('Warehouse not found for product');
                     }
                     const existProduct = await Product.findOne({
-                        where:{
+                        where: {
                             id: productId,
                             warehouseId: warehouse.id,
-                        }
-                    })
-                    
+                        },
+                    });
+
                     if (!existProduct) {
                         throw new Error('Product not found for product');
                     }
@@ -55,8 +53,8 @@ export default {
                         throw new Error(`Not enough quantity in the warehouse product SKU: ${existProduct.sku}`);
                     }
                 })
-            )
-            console.log(warehouseId)
+            );
+            console.log(warehouseId);
             // Создаем заказ
             const order = await Order.create({
                 status,
@@ -106,14 +104,25 @@ export default {
                 })
             );
 
+            const orderProducts = await ProductInOrder.findAll({ where: { orderId: order.id } });
+
+            const products = await Promise.all(
+                orderProducts.map(async orderProducts => {
+                    const product = await Product.findByPk(orderProducts.productId);
+                    const productDto = new ProductDto(product);
+                    return productDto;
+                })
+            );
             // Создаем DTO для заказа
-            const orderDto = new OrderDto(order);
-            
-            console.log(orderDto);
-            res.json({ order: orderDto });
+            const orderData = {
+                order: new OrderDto(order),
+                products: products,
+            };
+
+            res.json(orderData);
         } catch (error) {
             console.error('Error creating order:', error);
-            res.status(500).json({ error: 'Failed to create order' , riason: error.message });
+            res.status(500).json({ error: 'Failed to create order', riason: error.message });
         }
     },
 
