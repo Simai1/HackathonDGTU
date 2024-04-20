@@ -5,6 +5,7 @@ import Coords from './coords.js';
 import Order from './order.js';
 import Warehouse from './warehouse.js';
 import Product from './product.js';
+import User from './user.js';
 
 export default function () {
     // Shop oneToOne Coords
@@ -22,6 +23,9 @@ export default function () {
     // Warehouse OneToMany Product
     Warehouse.hasMany(Product);
     Product.belongsTo(Warehouse);
+
+    User.hasMany(Order);
+    Order.belongsTo(User);
 
     // Product ManyToMany Order
     Product.belongsToMany(Order, { through: 'ProductInOrder' });

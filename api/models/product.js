@@ -2,6 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 import EnumProductMeasure from '../enums/measure.js';
 // import EnumStoreName from '../enums/store-name.js';
 import EnumProductsName from '../enums/product.js';
+import checkQuantity from '../utils/checkQuantity.js';
 
 export default class Product extends Model {
     static initialize(sequelize) {
@@ -63,7 +64,7 @@ export default class Product extends Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                productQuantity:{
+                productQuantity: {
                     type: DataTypes.INTEGER,
                     allowNull: false,
                 },
@@ -88,5 +89,8 @@ export default class Product extends Model {
                 paranoid: true,
             }
         );
+        Product.afterDestroy(async shop => {
+            await checkQuantity(shop);
+        });
     }
 }
