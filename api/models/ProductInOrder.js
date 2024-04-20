@@ -18,6 +18,10 @@ export default class ProductInOrder extends Model {
                     type: DataTypes.UUID,
                     allowNull: false,
                 },
+                quantity: {
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                },
             },
             {
                 sequelize,
