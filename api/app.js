@@ -2,6 +2,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import corsMiddleware from './middlewares/cors.js';
 import dbUtils from './utils/db.js';
+import session from 'express-session';
 // import cronService from './services/cron.js';
 import 'dotenv/config';
 import authRoute from './routes/auth.js';
@@ -25,6 +26,13 @@ const PORT = process.env.PORT || 3000;
 // CronJob section //
 // cronService.agreementDecline.start();
 // ============== //
+
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {},
+}))
 
 app.use(express.json({limit: '10mb'}));
 app.use(express.urlencoded({extended: false}));

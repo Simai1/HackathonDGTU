@@ -5,8 +5,6 @@ import Shop from './shop.js';
 import Warehouse from './warehouse.js';
 import Order from './order.js';
 import ProductInOrder from './ProductInOrder.js';
-import ProductInShop from './productInShop.js';
-import ProductInWarehouse from './ProductInWarehouse.js';
 import ShopInWarehouse from './shopInWarehouse.js';
 import Coord from './coords.js';
 
@@ -16,13 +14,11 @@ const { DB_USER, DB_PWD, DB_HOST, DB_PORT, DB_NAME } = process.env;
 
 export const models = {
     User,
-    Product,
     Shop,
     Warehouse,
+    Product,
     Order,
     ProductInOrder,
-    ProductInShop,
-    ProductInWarehouse,
     ShopInWarehouse,
     Coord,
 };
