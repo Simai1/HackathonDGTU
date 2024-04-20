@@ -94,6 +94,7 @@ function Transfer(props) {
         <Editing
           editingShowData={editingShowData}
           modalShowFun={modalShowFun}
+          setEditingShowData={setEditingShowData}
         />
       )}
     </div>

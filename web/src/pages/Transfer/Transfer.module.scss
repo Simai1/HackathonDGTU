@@ -86,11 +86,27 @@ Button {
     position: fixed;
     top: 70px;
     width: 736px;
-    height: 593px;
+    height: 530px;
     background-color: #fff;
     border-radius: 8px;
     padding: 24px;
     box-sizing: border-box;
+
+    .bobmenu {
+      position: absolute;
+      top: 115px;
+      background-color: #fff;
+      width: 104px;
+      border: 1px solid #888;
+      border-radius: 8px;
+      span {
+        display: flex;
+        width: 100%;
+        padding: 10px;
+        font-weight: 400;
+        cursor: pointer;
+      }
+    }
     .title {
       display: block;
       width: 100% !important;
