@@ -1,19 +1,17 @@
-export default class OfferDto {
+export default class OrderDto {
     id;
     quantity;
     status;
     warehouseId;
-    shopId;
-    products;
-    user;
+    productId;
+    userId;
 
     constructor(model) {
         this.id = model.id;
-        this.quantity = model.quantity;
+        this.quantities = model.quantity;
         this.status = model.status;
-        this.warehouse = model.Warehouse;
-        this.shop = model.Shop;
-        this.products = model.Product;
-        this.user = model.User;
+        this.warehouseId = model.warehouseId;
+        this.productId = model.productId;
+        this.userId = model.userId;
     }
 }
