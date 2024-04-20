@@ -5,15 +5,15 @@ export default class OfferDto {
     warehouseId;
     shopId;
     products;
-    user;
+    userId;
 
     constructor(model) {
         this.id = model.id;
         this.quantity = model.quantity;
         this.status = model.status;
-        this.warehouse = model.Warehouse;
-        this.shop = model.Shop;
-        this.products = model.Product;
-        this.user = model.User;
+        this.warehouseId = model.warehouseId;
+        this.shopId = model.shopId;
+        this.products = model.products;
+        this.userId = model.userId;
     }
 }

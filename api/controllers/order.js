@@ -8,14 +8,16 @@ import Warehouse from '../models/warehouse.js';
 import Shop from '../models/shop.js';
 import { Op } from 'sequelize';
 import Product from '../models/product.js';
+import ProductDto from '../dtos/product-dto.js';
 
 export default {
+    
     async getAllOrders(req, res) {
         const orders = await Order.findAll();
         const orderDto = orders.map(order => new OrderDto(order));
         res.json(orderDto);
     },
-
+    // пофиксить проверку на достаточность товаров
     async createOrder({ body: { quantities, productIds, shopId, status, warehouseId, userId } }, res) {
         try {
             if (!productIds || !Array.isArray(productIds) || productIds.length === 0) {
@@ -25,10 +27,36 @@ export default {
             if (!quantities || !Array.isArray(quantities) || quantities.length !== productIds.length) {
                 throw new Error('Product quantities not provided or invalid');
             }
-
+            //проверка на достаточность товара
             // Вычисляем суммарное количество товаров в заказе
             const totalQuantity = quantities.reduce((acc, quantity) => acc + quantity, 0);
+            
+            await Promise.all(
+                productIds.map(async (productId, index) => {
+                    const quantity = quantities[index];
 
+                    // Проверяем на достаточность товара
+                    const warehouse = await Warehouse.findOne({ where: { id: warehouseId } });
+                    if (!warehouse) {
+                        throw new Error('Warehouse not found for product');
+                    }
+                    const existProduct = await Product.findOne({
+                        where:{
+                            id: productId,
+                            warehouseId: warehouse.id,
+                        }
+                    })
+                    
+                    if (!existProduct) {
+                        throw new Error('Product not found for product');
+                    }
+
+                    if (quantity >= existProduct.productQuantity) {
+                        throw new Error(`Not enough quantity in the warehouse product SKU: ${existProduct.sku}`);
+                    }
+                })
+            )
+            console.log(warehouseId)
             // Создаем заказ
             const order = await Order.create({
                 status,
@@ -67,13 +95,6 @@ export default {
 
                     // Обновляем количество товара на складе (уменьшаем)
                     const warehouse = await Warehouse.findOne({ where: { id: warehouseId } });
-                    if (!warehouse) {
-                        throw new Error('Warehouse not found for product');
-                    }
-
-                    if (quantity > warehouse.quantity) {
-                        throw new Error('Not enough quantity in the warehouse');
-                    }
                     await warehouse.decrement('quantity', { by: quantity });
 
                     // Увеличиваем количество товара в магазине
@@ -87,11 +108,12 @@ export default {
 
             // Создаем DTO для заказа
             const orderDto = new OrderDto(order);
-
+            
+            console.log(orderDto);
             res.json({ order: orderDto });
         } catch (error) {
             console.error('Error creating order:', error);
-            res.status(500).json({ error: 'Failed to create order' });
+            res.status(500).json({ error: 'Failed to create order' , riason: error.message });
         }
     },
 
