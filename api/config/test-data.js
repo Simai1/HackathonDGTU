@@ -34,6 +34,36 @@ export default {
                     "Product_Quantity": 100,
                     "Name_Warehouse": "Склад 1"
                 },
+                {
+                    "Column1": 7,
+                    "Product_Name": "Сыр",
+                    "Product_Cost": "2013.1",
+                    "Manufacture_Date": 44814.55469907408,
+                    "Expiry_Date": 44874.55469907408,
+                    "SKU": 1008,
+                    "Region": "Санкт-Петербург",
+                    "Product_Amount": "1.7804",
+                    "Product_Measure": "кг",
+                    "Product_Volume": "0.0019",
+                    "Manufacturer": "Фермерское хозяйство \"Сырок\"",
+                    "Product_Quantity": 100,
+                    "Name_Warehouse": "Склад 1"
+                },
+                {
+                    "Column1": 8,
+                    "Product_Name": "Рис",
+                    "Product_Cost": "167.4",
+                    "Manufacture_Date": 43934.79846064815,
+                    "Expiry_Date": 44299.79846064815,
+                    "SKU": 1027,
+                    "Region": "Краснодар",
+                    "Product_Amount": "3.0",
+                    "Product_Measure": "кг",
+                    "Product_Volume": "0.0036",
+                    "Manufacturer": "ООО \"Рисовая поляна\"",
+                    "Product_Quantity": 100,
+                    "Name_Warehouse": "Склад 1"
+                },
             ]
         },
         {
@@ -70,6 +100,36 @@ export default {
                     "Product_Quantity": 100,
                     "Name_Warehouse": "Склад 1"
                 },
+                {
+                    "Column1": 9,
+                    "Product_Name": "Рис",
+                    "Product_Cost": "248.0",
+                    "Manufacture_Date": 44704.68295138889,
+                    "Expiry_Date": 45069.68295138889,
+                    "SKU": 1027,
+                    "Region": "Тверь",
+                    "Product_Amount": "4.0",
+                    "Product_Measure": "кг",
+                    "Product_Volume": "0.0048",
+                    "Manufacturer": "ООО \"Рисовая поляна\"",
+                    "Product_Quantity": 100,
+                    "Name_Warehouse": "Склад 1"
+                },
+                {
+                    "Column1": 10,
+                    "Product_Name": "Сливочное масло",
+                    "Product_Cost": "104.62",
+                    "Manufacture_Date": 43897.65113425926,
+                    "Expiry_Date": 43957.65113425926,
+                    "SKU": 1040,
+                    "Region": "Ростов-на-Дону",
+                    "Product_Amount": "0.5914",
+                    "Product_Measure": "кг",
+                    "Product_Volume": "0.0006",
+                    "Manufacturer": "Агроконцерн \"ЭкоПоляна\"",
+                    "Product_Quantity": 100,
+                    "Name_Warehouse": "Склад 1"
+                },
             ]
         },
         {
@@ -88,6 +148,36 @@ export default {
                     "Product_Measure": "кг",
                     "Product_Volume": "0.0028",
                     "Manufacturer": "Агроконцерн \"ЭкоПоляна\"",
+                    "Product_Quantity": 100,
+                    "Name_Warehouse": "Склад 1"
+                },
+                {
+                    "Column1": 11,
+                    "Product_Name": "Капуста",
+                    "Product_Cost": "24.53",
+                    "Manufacture_Date": 44290.891076388885,
+                    "Expiry_Date": 44304.891076388885,
+                    "SKU": 1034,
+                    "Region": "Краснодар",
+                    "Product_Amount": "0.8124",
+                    "Product_Measure": "кг",
+                    "Product_Volume": "0.0018",
+                    "Manufacturer": "Овощеводческий кооператив \"Зеленый мир\"",
+                    "Product_Quantity": 100,
+                    "Name_Warehouse": "Склад 1"
+                },
+                {
+                    "Column1": 12,
+                    "Product_Name": "Молоко",
+                    "Product_Cost": "73.3",
+                    "Manufacture_Date": 44703.69008101852,
+                    "Expiry_Date": 44708.69008101852,
+                    "SKU": 1004,
+                    "Region": "Тверь",
+                    "Product_Amount": "1.4",
+                    "Product_Measure": "л",
+                    "Product_Volume": "0.0015",
+                    "Manufacturer": "Фермерское хозяйство \"Молочный рай\"",
                     "Product_Quantity": 100,
                     "Name_Warehouse": "Склад 1"
                 },
@@ -129,6 +219,36 @@ export default {
                     "Product_Quantity": 100,
                     "Name_Warehouse": "Склад 1"
                 },
+                {
+                    "Column1": 7,
+                    "Product_Name": "Сыр",
+                    "Product_Cost": "2013.1",
+                    "Manufacture_Date": 44814.55469907408,
+                    "Expiry_Date": 44874.55469907408,
+                    "SKU": 1008,
+                    "Region": "Санкт-Петербург",
+                    "Product_Amount": "1.7804",
+                    "Product_Measure": "кг",
+                    "Product_Volume": "0.0019",
+                    "Manufacturer": "Фермерское хозяйство \"Сырок\"",
+                    "Product_Quantity": 100,
+                    "Name_Warehouse": "Склад 1"
+                },
+                {
+                    "Column1": 8,
+                    "Product_Name": "Рис",
+                    "Product_Cost": "167.4",
+                    "Manufacture_Date": 43934.79846064815,
+                    "Expiry_Date": 44299.79846064815,
+                    "SKU": 1027,
+                    "Region": "Краснодар",
+                    "Product_Amount": "3.0",
+                    "Product_Measure": "кг",
+                    "Product_Volume": "0.0036",
+                    "Manufacturer": "ООО \"Рисовая поляна\"",
+                    "Product_Quantity": 100,
+                    "Name_Warehouse": "Склад 1"
+                },
             ]
         },
         {
@@ -165,6 +285,36 @@ export default {
                     "Product_Quantity": 100,
                     "Name_Warehouse": "Склад 1"
                 },
+                {
+                    "Column1": 9,
+                    "Product_Name": "Рис",
+                    "Product_Cost": "248.0",
+                    "Manufacture_Date": 44704.68295138889,
+                    "Expiry_Date": 45069.68295138889,
+                    "SKU": 1027,
+                    "Region": "Тверь",
+                    "Product_Amount": "4.0",
+                    "Product_Measure": "кг",
+                    "Product_Volume": "0.0048",
+                    "Manufacturer": "ООО \"Рисовая поляна\"",
+                    "Product_Quantity": 100,
+                    "Name_Warehouse": "Склад 1"
+                },
+                {
+                    "Column1": 10,
+                    "Product_Name": "Сливочное масло",
+                    "Product_Cost": "104.62",
+                    "Manufacture_Date": 43897.65113425926,
+                    "Expiry_Date": 43957.65113425926,
+                    "SKU": 1040,
+                    "Region": "Ростов-на-Дону",
+                    "Product_Amount": "0.5914",
+                    "Product_Measure": "кг",
+                    "Product_Volume": "0.0006",
+                    "Manufacturer": "Агроконцерн \"ЭкоПоляна\"",
+                    "Product_Quantity": 100,
+                    "Name_Warehouse": "Склад 1"
+                },
             ]
 
         },
@@ -184,6 +334,36 @@ export default {
                     "Product_Measure": "кг",
                     "Product_Volume": "0.0028",
                     "Manufacturer": "Агроконцерн \"ЭкоПоляна\"",
+                    "Product_Quantity": 100,
+                    "Name_Warehouse": "Склад 1"
+                },
+                {
+                    "Column1": 11,
+                    "Product_Name": "Капуста",
+                    "Product_Cost": "24.53",
+                    "Manufacture_Date": 44290.891076388885,
+                    "Expiry_Date": 44304.891076388885,
+                    "SKU": 1034,
+                    "Region": "Краснодар",
+                    "Product_Amount": "0.8124",
+                    "Product_Measure": "кг",
+                    "Product_Volume": "0.0018",
+                    "Manufacturer": "Овощеводческий кооператив \"Зеленый мир\"",
+                    "Product_Quantity": 100,
+                    "Name_Warehouse": "Склад 1"
+                },
+                {
+                    "Column1": 12,
+                    "Product_Name": "Молоко",
+                    "Product_Cost": "73.3",
+                    "Manufacture_Date": 44703.69008101852,
+                    "Expiry_Date": 44708.69008101852,
+                    "SKU": 1004,
+                    "Region": "Тверь",
+                    "Product_Amount": "1.4",
+                    "Product_Measure": "л",
+                    "Product_Volume": "0.0015",
+                    "Manufacturer": "Фермерское хозяйство \"Молочный рай\"",
                     "Product_Quantity": 100,
                     "Name_Warehouse": "Склад 1"
                 },
