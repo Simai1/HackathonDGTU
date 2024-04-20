@@ -7,24 +7,23 @@ import Warehouse from './warehouse.js';
 import Product from './product.js';
 
 export default function () {
-    // User.hasOne(TokenSchema, { foreignKey: 'userId' });
-    // TokenSchema.belongsTo(User, { foreignKey: 'userId' });
-
+    // Shop oneToOne Coords
     Shop.hasOne(Coords);
     Coords.belongsTo(Shop);
 
+    // Warehouse oneToOne Coords
     Warehouse.hasOne(Coords);
     Coords.belongsTo(Warehouse);
 
-    Product.belongsToMany(Shop, { through: 'ProductInShop', foreignKey: 'productId' });
-    Shop.belongsToMany(Product, { through: 'ProductInShop', foreignKey: 'shopId' });
+    // Shop OneToMany Product
+    Shop.hasMany(Product);
+    Product.belongsTo(Shop);
 
-    Shop.belongsToMany(Warehouse, { through: 'ShopInWarehouse', foreignKey: 'shopId' });
-    Warehouse.belongsToMany(Shop, { through: 'ShopInWarehouse', foreignKey: 'warehouseId' });
+    // Warehouse OneToMany Product
+    Warehouse.hasMany(Product);
+    Product.belongsTo(Warehouse);
 
-    Product.belongsToMany(Order, { through: 'ProductInOrder', foreignKey: 'productId' });
-    Order.belongsToMany(Product, { through: 'ProductInOrder', foreignKey: 'orderId' });
-
-    Product.belongsToMany(Warehouse, { through: 'ProductInWarehouse', foreignKey: 'productId' });
-    Warehouse.belongsToMany(Product, { through: 'ProductInWarehouse', foreignKey: 'warehouseId' });
+    // Product ManyToMany Order
+    Product.belongsToMany(Order, { through: 'ProductInOrder' });
+    Order.belongsToMany(Product, { through: 'ProductInOrder' });
 }

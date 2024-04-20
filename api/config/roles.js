@@ -1,10 +1,10 @@
 import { mapObjectKeys } from '../utils/map.js';
 
 const roles = {
-    ADMIN: 1,
-    SHOP: 2,
-    WAREHOUSE: 3,
-    SUPPLY: 4
+    Администратор: 1,
+    Магазин: 2,
+    Склад: 3,
+    Поставщик: 4
 };
 
 export default roles;

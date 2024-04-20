@@ -4,11 +4,9 @@ import Product from './product.js';
 import Shop from './shop.js';
 import Warehouse from './warehouse.js';
 import Order from './order.js';
-import ProductIOrder from './ProductInOrder.js';
-import ProductInShop from './productInShop.js';
-import ProductInWarehouse from './ProductInWarehouse.js';
+import ProductInOrder from './ProductInOrder.js';
 import ShopInWarehouse from './shopInWarehouse.js';
-import Coords from './coords.js';
+import Coord from './coords.js';
 
 import 'dotenv/config';
 
@@ -16,15 +14,13 @@ const { DB_USER, DB_PWD, DB_HOST, DB_PORT, DB_NAME } = process.env;
 
 export const models = {
     User,
-    Product,
     Shop,
     Warehouse,
+    Product,
     Order,
-    ProductIOrder,
-    ProductInShop,
-    ProductInWarehouse,
+    ProductInOrder,
     ShopInWarehouse,
-    Coords,
+    Coord,
 };
 export const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PWD, {
     host: DB_HOST,

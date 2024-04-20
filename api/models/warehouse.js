@@ -14,11 +14,11 @@ export default class Warehouse extends Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                coordsID: {
+                coordsId: {
                     type: DataTypes.UUID,
                     allowNull: false,
                 },
-                shopID: {
+                shopId: {
                     type: DataTypes.UUID,
                     allowNull: false,
                 },

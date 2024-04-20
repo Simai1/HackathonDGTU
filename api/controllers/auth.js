@@ -27,16 +27,16 @@ export default {
         });
     },
 
-    async login({body: {login, password}}, res) {
-        if (!login) throw new AppErrorMissing("login");
-        if (!password) throw new AppErrorMissing("password");
+    async login(req, res) {
+        if (!req.body.login) throw new AppErrorMissing("login");
+        if (!req.body.password) throw new AppErrorMissing("password");
 
-        const user = await User.findOne({where: {login}});
-        if (!user || !user.validatePassword(password)) throw new AppErrorInvalid("login or password");
+        const user = await User.findOne({where: {login: req.body.login}});
+        if (!user || !user.validatePassword(req.body.password)) throw new AppErrorInvalid("login or password");
         if (!user) throw new AppErrorInvalid("login or password");
 
         const userDto = new UserDto(user);
-
+        console.log("success login")
         res.json({
             'user': userDto,
         });
@@ -55,6 +55,7 @@ export default {
         for (const user of users) {
             userDtos.push(new UserDto(user));
         }
+        console.log(req.session)
         res.json({userDtos});
     },
 }
