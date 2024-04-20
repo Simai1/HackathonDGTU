@@ -1,0 +1,46 @@
+@import "./../../style/color.scss";
+
+.LeftMenu__inner{
+    background-color: var( --menu-color);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    .logo{
+        width: 136px;
+        height: 31px;
+        margin: 16px 0px 34px 24px;
+    }
+    ul{
+        list-style: none;
+        width:  158px;
+        margin: 0;
+        position: relative;
+        left: -20px;
+       
+    }
+    li{
+        padding: 16px 0px 16px 10px;
+        width:  158px;
+        border-radius: 8px;
+        transform: 0.15s linear all;
+        box-sizing: border-box;
+        position: relative;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 21.94px;
+        img{
+            position: absolute;
+            right: 10px;
+            top: 23px;
+        }
+    }
+    li:hover{
+        cursor: pointer;
+        // opacity: 0.8;
+        background: #F37022!important;
+    }
+}

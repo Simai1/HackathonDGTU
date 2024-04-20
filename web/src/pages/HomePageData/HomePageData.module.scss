@@ -1,0 +1,20 @@
+.HomePage__table{
+    display: flex;
+}
+.HomePage__zapr{
+    width: 500px;
+}
+.HomePage__table__inner{
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    box-sizing: border-box;
+    h3{
+        margin: 0px 0px 24px 0px;
+    }
+}
+.HomePage__table__inner:last-child{
+    margin-left: 24px;
+}

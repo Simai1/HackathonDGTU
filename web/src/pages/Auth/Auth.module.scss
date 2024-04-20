@@ -1,0 +1,32 @@
+@import "./../../style/color.scss";
+.Auth{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    Input{
+        padding-left: 20px;
+        box-sizing: border-box;
+    }
+    .Auth__inner{
+        display: flex;
+        justify-content: center;
+        width: 352px;
+        height: 366px;
+        background-color: var(--gray-color);
+        border-radius: 16px;
+    }
+    .Auth__title{
+        text-align: center;
+        width: 100%;
+    }
+    Button{
+        margin-top: 19px;
+        font-size: 20px;
+        transition: 0.15s linear all;
+    }
+    Button:hover{
+        opacity: 0.6;
+        cursor: pointer;
+    }
+}
