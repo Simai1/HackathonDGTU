@@ -1,48 +1,48 @@
 import React, { useState, useEffect } from "react";
-import style from "./WarehousCard.module.scss";
+import style from "./StoreCard.module.scss";
 import rezwernutimg from "./../../img/rezwernut.svg";
-import { GetProductsDataWarehouse } from "../../Api/Api";
+import { GetProductsDataShop } from "../../Api/Api";
 
-function WarehousCard(props) {
-  const [ProductsDataWarehouse, setProductsDataWarehouse] = useState([]);
-  const [ProductDataOpen, setProductDataOpen] = useState(false); 
+function StoreCard(props) {
+  const [ProductsDataShops, setProductsDataShops] = useState([]);
+  const [ProductDataOpenShop, setProductDataOpenShop] = useState(false); 
 
   const getId = (index) => {
     const id = props.data[index].id;
-    GetProductsDataWarehouse(id).then((data) => {
-      const dataArray = Array.isArray(data) ? data : [data]; // Преобразование в массив, если данные не являются массивом
-      setProductsDataWarehouse(dataArray);
-      setProductDataOpen(true); 
+    GetProductsDataShop(id).then((data) => {
+      const dataArray = Array.isArray(data) ? data : [data]; 
+      setProductsDataShops(dataArray);
+      setProductDataOpenShop(true); 
       console.log(dataArray[0].products);
     });
   };
 
   useEffect(() => {
-    const warehousCardData = document.querySelectorAll(`.${style.WarehousCard__data}`);
+    const warehousCardData = document.querySelectorAll(`.${style.StoreCard__data}`);
     warehousCardData.forEach((item) => {
       const name = item.querySelector('h3').textContent;
-      if (ProductsDataWarehouse.some((product) => product.name === name)) {
+      if (ProductsDataShops.some((product) => product.name === name)) {
         item.style.display = "none";
       } else {
         item.style.display = "block";
       }
     });
-  }, [ProductsDataWarehouse]);
+  }, [ProductsDataShops]);
 
   return (
-    <div className={style.WarehousCard}>
-      <div className={style.WarehousCard__inner}>
-      {ProductDataOpen && ( 
+    <div className={style.StoreCard}>
+      <div className={style.StoreCard__inner}>
+      {/* {ProductDataOpenShop && (
           <div className={style.ProductData}>
             <div className={style.ProductData__block1}>
-                <h3>{ProductsDataWarehouse[0].name}</h3>
+                <h3>{ProductsDataShops[0].name}</h3>
                 <div className={style.ProductData__coord}>
                     <div>
                         <p>Координаты:</p>
                     </div>
                     <div className={style.ProductData__coordDate}>
-                        <p>X:{ProductsDataWarehouse[0].Coord.x}</p>
-                        <p>Y:{ProductsDataWarehouse[0].Coord.y}</p>
+                        <p>X:{ProductsDataShops[0].Coord.x}</p>
+                        <p>Y:{ProductsDataShops[0].Coord.y}</p>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@ function WarehousCard(props) {
                     </thead>
             
                 <tbody>
-                    {ProductsDataWarehouse[0].products.map((item, index) => (
+                    {ProductsDataShops[0].products.map((item, index) => (
                         <tr key={index}>
                             <td>{index}</td>
                             <td>{item.name}</td>
@@ -80,9 +80,9 @@ function WarehousCard(props) {
             </table>
             </div>
           </div>
-        )}
+        )} */}
         {props.data?.map((item, index) => (
-          <div key={index} className={style.WarehousCard__data}>
+          <div key={index} className={style.StoreCard__data}>
             <h3>{item.name}</h3>
             <p>
               Координаты X:{item.Coord.x} Y:{item.Coord.y}
@@ -96,4 +96,4 @@ function WarehousCard(props) {
   );
 }
 
-export default WarehousCard;
+export default StoreCard;

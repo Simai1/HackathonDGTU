@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import style from "./Shops.module.scss";
-import { GetdataShops } from "../../Api/Api";
+import { GetdataShop } from "../../Api/Api";
+import StoreCard from "../../components/StoreCard/StoreCard";
 
 function Shops(props) {
-    const [dataShops, setdataShops] = useState({})
+    const [dataShopCard, setdataShopCard] = useState([])
     
 useEffect(()=>{
-    setdataShops(GetdataShops())
+    GetdataShop().then((data)=>{
+        setdataShopCard(data)
+    });
+    
+
 },[])
 
-console.log(dataShops);
-
   return (
-   <div>
-        <h1>Магазины</h1>
+   <div className={style.Shop}>
+        <h1>Склады</h1>
+        <StoreCard data={dataShopCard}/>
    </div>
   );
 }

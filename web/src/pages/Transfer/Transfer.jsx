@@ -84,11 +84,11 @@ function Transfer(props) {
                   <td>
                     <img
                       onClick={() => onClrickRed(item)}
-                      src={deleteImg}
+                      src={deleteImg} alt="deleteImg"
                     ></img>
                   </td>
                   <td>
-                    <img src={redaction}></img>
+                    <img src={redaction} alt="redaction"></img>
                   </td>
                 </tr>
               ))}

@@ -13,7 +13,6 @@ useEffect(()=>{
     
 
 },[])
-console.log(dataWarehousCard);
 
   return (
    <div className={style.Warehous}>

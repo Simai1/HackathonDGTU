@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./LeftMenu.module.scss";
-import arrowIMG from "./../../img/arrow.png";
 import { Link } from "react-router-dom";
 
 function LeftMenu(props) {
@@ -41,7 +40,7 @@ function LeftMenu(props) {
               }}
               onClick={() => handleMenuClick("Склады")}
             >
-              Склады<img src={arrowIMG}></img>
+              Склады
             </li>
             <li
               style={{
@@ -50,7 +49,7 @@ function LeftMenu(props) {
               }}
               onClick={() => handleMenuClick("Запросы")}
             >
-              Запросы<img src={arrowIMG}></img>
+              Запросы
             </li>
             <li
               style={{
@@ -59,7 +58,7 @@ function LeftMenu(props) {
               }}
               onClick={() => handleMenuClick("Магазины")}
             >
-              Магазины<img src={arrowIMG}></img>
+              Магазины
             </li>
             <li
               style={{
@@ -68,7 +67,7 @@ function LeftMenu(props) {
               }}
               onClick={() => handleMenuClick("Аналитика")}
             >
-              Аналитика<img src={arrowIMG}></img>
+              Аналитика
             </li>
           </ul>
         </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import LeftMenu from "../../ui/LeftMenu/LeftMenu.jsx";
 import style from "./HomePage.module.scss";
 import HomePageData from '../HomePageData/HomePageData.jsx';
