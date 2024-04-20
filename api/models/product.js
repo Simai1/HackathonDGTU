@@ -13,6 +13,10 @@ export default class Product extends Model {
                     allowNull: false,
                     primaryKey: true,
                 },
+                Column1: {
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                },
                 productName: {
                     type: DataTypes.STRING,
                     allowNull: false,
