@@ -32,6 +32,10 @@ export default class Product extends Model {
                     type: DataTypes.DATE,
                     allowNull: false,
                 },
+                uploadingDate: {
+                    type: DataTypes.DATE,
+                    allowNull: false,
+                },
                 sku: {
                     type: DataTypes.INTEGER,
                     allowNull: false,

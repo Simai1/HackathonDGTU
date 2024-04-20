@@ -44,6 +44,7 @@ export default {
                         return res.status(400).json({status: "error", message: "Warehouse not found"});
                     }
                     const warehouseId = existWarehouse.id;
+                    const uploadingDate = Date.now();
                     Product.create({
                         productName,
                         productCost,
@@ -56,7 +57,8 @@ export default {
                         productVolume,
                         manufacture, 
                         productQuantity, 
-                        warehouseId, 
+                        warehouseId,
+                        uploadingDate, 
                     })
 
                 } catch (e) {
