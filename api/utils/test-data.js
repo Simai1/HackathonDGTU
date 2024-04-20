@@ -49,7 +49,7 @@ async function fillWarehouse() {
                 iconCaption: testData.warehouse[i].name,
                 markerColor: "#1e98ff",
             });
-            const warehouse = await Warehouse.create({
+            const newWarehouse = await Warehouse.create({
                 name: testData.warehouse[i].name,
                 quantity: testData.warehouse[i].quantity,
                 coordId: coord2.id,
@@ -67,12 +67,12 @@ async function fillWarehouse() {
                     productVolume: warehouse.Product_Volume,
                     manufacture: warehouse.Manufacturer,
                     productQuantity: warehouse.Product_Quantity,
-                    warehouseId: warehouse.id,
+                    warehouseId: newWarehouse.id,
                 })
             }
             await ShopInWarehouse.create({
                 shopId: newShop.id,
-                warehouseId: warehouse.id,
+                warehouseId: newWarehouse.id,
             })
         }
     }
