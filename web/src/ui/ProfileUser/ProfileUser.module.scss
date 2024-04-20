@@ -26,5 +26,12 @@
             line-height: 24.38px;
             text-align: left;
         }
+        .ProfileUser__imgUser{
+            transition: 0.15s linear all;
+        }
+        .ProfileUser__imgUser:hover{
+            cursor: pointer;
+            opacity: 0.6;
+        }
     }
 }

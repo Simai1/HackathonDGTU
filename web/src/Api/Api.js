@@ -8,10 +8,9 @@ export const Login = async (data) => {
   try {
     const response = await axios.post(`${server}/auth/login`, data);
     return response;
-  } catch (error) {
-    console.error("Error:", error);
-    throw error;
-  }
+  } catch (response) {
+        return response;
+      }
 };
 
 export const GetDataWarehouse = async () => {
@@ -47,7 +46,7 @@ export const GetDataWarehouse = async () => {
   export const GetdataShop = async () => {
     try {
       const response = await axios.get(`${server}/shop`);
-      return response;
+      return response.data;
     } catch (error) {
       console.error("Error:", error);
       throw error;
