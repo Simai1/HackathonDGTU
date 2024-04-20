@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./LeftMenu.module.scss";
 import arrowIMG from "./../../img/arrow.png";
-import logo from "./../../img/logo.png";
 import { Link } from "react-router-dom";
 
 function LeftMenu(props) {
@@ -13,7 +12,7 @@ function LeftMenu(props) {
         <div className={styles.LeftMenu}>
             <div className={styles.LeftMenu__inner}>
                 <div>      
-                <img src="./img/logo.png" alt="logo" className={styles.logo}></img>
+                <img src="./img/logo.svg" alt="logo" className={styles.logo}></img>
                     <ul className={styles.LeftMenu__list}>
                         <li style={{ backgroundColor: props.activeMenu === "Главная" ? "#F3702233" : "#FFFFFF" }} onClick={() => handleMenuClick("Главная")}>Главная</li>
                         <Link to={"/map"}><li style={{ backgroundColor: props.activeMenu === "Карта" ? "#F3702233" : "#FFFFFF" }} onClick={() => handleMenuClick("Карта")}>Карта</li></Link>
@@ -24,6 +23,7 @@ function LeftMenu(props) {
                     </ul>
                 </div>
             </div>
+
         </div>
   );
 }
