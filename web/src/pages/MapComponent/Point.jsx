@@ -6,17 +6,16 @@ function Point(props) {
     <div className={styles.Point}>
       <Placemark
         geometry={props.coor}
-        options={{
-          iconColor: `${props.iconColor}`,
-          iconImageHref: props.icomUrl, // Путь к вашему изображению
-          iconLayout: "default#image",
-          iconImageSize: [30, 30], // Размеры изображения
-        }}
         properties={{
           iconCaption: props.iconCaption,
         }}
+        options={{
+          iconColor: `${props.iconColor}`,
+          //   iconImageHref: props.icomUrl, // Путь к вашему изображению
+          //   iconLayout: "default#image",
+          //   iconImageSize: [30, 30], // Размеры изображения
+        }}
       />
-      <div className={styles.Point_text}>www</div>
     </div>
   );
 }
