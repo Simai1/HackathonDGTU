@@ -4,8 +4,8 @@ export default class OrderDto {
     status;
     warehouseId;
     shopId;
-    products;
     userId;
+    products;
 
     constructor(model) {
         this.id = model.id;
@@ -13,7 +13,7 @@ export default class OrderDto {
         this.status = model.status;
         this.warehouseId = model.warehouseId;
         this.shopId = model.shopId;
-        this.products = model.products;
         this.userId = model.userId;
+        this.products = model.products;
     }
 }

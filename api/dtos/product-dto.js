@@ -1,5 +1,5 @@
-import {map as productNameMap} from "../enums/product.js";
-import {map as measureMap} from "../enums/measure.js";
+import { map as productNameMap } from '../enums/product.js';
+import { map as measureMap } from '../enums/measure.js';
 export default class ProductDto {
     id;
     name;
@@ -14,7 +14,6 @@ export default class ProductDto {
     manufacturer;
     quantity;
     orderId;
-
 
     constructor(model) {
         this.id = model.id;
