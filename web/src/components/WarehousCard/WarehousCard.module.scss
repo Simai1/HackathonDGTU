@@ -5,7 +5,7 @@
         width: 100%;
         .ProductData{
             width: 90%;
-            height: 300px;
+            height: 450px;
             border: 1px solid #9F9F9F;
             border-radius: 8px;
             margin: 12px;
@@ -40,18 +40,17 @@
                 }
            }
            .ProductData__block2::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
           }
           
           .ProductData__block2::-webkit-scrollbar-thumb {
-            background-color: #F37022;
-            border-radius: 8px;
+            background-color: #9F9F9F;
+            border-radius: 6px;
           }
           
           
-          
           .ProductData__block2::-moz-scrollbar {
-            width: 8px;
+            width: 6px;
           }
           
           .ProductData__block2::-moz-scrollbar-thumb {
