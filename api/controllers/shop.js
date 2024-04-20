@@ -51,6 +51,7 @@ export default {
             ]
         });
         const products = await Product.findAll({where: {shopId: shop.id}});
+        if (products.length <= 2) res.json('products <= 2');
         const product = products[random.int(0, products.length)];
         const productDto = new ProductDto(product);
         await product.destroy();
