@@ -27,11 +27,11 @@ export default class Order extends Model {
                     type: DataTypes.UUID,
                     allowNull: false,
                 },
-                productId: {
-                    type: DataTypes.UUID,
-                    allowNull: false,
-                },
                 userId: {
+                    type: DataTypes.UUID,
+                    allowNull: true,
+                },
+                shopId: {
                     type: DataTypes.UUID,
                     allowNull: false,
                 },
