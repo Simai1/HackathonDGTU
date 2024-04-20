@@ -7,10 +7,10 @@ import mapProduct from "../enums/product.js"
 import fs from "fs"
 
 export default {
-    async parseFromXlsx(req, res){
+    async parseFromXlsx(req, res) {
         let workbook = XLSX.readFile(req.file.path);
         const products = [];
-
+        //выгрузка из xlsx в json (не удалять)
         // const workbook = XLSX.readFile(req.file.path);
 
         // // Получаем первый лист в книге
@@ -30,7 +30,7 @@ export default {
         // });
 
         Object.keys(workbook.Sheets).forEach((name) => {
-            const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[name], {header: 1});
+            const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[name], { header: 1 });
             products.push({ name, data: sheetData });
         });
 
@@ -38,7 +38,7 @@ export default {
         console.log(dataProducts)
         for (const element of dataProducts) {
             const id = element[0];
-            if(Number(id)) {
+            if (Number(id)) {
                 try {
                     const productName = mapProduct[element[1]];
                     const productCost = element[2];
@@ -60,7 +60,7 @@ export default {
                         }
                     });
                     if (!existWarehouse) {
-                        return res.status(400).json({status: "error", message: "Warehouse not found"});
+                        return res.status(400).json({ status: "error", message: "Warehouse not found" });
                     }
                     const warehouseId = existWarehouse.id;
                     const uploadingDate = Date.now();
@@ -74,21 +74,82 @@ export default {
                         productAmount,
                         productMeasure,
                         productVolume,
-                        manufacture, 
-                        productQuantity, 
+                        manufacture,
+                        productQuantity,
                         warehouseId,
-                        uploadingDate, 
+                        uploadingDate,
                     })
 
                 } catch (e) {
                     console.log(e)
-                    return res.status(400).json({status: "error", message: e.message});
+                    return res.status(400).json({ status: "error", message: e.message });
                 }
 
             }
             else console.log(id);
         }
 
-        return res.json({status: "ok", rek: dataProducts[0]});
+        return res.json({ status: "ok", rek: dataProducts[0] });
+    },
+
+    async downloadProductsFromWarehouse({ body: { name } }, res) {
+        try {
+            const existWarehouse = await Warehouse.findOne({
+                where: {
+                    name,
+                }
+            });
+            if (!existWarehouse) {
+                return res.status(400).json({ status: "error", message: "Warehouse not found" });
+            }
+            const products = await Product.findAll({
+                where: {
+                    warehouseId: existWarehouse.id,
+                }
+            })
+
+            // Создание нового XLSX файла
+            const workbook = new ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet('Cities');
+
+            // "id": "882b80d1-fce6-4f60-bc24-829412104d1e", 
+            // "name": "Сливочное масло", наименование товара
+            // "cost": 655.2, - стоимость покупки со склада
+            // "manufactureDate": "1970-01-01T00:00:45.398Z", дата изготовления продукта
+            // "expiryDate": "1970-01-01T00:00:45.404Z", дата, когда продукт испортится
+            // "sku": 1039, обозначающий идентификатор товарной позиции (артикул)
+            // "region": "Санкт-Петербург", регион, где товар производится
+            // "amount": 600, - вес (литры, граммы,) (зависити от measure) в 1 единице продукта
+            // "measure": "г", - мера измерения продукта
+            // "volume": 0.0006, - (пока неиспользуемое поле) - скоко в процентах занимает склад 
+            // "manufacturer": "Маслозавод \"Сливка\"", - производитель
+            // "quantity": 100, - количетсво позиций на складе
+            // "orderId": null - привязка к ордеру
+            // Добавление заголовков столбцов
+            //Column1	Product_Name	Product_Cost	Manufacture_Date	Expiry_Date	SKU	Region	Product_Amount	Product_Measure	Product_Volume	Manufacturer	Product_Quantity	Name_Warehouse
+
+            worksheet.columns = [
+                { header: 'City ID', key: 'city_id', width: 10 },
+                { header: 'Name', key: 'name', width: 20 },
+                { header: 'City Rank', key: 'city_rank', width: 15 },
+            ];
+
+            // Добавление данных в таблицу
+            cities.forEach(city => {
+
+                const { city_id, ...cityData } = city.dataValues;
+                worksheet.addRow(cityData);
+            });
+
+            // Сохранение файла и отправка его пользователю
+            const buffer = await workbook.xlsx.writeBuffer();
+            res.setHeader('Content-Disposition', 'attachment; filename=cities.xlsx');
+            res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            res.send(buffer);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error exporting data to Excel');
+        }
     }
 }
+
