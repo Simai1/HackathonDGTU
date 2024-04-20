@@ -10,10 +10,10 @@ import { Op } from 'sequelize';
 import Product from '../models/product.js';
 
 export default {
-    async getAllUserOrders(req, res) {
-        const user = await User.findOne({ where: { id: req.user.id } });
-        const orders = await Order.findAll({ where: { userId: user.id } });
-        res.json({ orders });
+    async getAllOrders(req, res) {
+        const orders = await Order.findAll();
+        const orderDto = orders.map(order => new OrderDto(order));
+        res.json(orderDto);
     },
 
     async createOrder({ body: { quantities, productIds, shopId, status, warehouseId, userId } }, res) {
@@ -34,8 +34,6 @@ export default {
                 status,
                 warehouseId,
                 userId,
-                // Первый элемент массива productIds будет использоваться в качестве productId
-                productId: productIds[0],
                 // Добавляем суммарное количество в свойство quantity
                 quantity: totalQuantity,
                 shopId,
@@ -98,43 +96,33 @@ export default {
     },
 
     async changeStatusOrder({ params: { orderId }, body: { status: newStatus, carrierId } }, res) {
-        try {
-            const order = await Order.findByPk(orderId);
-            if (!order) {
-                throw new Error('Order not found');
-            }
-
-            if (isNaN(newStatus) || !Object.values(status).includes(parseInt(newStatus))) {
-                throw new Error('Invalid status');
-            }
-
-            await order.update({ status: parseInt(newStatus) });
-
-            if (parseInt(newStatus) === status['Доставляется']) {
-                const carrier = await User.findByPk(carrierId);
-                if (!carrier) {
-                    throw new Error('Carrier not found');
-                }
-
-                if (carrier.role !== roles['Поставщик']) {
-                    throw new Error('The carrier must be a supplier');
-                }
-
-                // Присваиваем перевозчика заказу
-                order.userId = carrier.id;
-
-                // Обновляем поля warehouseId и shopId для каждого продукта этого заказа
-                await Promise.all(
-                    order.Products.map(async product => {
-                        await product.update({ warehouseId: null, shopId: order.shopId });
-                    })
-                );
-            }
-
-            res.json({ message: 'Order status updated successfully' });
-        } catch (error) {
-            console.error('Error changing order status:', error);
-            res.status(500).json({ error: 'Failed to change order status' });
+        const order = await Order.findByPk(orderId);
+        if (!order) {
+            throw new Error('Order not found');
         }
+        const carrier = await User.findByPk(carrierId);
+        if (carrier.role !== roles.carrier) {
+            throw new Error('Invalid carrier');
+        }
+        if (!newStatus || !Object.values(status).includes(newStatus)) {
+            throw new Error('Invalid status');
+        }
+        if (newStatus !== status.delivered && newStatus !== status.delivering) {
+            throw new Error('Invalid status');
+        }
+
+        // Теперь нужно в Product по айдишникам всех товаров в этом заказе обновить свойство warehouseId на null, а orderId у всех на новый
+        await order.update({ status: newStatus, userId: carrierId });
+        if (newStatus === status.delivering) {
+            for (const productInOrder of await ProductInOrder.findAll({ where: { orderId } })) {
+                const product = await Product.findByPk(productInOrder.productId);
+                if (!product) {
+                    throw new Error('Product not found');
+                }
+                await product.update({ warehouseId: null, shopId: order.shopId });
+            }
+        }
+
+        res.json({ order });
     },
 };

@@ -3,15 +3,17 @@ export default class OfferDto {
     quantity;
     status;
     warehouseId;
-    productId;
-    userId;
+    shopId;
+    products;
+    user;
 
     constructor(model) {
         this.id = model.id;
         this.quantity = model.quantity;
         this.status = model.status;
-        this.warehouseId = model.warehouseId;
-        this.productId = model.productId;
-        this.userId = model.userId !== undefined ? model.userId : null; // Устанавливаем userId в null, если его нет в модели
+        this.warehouse = model.Warehouse;
+        this.shop = model.Shop;
+        this.products = model.Product;
+        this.user = model.User;
     }
 }
