@@ -17,10 +17,30 @@ export const Login = async (data) => {
 export const GetDataWarehouse = async () => {
     try {
       const response = await axios.get(`${server}/warehouse`);
-      console.log(response)
+      return response.data;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
+  export const GetdataShops = async () => {
+    try {
+      const response = await axios.get(`${server}/shop`);
       return response;
     } catch (error) {
       console.error("Error:", error);
       throw error;
     }
   };
+
+  export const GetProductsDataShops = async (data) => {
+    try {
+      const response = await axios.get(`${server}/warehouse/${data}/products`);
+      return response.data;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+

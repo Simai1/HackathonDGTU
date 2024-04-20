@@ -19,7 +19,7 @@ export function MapMenu(props) {
   return (
     <div className={styles.MapMenu}>
       <div className={styles.back}>
-        <Link style={{ textDecoration: "none" }} to="/">
+        <Link to="/HomePage">
           <img width={22} src="./img/arrow.png" alt="<" />
           <span>Назад</span>
         </Link>

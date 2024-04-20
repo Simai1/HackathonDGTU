@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./LeftMenu.module.scss";
 import arrowIMG from "./../../img/arrow.png";
 import logo from "./../../img/logo.png";
+import { Link } from "react-router-dom";
 
 function LeftMenu(props) {
   const handleMenuClick = (menuName) => {
@@ -23,10 +24,21 @@ function LeftMenu(props) {
             >
               Главная
             </li>
+            <Link to={"/map"}>
+              <li
+                style={{
+                  backgroundColor:
+                    props.activeMenu === "Карта" ? "#F3702233" : "#FFFFFF",
+                }}
+                onClick={() => handleMenuClick("Карта")}
+              >
+                Карта
+              </li>
+            </Link>
             <li
               style={{
                 backgroundColor:
-                  props.activeMenu === "Склады" ? "#F5F5F533" : "#FFFFFF",
+                  props.activeMenu === "Склады" ? "#F3702233" : "#FFFFFF",
               }}
               onClick={() => handleMenuClick("Склады")}
             >

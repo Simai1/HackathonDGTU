@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Warehouse.module.scss";
+import style from "./Warehouse.module.scss";
 import WarehousCard from "../../components/WarehousCard/WarehousCard";
 import { GetDataWarehouse } from "../../Api/Api";
 
 function Warehouse(props) {
-    const [dataWarehousCard, setdataWarehousCard] = useState({})
+    const [dataWarehousCard, setdataWarehousCard] = useState([])
     
 useEffect(()=>{
-    setdataWarehousCard(GetDataWarehouse())
+    GetDataWarehouse().then((data)=>{
+        setdataWarehousCard(data)
+    });
+    
 
 },[])
 console.log(dataWarehousCard);
 
   return (
-   <div>
+   <div className={style.Warehous}>
         <h1>Склады</h1>
         <WarehousCard data={dataWarehousCard}/>
    </div>

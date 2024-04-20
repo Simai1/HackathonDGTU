@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
 import LeftMenu from "../../ui/LeftMenu/LeftMenu.jsx";
 import style from "./HomePage.module.scss";
-import HomePageData from "../HomePageData/HomePageData.jsx";
-import Transfer from "../Transfer/Transfer.jsx";
-import Warehouse from "../Warehouse/Warehouse.jsx";
+import HomePageData from '../HomePageData/HomePageData.jsx';
+import Transfer from '../Transfer/Transfer.jsx';
+import Warehouse from '../Warehouse/Warehouse.jsx';
+import Shops from '../Shops/Shops.jsx';
+import ProfileUser from "../../ui/ProfileUser/ProfileUser.jsx";
 
 const HomePage = () => {
   const [activeMenu, setActiveMenu] = useState("Главная"); // Используем хук useState для хранения активного пункта меню
@@ -118,12 +120,22 @@ const HomePage = () => {
   return (
     <div className={style.HomePage}>
       <LeftMenu setActiveMenu={setActiveMenu} activeMenu={activeMenu} />
-      {/* <ProfileUser/> */}
+      <ProfileUser/>
       <div className={style.HomePage__inner}>
-        {activeMenu === "Главная" && <HomePageData />}
-        {activeMenu === "Склады" && <Warehouse />}
-        {activeMenu === "Запросы" && <Transfer data={DataZaprosTesting} />}
-      </div>
+      {activeMenu === "Главная" &&(
+        <HomePageData/>
+      )}
+       {activeMenu === "Склады" &&(
+        <Warehouse/>
+      )}
+      {activeMenu === "Запросы" &&(
+        <Transfer data={DataZaprosTesting}/>
+      )}
+      {activeMenu === "Магазины" &&(
+        <Shops/>
+      )}
+     </div>
+
     </div>
   );
 };
