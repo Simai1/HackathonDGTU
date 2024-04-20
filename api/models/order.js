@@ -33,7 +33,7 @@ export default class Order extends Model {
                 },
                 userId: {
                     type: DataTypes.UUID,
-                    allowNull: true,
+                    allowNull: false,
                 },
             },
             {
