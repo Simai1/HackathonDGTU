@@ -14,10 +14,11 @@ export const Login = async (data) => {
   }
 };
 
-export const GetData = async (data) => {
+export const GetDataWarehouse = async () => {
     try {
-      const response = await axios.post(`${server}/auch/login`, data);
-      return response.data;
+      const response = await axios.get(`${server}/warehouse`);
+      console.log(response)
+      return response;
     } catch (error) {
       console.error("Error:", error);
       throw error;

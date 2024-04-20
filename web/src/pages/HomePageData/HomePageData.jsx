@@ -3,6 +3,7 @@ import React from "react";
 import style from "./HomePageData.module.scss";
 import ProgressBar from "../../ui/progress/ProgressBar";
 import DataDisplay from "../../ui/DataDisplay/DataDisplay";
+import DataZapr from "../../ui/DataZapros/Data.zapr";
 
 function HomePageData(props) {
 
@@ -53,7 +54,7 @@ function HomePageData(props) {
       </div>
     </div>
     
-    {/* <div className={style.HomePage__zapr}>
+    <div className={style.HomePage__zapr}>
     <h1>Запросы</h1>
     
     <div classDataZaprosTestName={style.HomePage__table}>
@@ -78,7 +79,7 @@ function HomePageData(props) {
           </div>
           
       </div>
-    </div> */}
+    </div>
     
     </div>
   );

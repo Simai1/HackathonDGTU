@@ -1,9 +1,79 @@
 Button{
     font-size: 18px;
+    margin-bottom: 24px;
 }
-thead{
-    background-color: #EEEEEE;
-    tr{
-
+.TableHeader{
+   
+    height: 54px;
+    align-items: center;
+    display: flex;
+}
+.TableScroll{
+    width: 95%;
+    -webkit-overflow-scrolling: touch; 
+    max-height: 650px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    table{
+        width: 100%;
+        border-spacing: 0px;
+        height: 54px;
+        border-radius: 8px;
+        thead{
+            width: 80%;
+            border-radius: 8px;        
+            height: 54px;
+            padding-left: 24px;
+            position: sticky;
+            top: 0;
+           th{
+            background-color: #EEEEEE;
+            padding-left: 15px;
+           }
+           .thFirst{
+            border-radius: 8px 0px 0px 8px;
+           }
+           .thLast{
+            border-radius: 0px 8px 8px 0px;
+           }
+        }  
+        td{
+            padding: 15px;
+        }
+        th{
+            text-align: left;
+        }
+        tbody{
+            img{
+                transition: 0.15s linear all;
+            }
+            img:hover{
+                opacity: 0.6;
+                cursor: pointer;
+            }
+        }
+    
     }
+
 }
+
+  
+  .TableScroll::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .TableScroll::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 8px;
+  }
+  
+  
+  
+  .TableScroll::-moz-scrollbar {
+    width: 8px;
+  }
+  
+  .TableScroll::-moz-scrollbar-thumb {
+    background-color: #888;
+  }
+
