@@ -5,10 +5,13 @@ import dbUtils from './utils/db.js';
 // import session from 'express-session';
 // import cronService from './services/cron.js';
 import 'dotenv/config';
+
 import authRoute from './routes/auth.js';
 import parserRouter from './routes/parser.js';
 import shopRouter from "./routes/shop.js";
 import productRouter from './routes/product.js';
+import warehouseRouter from "./routes/warehouse.js";
+
 import testUtils from './utils/test-data.js';
 
 const app = express();
@@ -49,5 +52,5 @@ app.use('/auth', authRoute);
 app.use('/parser', parserRouter);
 app.use('/product', productRouter);
 app.use('/shop', shopRouter);
-
+app.use('/warehouse', warehouseRouter);
 app.listen(PORT, () => console.log(`Listen on :${PORT}`));
