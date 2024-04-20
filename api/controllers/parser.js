@@ -2,6 +2,8 @@ import XLSX from "xlsx";
 import { sequelize } from "../models/index.js";
 import map from "../enums/measure.js"
 import Warehouse from "../models/warehouse.js";
+import Product from "../models/product.js";
+import mapProduct from "../enums/product.js"
 
 export default {
     async parseFromXlsx(req, res){
@@ -19,13 +21,13 @@ export default {
             const id = element[0];
             if(Number(id)) {
                 try {
-                    const productName = element[1];
+                    const productName = mapProduct[element[1]];
                     const productCost = element[2];
                     const manufactureDate = new Date((element[3] - 25569) * 86400000 + 1000)
                     manufactureDate.setHours(manufactureDate.getHours() - 3);
                     const expiryDate = new Date((element[4] - 25569) * 86400000 + 1000)
                     expiryDate.setHours(expiryDate.getHours() - 3);
-                    const SKU = element[5];
+                    const sku = element[5];
                     const region = element[6];
                     const productAmount = element[7];
                     const productMeasure = map[element[8]];
@@ -41,6 +43,21 @@ export default {
                     if (!existWarehouse) {
                         return res.status(400).json({status: "error", message: "Warehouse not found"});
                     }
+                    const warehouseId = existWarehouse.id;
+                    Product.create({
+                        productName,
+                        productCost,
+                        manufactureDate,
+                        expiryDate,
+                        sku,
+                        region,
+                        productAmount,
+                        productMeasure,
+                        productVolume,
+                        manufacture, 
+                        productQuantity, 
+                        warehouseId, 
+                    })
 
                 } catch (e) {
                     console.log(e)

@@ -32,7 +32,7 @@ export default class Product extends Model {
                     type: DataTypes.DATE,
                     allowNull: false,
                 },
-                SKU: {
+                sku: {
                     type: DataTypes.INTEGER,
                     allowNull: false,
                 },
@@ -73,7 +73,7 @@ export default class Product extends Model {
                 },
                 shopId: {
                     type: DataTypes.UUID,
-                    allowNull: false,
+                    allowNull: true,
                 },
             },
             {

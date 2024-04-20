@@ -25,4 +25,4 @@ const product = {
 
 export default product;
 
-export const map = mapObjectKeys(product);
+export const mapProduct = mapObjectKeys(product);

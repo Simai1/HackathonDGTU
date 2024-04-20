@@ -9,7 +9,7 @@ async function fillWarehouse() {
             },
         });
         if (!warehouse) {
-            await warehouse.create({
+            await Warehouse.create({
                 name: x.name,
             });
         }

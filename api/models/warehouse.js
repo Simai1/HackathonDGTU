@@ -16,15 +16,15 @@ export default class Warehouse extends Model {
                 },
                 coordsId: {
                     type: DataTypes.UUID,
-                    allowNull: false,
+                    allowNull: true,
                 },
                 shopId: {
                     type: DataTypes.UUID,
-                    allowNull: false,
+                    allowNull: true,
                 },
                 productId: {
                     type: DataTypes.UUID,
-                    allowNull: false,
+                    allowNull: true,
                 }
             },
             {
