@@ -10,11 +10,10 @@ function App() {
   const [UserData, setUserData] = useState({});
   return (
     <DataContext.Provider
-    value={{
+      value={{
         setUserData,
-        UserData
-      }
-    }
+        UserData,
+      }}
     >
       <BrowserRouter>
         <main className="App">
@@ -26,7 +25,6 @@ function App() {
         </main>
       </BrowserRouter>
     </DataContext.Provider>
-
   );
 }
 

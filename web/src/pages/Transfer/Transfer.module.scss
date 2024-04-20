@@ -1,79 +1,197 @@
-Button{
-    font-size: 18px;
-    margin-bottom: 24px;
+Button {
+  font-size: 18px;
+  margin-bottom: 24px;
 }
-.TableHeader{
-   
+.TableHeader {
+  height: 54px;
+  align-items: center;
+  display: flex;
+}
+.TableScroll {
+  width: 95%;
+  -webkit-overflow-scrolling: touch;
+  max-height: 650px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  table {
+    width: 100%;
+    border-spacing: 0px;
     height: 54px;
-    align-items: center;
-    display: flex;
-}
-.TableScroll{
-    width: 95%;
-    -webkit-overflow-scrolling: touch; 
-    max-height: 650px;
-    overflow-y: scroll;
-    scrollbar-width: thin;
-    table{
-        width: 100%;
-        border-spacing: 0px;
-        height: 54px;
-        border-radius: 8px;
-        thead{
-            width: 80%;
-            border-radius: 8px;        
-            height: 54px;
-            padding-left: 24px;
-            position: sticky;
-            top: 0;
-           th{
-            background-color: #EEEEEE;
-            padding-left: 15px;
-           }
-           .thFirst{
-            border-radius: 8px 0px 0px 8px;
-           }
-           .thLast{
-            border-radius: 0px 8px 8px 0px;
-           }
-        }  
-        td{
-            padding: 15px;
-        }
-        th{
-            text-align: left;
-        }
-        tbody{
-            img{
-                transition: 0.15s linear all;
-            }
-            img:hover{
-                opacity: 0.6;
-                cursor: pointer;
-            }
-        }
-    
-    }
-
-}
-
-  
-  .TableScroll::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  .TableScroll::-webkit-scrollbar-thumb {
-    background-color: #888;
     border-radius: 8px;
+    thead {
+      width: 80%;
+      border-radius: 8px;
+      height: 54px;
+      padding-left: 24px;
+      position: sticky;
+      top: 0;
+      th {
+        background-color: #eeeeee;
+        padding-left: 15px;
+      }
+      .thFirst {
+        border-radius: 8px 0px 0px 8px;
+      }
+      .thLast {
+        border-radius: 0px 8px 8px 0px;
+      }
+    }
+    td {
+      padding: 15px;
+    }
+    th {
+      text-align: left;
+    }
+    tbody {
+      img {
+        transition: 0.15s linear all;
+      }
+      img:hover {
+        opacity: 0.6;
+        cursor: pointer;
+      }
+    }
   }
-  
-  
-  
-  .TableScroll::-moz-scrollbar {
-    width: 8px;
-  }
-  
-  .TableScroll::-moz-scrollbar-thumb {
-    background-color: #888;
-  }
+}
 
+.TableScroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.TableScroll::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 8px;
+}
+
+.TableScroll::-moz-scrollbar {
+  width: 8px;
+}
+
+.TableScroll::-moz-scrollbar-thumb {
+  background-color: #888;
+}
+
+.Editing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100vw;
+  height: 1000px;
+  top: 0;
+  left: 0;
+  background-color: #8888888c;
+
+  .container {
+    position: fixed;
+    top: 70px;
+    width: 736px;
+    height: 530px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    box-sizing: border-box;
+
+    .bobmenu {
+      position: absolute;
+      top: 115px;
+      background-color: #fff;
+      width: 104px;
+      border: 1px solid #888;
+      border-radius: 8px;
+      span {
+        display: flex;
+        width: 100%;
+        padding: 10px;
+        font-weight: 400;
+        cursor: pointer;
+      }
+    }
+    .title {
+      display: block;
+      width: 100% !important;
+      padding-bottom: 30px;
+    }
+    .title2 {
+      display: block;
+      width: 100% !important;
+      padding-top: 30px;
+      padding-bottom: 8px;
+    }
+    h6 {
+      font-size: 24px;
+      font-weight: 500;
+      padding: 0;
+      margin: 0;
+      padding-bottom: 24px;
+    }
+    .storage {
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+      img {
+        padding-left: 10px;
+      }
+      padding: 10px;
+      border: 1px solid #888;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      margin-top: 8px;
+      display: inline;
+    }
+    .table {
+      width: 100%;
+      display: flex;
+      box-shadow: 0 0 2px #888;
+      border-radius: 8px;
+      table {
+        width: 100%;
+      }
+      .name {
+        padding-left: 10px;
+      }
+
+      td {
+        padding: 10px 40px;
+      }
+      .god_inner {
+        background-color: #c4c4c4ae;
+        padding: 5px 30px;
+        border-radius: 20px;
+        text-align: center;
+      }
+      .inp {
+        display: flex;
+        flex-direction: row;
+        padding-right: 0;
+
+        input {
+          width: 60px;
+          border-radius: 8px;
+          padding: 4px 5px;
+          color: #000000;
+          margin-right: 2px;
+        }
+      }
+      .crst {
+        padding-left: 0;
+        padding-right: 0;
+        img {
+          cursor: pointer;
+        }
+      }
+    }
+    .buttons {
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+      Button {
+        cursor: pointer;
+      }
+      .buttons_inner {
+        padding: 20px;
+        padding-left: 10px;
+      }
+    }
+  }
+}
