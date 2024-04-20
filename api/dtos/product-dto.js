@@ -1,4 +1,5 @@
 import {map as productNameMap} from "../enums/product.js";
+import {map as measureMap} from "../enums/measure.js";
 export default class ProductDto {
     id;
     name;
@@ -24,7 +25,7 @@ export default class ProductDto {
         this.sku = model.sku;
         this.region = model.region;
         this.amount = model.productAmount;
-        this.measure = model.productMeasure;
+        this.measure = measureMap[model.productMeasure];
         this.volume = model.productVolume;
         this.manufacturer = model.manufacture;
         this.quantity = model.productQuantity;
