@@ -12,7 +12,7 @@ function LeftMenu(props) {
     <div className={styles.LeftMenu}>
       <div className={styles.LeftMenu__inner}>
         <div>
-          <img src="./img/logo.png" alt="logo" className={styles.logo}></img>
+          <img src="./img/logo.svg" alt="logo" className={styles.logo}></img>
           <ul className={styles.LeftMenu__list}>
             <li
               style={{
