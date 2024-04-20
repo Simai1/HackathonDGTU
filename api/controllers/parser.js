@@ -4,11 +4,30 @@ import map from "../enums/measure.js"
 import Warehouse from "../models/warehouse.js";
 import Product from "../models/product.js";
 import mapProduct from "../enums/product.js"
+import fs from "fs"
 
 export default {
     async parseFromXlsx(req, res){
         let workbook = XLSX.readFile(req.file.path);
         const products = [];
+
+        // const workbook = XLSX.readFile(req.file.path);
+
+        // // Получаем первый лист в книге
+        // const sheetName = workbook.SheetNames[0];
+        // const worksheet = workbook.Sheets[sheetName];
+
+        // // Преобразуем лист в JSON
+        // const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+        // // Путь к файлу, в который будет сохранено JSON
+        // const filePath = 'output.json';
+
+        // // Преобразуем JSON в строку и сохраняем в файл
+        // fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
+        //     if (err) throw err;
+        //     console.log('JSON данные успешно сохранены в файл ' + filePath);
+        // });
 
         Object.keys(workbook.Sheets).forEach((name) => {
             const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[name], {header: 1});

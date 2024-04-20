@@ -1,12 +1,57 @@
-import Product from '../models/product';
-import Shop from '../models/shop';
-import Warehouse from '../models/warehouse';
+import Product from '../models/product.js';
+import Shop from '../models/shop.js';
+import Warehouse from '../models/warehouse.js';
+import ProductInWarehouseDto from '../dtos/productInWarehours-dto.js';
+import { Op } from 'sequelize';
 
 export default {
-    async getProducts(req, res) {
-        const products = await Product.findAll({ include: [Shop, Warehouse] });
-        res.json(products);
+    async getProductsWithWarehouse(req, res) {
+        const products = await Product.findAll({
+            include: [
+                {
+                    model: Shop,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt', 'CoordId', 'deletedAt'],
+                    },
+                },
+            ],
+        });
+
+        const productInWarehouseDto = products.map(product => new ProductInWarehouseDto(product));
+        res.send(productInWarehouseDto);
     },
 
-    async createProduct(req, res)
+    async getProductsWitShop(req, res) {
+        const products = await Product.findAll({
+            include: [
+                {
+                    model: Shop,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt', 'CoordId', 'deletedAt'],
+                    },
+                },
+            ],
+        });
+
+        const productInWarehouseDto = products.map(product => new ProductInWarehouseDto(product));
+        res.send(productInWarehouseDto);
+    },
+
+    async getExpiryDateProduct(req, res) {
+        const currentDate = new Date();
+        const fourDaysFromNow = new Date(currentDate);
+        fourDaysFromNow.setDate(fourDaysFromNow.getDate() + 4);
+
+        const products = await Product.findAll({
+            include: {
+                model: Warehouse,
+            },
+            where: {
+                expiryDate: {
+                    [Op.lte]: fourDaysFromNow,
+                },
+            },
+        });
+        res.send(products);
+    },
 };
