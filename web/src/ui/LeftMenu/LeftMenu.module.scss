@@ -43,9 +43,7 @@
       margin: 0;
       position: relative;
       left: -20px;
-      a {
-        text-decoration: none;
-      }
+    
     }
   }
   li:hover {
@@ -54,3 +52,6 @@
     background: hsla(22, 90%, 54%, 0.4) !important;
   }
 }
+a {
+    text-decoration: none;
+  }
