@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { YMaps } from "react-yandex-maps";
 import MapBody from "./MapBody";
 import { coordinates } from "./Coordinates";
@@ -36,16 +36,43 @@ function MapComponent() {
       alert("Геолокация не поддерживается вашим браузером");
     }
   }, []);
+  const map = useRef(null);
+  const [activeItem, setActiveItem] = useState(null);
 
+  const handleClick = (e, id) => {
+    const placemarkCoords = e.get("coords");
+    if (map.current) {
+      map.current.setCenter(placemarkCoords);
+    }
+    setActiveItem(id);
+  };
+
+  const handleClickMenu = (coor) => {
+    const placemarkCoords = coor;
+    if (map.current) {
+      map.current.setCenter(placemarkCoords);
+    }
+  };
   return (
     <div className={styles.MapComponent}>
       <div className={styles.menu}>
-        <MapMenu listPoints={listPoints} />
+        <MapMenu
+          setActiveItem={setActiveItem}
+          activeItem={activeItem}
+          handleClickMenu={handleClickMenu}
+          listPoints={listPoints}
+        />
       </div>
 
       <div className={styles.map} style={{ height: "100vh", width: "100%" }}>
         <YMaps query={{ apikey: "f3c78576-996b-4eaa-84f8-12a8520d276a" }}>
-          <MapBody listPoints={listPoints} />
+          <MapBody
+            setActiveItem={setActiveItem}
+            activeItem={activeItem}
+            map={map}
+            handleClick={handleClick}
+            listPoints={listPoints}
+          />
         </YMaps>
       </div>
     </div>

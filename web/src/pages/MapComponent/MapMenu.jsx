@@ -7,6 +7,7 @@ function MapMenu(props) {
   const [sortData, setSortData] = useState(props.listPoints);
   const [modalWindShow, setModalWindShow] = useState("Все");
   const [modalWindText, setmodalWindText] = useState(false);
+  console.log(props.listPoints);
 
   useEffect(() => {
     const fd = props.listPoints;
@@ -43,6 +44,14 @@ function MapMenu(props) {
     setmodalWindText(false);
   };
 
+  const onHandleItem = (item) => {
+    props.handleClickMenu([
+      props.listPoints[item.id].geometry.coordinates[1],
+      props.listPoints[item.id].geometry.coordinates[0],
+    ]);
+    props.setActiveItem(item.id);
+  };
+
   const funMarshrut = () => {
     const pointB = [
       props.listPoints[0].geometry.coordinates[1],
@@ -69,16 +78,19 @@ function MapMenu(props) {
       <div className={styles.shearch}>
         <input placeholder="Поиск..." type="text" onChange={shearch} />
       </div>
-      <div className={styles.button_container}>
-        <div
-          className={styles.all}
-          onClick={() => setmodalWindText(!modalWindText)}
-        >
-          <span>{modalWindShow}</span>
-          <img width={10} src="./img/arrow_bottom.png" alt=">"></img>
+      <div className={styles.button_block}>
+        <div className={styles.button_container}>
+          <div
+            className={styles.all}
+            onClick={() => setmodalWindText(!modalWindText)}
+          >
+            <span>{modalWindShow}</span>
+            <img width={10} src="./img/arrow_bottom.png" alt=">"></img>
+          </div>
         </div>
+        <div className={styles.but_add}>Добавить</div>
       </div>
-      <button onClick={funMarshrut}>Маршрут </button>
+      {/* <button onClick={funMarshrut}>Маршрут </button> */}
       {modalWindText && (
         <div className={styles.modalWind}>
           <span onClick={() => setModalFunck("Все")}>Все</span>
@@ -89,7 +101,16 @@ function MapMenu(props) {
       <div className={styles.container}>
         <div>
           {filtredData.map((item) => (
-            <span key={item.id} className={styles.MapMenu_span}>
+            <span
+              onClick={() => onHandleItem(item)}
+              key={item.id}
+              className={styles.MapMenu_span}
+              style={
+                item.id === props.activeItem
+                  ? { backgroundColor: "#F36F2247", borderRadius: "8px" }
+                  : null
+              }
+            >
               {item.properties.iconCaption}
             </span>
           ))}

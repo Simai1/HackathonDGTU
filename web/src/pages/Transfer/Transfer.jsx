@@ -99,7 +99,7 @@ function Transfer(props) {
                   </td>
                   <td>
                     <div className={style.img_bac}>
-                      <img src="./img/musor.svg" alt="redaction"></img>
+                      <img src="./img/musor.png" alt="redaction"></img>
                     </div>
                   </td>
                 </tr>

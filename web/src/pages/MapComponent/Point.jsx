@@ -7,6 +7,7 @@ function Point(props) {
   return (
     <div className={styles.Point}>
       <Placemark
+        onClick={(event) => props.handleClick(event, props.id)}
         geometry={props.coor}
         properties={{
           iconContent: title,
