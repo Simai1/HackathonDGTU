@@ -5,7 +5,7 @@ import { coordinates } from "./Coordinates";
 import styles from "./Styles.module.scss";
 import MapMenu from "./MapMenu";
 function MapComponent() {
-  const [listPoints, setListPoints] = useState(coordinates);
+  const [listPoints] = useState(coordinates);
   const [myCoor, setMyCoor] = useState([]);
   if (!navigator.geolocation) {
     alert("браузер не поддерживает геолокацию");
@@ -15,7 +15,7 @@ function MapComponent() {
         setMyCoor(position);
       },
       function (error) {
-        if (error.code == error.PERMISSION_DENIED)
+        if (error.code === error.PERMISSION_DENIED)
           alert("Дайте разрешение на определение местоположения");
       }
     );
@@ -26,6 +26,7 @@ function MapComponent() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setMyCoor([position.coords.latitude, position.coords.longitude]);
+          console.log("My Coor",myCoor)
         },
         (error) => {
           // alert('Ошибка при определении местоположения', error);

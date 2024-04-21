@@ -13,8 +13,8 @@ function ProfileUser() {
   <div className={styles.ProfileUser}>
     <div className={styles.ProfileUser__inner}>
             <div>
-                <img  className={styles.ProfileUser__imgUwedomletion} src={uwedomletion}></img>
-                <img className={styles.ProfileUser__imgUser} src={userImg} onClick={()=>setopenExitMenu(!openExitMenu)}></img>
+                <img  className={styles.ProfileUser__imgUwedomletion} src={uwedomletion} alt="img"></img>
+                <img className={styles.ProfileUser__imgUser} src={userImg} onClick={()=>setopenExitMenu(!openExitMenu)} alt="img"></img>
             </div>
             <div className={styles.ProfileUser__DataUser}>
                 <p className={styles.ProfileUser__DataUserName} >{UserData.user.name}</p>

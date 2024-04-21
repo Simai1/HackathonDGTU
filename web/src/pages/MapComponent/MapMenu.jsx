@@ -52,20 +52,20 @@ function MapMenu(props) {
     props.setActiveItem(item.id);
   };
 
-  const funMarshrut = () => {
-    const pointB = [
-      props.listPoints[0].geometry.coordinates[1],
-      props.listPoints[0].geometry.coordinates[0],
-    ]; // координаты точки А
-    const pointA = [
-      props.listPoints[1].geometry.coordinates[1],
-      props.listPoints[1].geometry.coordinates[0],
-    ]; // координаты точки Б
-    console.log(pointB, pointA);
-    const url = `https://yandex.ru/maps/?rtext=${pointA}~${pointB}&rtt=auto`;
+  // const funMarshrut = () => {
+  //   const pointB = [
+  //     props.listPoints[0].geometry.coordinates[1],
+  //     props.listPoints[0].geometry.coordinates[0],
+  //   ]; // координаты точки А
+  //   const pointA = [
+  //     props.listPoints[1].geometry.coordinates[1],
+  //     props.listPoints[1].geometry.coordinates[0],
+  //   ]; // координаты точки Б
+  //   console.log(pointB, pointA);
+  //   const url = `https://yandex.ru/maps/?rtext=${pointA}~${pointB}&rtt=auto`;
 
-    window.open(url, "_blank");
-  };
+  //   window.open(url, "_blank");
+  // };
 
   return (
     <div className={styles.MapMenu}>

@@ -105,7 +105,7 @@ function HomePageData(props) {
                 <h1>Аналитика</h1>
                 <div className={style.HomePage__table}>
                     <div className={style.HomePage__table__inner}>
-                            <img className={style.AnaliticImg} src="./img/AnalitikFrame.svg"></img>
+                            <img className={style.AnaliticImg} src="./img/AnalitikFrame.svg" alt="img"></img>
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@ function HomePageData(props) {
                     <div className={style.history__block}>
                         <p >Доставка #{index+1}</p>
                         <p >{item.date}</p>
-                        <p >{item.from}<img src="./img/arrowNext.svg"></img>{item.to}</p>
+                        <p >{item.from}<img src="./img/arrowNext.svg" alt="img"></img>{item.to}</p>
                     </div>
                 ))}
         </div>

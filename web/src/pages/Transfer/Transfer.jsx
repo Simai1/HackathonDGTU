@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "./Transfer.module.scss";
 import Button from "../../ui/Button/Button";
 import deleteImg from "./../../img/deleteImg.svg";
-import redaction from "./../../img/redaction.svg";
 import Editing from "./Editing";
-import { getAllOrders } from "../../Api/Api";
+// import { getAllOrders } from "../../Api/Api";
 
 function Transfer(props) {
   const [activeButton, setActiveButton] = useState("Ожидаемые");
   const [editingShow, setEditingShow] = useState(false);
   const [editingShowData, setEditingShowData] = useState([]);
-  const [orderData, setOrderData] = useState([]);
+//   const [orderData, setOrderData] = useState([]);
 
-  useEffect(() => {
-    getAllOrders().then((data) => {
-      setOrderData(data);
-      console.log("orderData", data);
-    });
-  }, []);
+//   useEffect(() => {
+//     getAllOrders().then((data) => {
+//       setOrderData(data);
+//       console.log("orderData", data);
+//     });
+//   }, []);
 
   const modalShowFun = () => {
     setEditingShow(false);
