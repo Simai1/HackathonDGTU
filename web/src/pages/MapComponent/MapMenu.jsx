@@ -29,7 +29,13 @@ function MapMenu(props) {
   console.log(props.listPoints);
 
   const addFunClick = () => {
-    console.log(adres.data.geo_lat, adres.data.geo_lon, modalSpisokText, name);
+    console.log(
+      adres,
+      adres.data.geo_lat,
+      adres.data.geo_lon,
+      modalSpisokText,
+      name
+    );
     const lon = parseFloat(adres.data.geo_lon);
     const lat = parseFloat(adres.data.geo_lat);
     const coordinates = [lon, lat];
@@ -38,7 +44,7 @@ function MapMenu(props) {
       id: index + 1,
       geometry: {
         coordinates: coordinates,
-        type: "Feature",
+        type: "Point",
       },
       properties: {
         iconCaption: name,
@@ -52,6 +58,7 @@ function MapMenu(props) {
     setModalAddShow(false);
     sertAdres("");
     setIndex(index + 1);
+    props.setActiveItem(index + 1);
   };
 
   useEffect(() => {
@@ -90,9 +97,10 @@ function MapMenu(props) {
   };
 
   const onHandleItem = (item) => {
+    console.log("www", props.listPoints);
     props.handleClickMenu([
-      props.listPoints[item.id].geometry.coordinates[1],
-      props.listPoints[item.id].geometry.coordinates[0],
+      props.listPoints.find((el) => el.id === item.id).geometry.coordinates[1],
+      props.listPoints.find((el) => el.id === item.id).geometry.coordinates[0],
     ]);
     props.setActiveItem(item.id);
   };
