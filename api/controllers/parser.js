@@ -96,68 +96,15 @@ export default {
         return res.json({ status: "ok", rek: dataProducts[0] });
     },
 
-    async downloadProductsFromWarehouse({ body: { name } }, res) {
+    async downloadProductsFromWarehouse(req, res) {
         try {
-            const existWarehouse = await Warehouse.findOne({
-                where: {
-                    name,
-                }
-            });
-            if (!existWarehouse) {
-                return res.status(400).json({ status: "error", message: "Warehouse not found" });
-            }
-            const products = await Product.findAll({
-                where: {
-                    warehouseId: existWarehouse.id,
-                }
-            })
+            const products = await Product.findAll();
             const productDtos = [];
             for(const product of products) {    
                 productDtos.push(new ProductDto(product)); 
             }
             res.json({ data: productDtos})
-            // Создание нового XLSX файла
-            // const workbook = new ExcelJS.Workbook();
-            // const worksheet = workbook.addWorksheet('Warehouse');
-
-            // worksheet.columns = [
-            //     { Header: "S no.", key: "s_no"},
-            //     { header: 'Product_Name', key: 'name', },
-            //     { header: 'Product_Cost', key: 'productCost', },
-            //     { header: 'Manufacture_Date', key: 'manufactureDate', width: 25},
-            //     { header: 'Expiry_Date', key: 'expiryDate', width: 25},
-            //     { header: 'SKU', key: 'sku', },
-            //     { header: 'Region', key: 'region', },
-            //     { header: 'Product_Amount', key: 'productAmount', },
-            //     { header: 'Product_Measure', key: 'productMeasure', },
-            //     { header: 'Product_Volume', key: 'productVolume', },
-            //     { header: 'Manufacturer', key: 'manufacture', width: 35},
-            //     { header: 'Product_Quantity', key: 'productQuantity', },
-            // ];
-            // let counter = 1;
-            // // Добавление данных в таблицу
-            // products.forEach(product => {
-            //     product.s_no = counter;
-            //     product.name = productNameMap[product.productName];
-            //     product.productMeasure = measureMap[product.productMeasure];
-            //     console.log(product);
-            //     worksheet.addRow(product);
-            //     counter++;
-            // });
-
-            // const currentDate = new Date().toISOString().slice(0, 10).replace('-','_').replace('-','_');
-            
-            // //const savedPath = path.join(process.env.USERPROFILE, 'Saved');
-            // const fileName = `${name}_${currentDate}.xlsx`.replace('д ','д_');
-            // console.log(fileName);
-            // const filePath = path.join("./download/", fileName);
-            // workbook.xlsx.writeFile(`./download/${filePath}`)
-
-            // .then(() => {
-            //     console.log('File saved!')
-            //     res.json({ status: "File saved"})
-            // });
-            
+                        
         } catch (error) {
             console.error(error);
             res.status(500).send('Error exporting data to Excel');

@@ -26,8 +26,7 @@ router
         asyncRoute(parserController.parseFromXlsx)
     );
 router.route('/downloadProductsFromWarehouse')
-    .post(
-        upload.single('file'),
+    .get(
         asyncRoute(parserController.downloadProductsFromWarehouse)
     );
 
