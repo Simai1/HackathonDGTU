@@ -169,8 +169,8 @@ function MapMenu(props) {
 
     const C = `${props.listPoints[2].geometry.coordinates[1]},${props.listPoints[2].geometry.coordinates[0]}`; // координаты точки C
     const D = `${props.listPoints[3].geometry.coordinates[1]},${props.listPoints[3].geometry.coordinates[0]}`; // координаты точки M
-    const B = `${props.listPoints[0].geometry.coordinates[1]},${props.listPoints[0].geometry.coordinates[0]}`; // координаты точки B
-    const A = `${props.listPoints[1].geometry.coordinates[1]},${props.listPoints[1].geometry.coordinates[0]}`; // координаты точки A
+    const A = `${props.listPoints[0].geometry.coordinates[1]},${props.listPoints[0].geometry.coordinates[0]}`; // координаты точки B
+    const B = `${props.listPoints[1].geometry.coordinates[1]},${props.listPoints[1].geometry.coordinates[0]}`; // координаты точки A
 
     let data = []
   path.map((el)=>{

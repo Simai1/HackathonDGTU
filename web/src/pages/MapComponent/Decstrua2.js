@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Dijkstra = () => {
+ const Dijkstra = () => {
   const [graph, setGraph] = useState({
     A: { B: 1949, C: 2040 },
     B: { A: 2161, C: 2168, D: 1114 },
@@ -48,7 +48,6 @@ const Dijkstra = () => {
       path.unshift(current);
       current = predecessors[current];
     }
-console.log(path)
     return path;
   };
 
