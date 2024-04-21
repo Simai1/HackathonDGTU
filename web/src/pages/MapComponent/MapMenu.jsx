@@ -7,6 +7,7 @@ function MapMenu(props) {
   const [sortData, setSortData] = useState(props.listPoints);
   const [modalWindShow, setModalWindShow] = useState("Все");
   const [modalWindText, setmodalWindText] = useState(false);
+  console.log(props.listPoints);
 
   useEffect(() => {
     const fd = props.listPoints;
@@ -41,6 +42,14 @@ function MapMenu(props) {
   const setModalFunck = (text) => {
     setModalWindShow(text);
     setmodalWindText(false);
+  };
+
+  const onHandleItem = (item) => {
+    props.handleClickMenu([
+      props.listPoints[item.id].geometry.coordinates[1],
+      props.listPoints[item.id].geometry.coordinates[0],
+    ]);
+    props.setActiveItem(item.id);
   };
 
   const funMarshrut = () => {
@@ -78,7 +87,7 @@ function MapMenu(props) {
           <img width={10} src="./img/arrow_bottom.png" alt=">"></img>
         </div>
       </div>
-      <button onClick={funMarshrut}>Маршрут </button>
+      {/* <button onClick={funMarshrut}>Маршрут </button> */}
       {modalWindText && (
         <div className={styles.modalWind}>
           <span onClick={() => setModalFunck("Все")}>Все</span>
@@ -88,16 +97,16 @@ function MapMenu(props) {
       )}
       <div className={styles.container}>
         <div>
-          {filtredData.map((item, index) => (
+          {filtredData.map((item) => (
             <span
-              onClick={() =>
-                props.handleClickMenu([
-                  props.listPoints[index].geometry.coordinates[1],
-                  props.listPoints[index].geometry.coordinates[0],
-                ])
-              }
+              onClick={() => onHandleItem(item)}
               key={item.id}
               className={styles.MapMenu_span}
+              style={
+                item.id === props.activeItem
+                  ? { backgroundColor: "#F36F2247", borderRadius: "8px" }
+                  : null
+              }
             >
               {item.properties.iconCaption}
             </span>

@@ -37,11 +37,14 @@ function MapComponent() {
     }
   }, []);
   const map = useRef(null);
-  const handleClick = (e) => {
+  const [activeItem, setActiveItem] = useState(null);
+
+  const handleClick = (e, id) => {
     const placemarkCoords = e.get("coords");
     if (map.current) {
       map.current.setCenter(placemarkCoords);
     }
+    setActiveItem(id);
   };
 
   const handleClickMenu = (coor) => {
@@ -53,12 +56,19 @@ function MapComponent() {
   return (
     <div className={styles.MapComponent}>
       <div className={styles.menu}>
-        <MapMenu handleClickMenu={handleClickMenu} listPoints={listPoints} />
+        <MapMenu
+          setActiveItem={setActiveItem}
+          activeItem={activeItem}
+          handleClickMenu={handleClickMenu}
+          listPoints={listPoints}
+        />
       </div>
 
       <div className={styles.map} style={{ height: "100vh", width: "100%" }}>
         <YMaps query={{ apikey: "f3c78576-996b-4eaa-84f8-12a8520d276a" }}>
           <MapBody
+            setActiveItem={setActiveItem}
+            activeItem={activeItem}
             map={map}
             handleClick={handleClick}
             listPoints={listPoints}
