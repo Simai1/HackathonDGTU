@@ -109,5 +109,24 @@ export default {
             console.error(error);
             res.status(500).send('Error exporting data to Excel');
         }
+    },
+
+    async downloadProductsFromShop({body: {id }}, res) {
+        try {
+            const products = await Product.findAll({
+                where: {
+                    shopId: id,
+                }
+            });
+            const productDtos = [];
+            for(const product of products) {    
+                productDtos.push(new ProductDto(product)); 
+            }
+            res.json({ data: productDtos})
+                        
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error exporting data to Excel');
+        }
     }
 }

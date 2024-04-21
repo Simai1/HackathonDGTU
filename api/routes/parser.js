@@ -29,6 +29,8 @@ router.route('/downloadProductsFromWarehouse')
     .get(
         asyncRoute(parserController.downloadProductsFromWarehouse)
     );
+router.route('/downloadProductsFromShop')
+    .post(asyncRoute(parserController.downloadProductsFromShop));    
 
 
 export default router;
