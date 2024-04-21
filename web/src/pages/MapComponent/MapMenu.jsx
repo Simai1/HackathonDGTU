@@ -109,6 +109,7 @@ function MapMenu(props) {
     ]);
     props.setActiveItem(item.id);
   };
+
   const funMarshrut = () => {
     const pointC = `${props.listPoints[2].geometry.coordinates[1]},${props.listPoints[2].geometry.coordinates[0]}`; // координаты точки C
     const pointM = `${props.listPoints[3].geometry.coordinates[1]},${props.listPoints[3].geometry.coordinates[0]}`; // координаты точки M
