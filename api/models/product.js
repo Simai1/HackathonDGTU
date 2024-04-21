@@ -1,9 +1,11 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, Op } from 'sequelize';
 import EnumProductMeasure from '../enums/measure.js';
 // import EnumStoreName from '../enums/store-name.js';
 import EnumProductsName from '../enums/product.js';
 // import checkQuantity from '../utils/checkQuantity.js';
-
+import createOrder from '../utils/createOrder.js';
+import Warehouse from './warehouse.js';
+import ShopInWarehouse from './shopInWarehouse.js';
 export default class Product extends Model {
     static initialize(sequelize) {
         Product.init(
@@ -89,8 +91,64 @@ export default class Product extends Model {
                 paranoid: true,
             }
         );
-        // Product.afterDestroy(async shop => {
-        //     await checkQuantity(shop);
-        // });
+
+        Product.afterDestroy(async product => {
+            // 1. Проверяем, если quantity меньше половины
+            // if (product.quantity < 500) {
+            // 2. Собираем все удаленные продукты по shop.id и записываем name продуктов в массив, id в другой массив
+            const prod = await Product.findAll({
+                limit: 5,
+                where: {
+                    deletedAt: {
+                        [Op.ne]: null,
+                    },
+                    shopId: product.shopId,
+                },
+                paranoid: false,
+            });
+            console.log(product.shopId);
+            const deletedNames = prod.map(prod => prod.productName);
+
+            console.log(deletedNames);
+            // По deletedNames найди такие же продукты ( с таким же названием) в складе, который связан с этим магазином, откуда товары удалялись
+
+            const warehouse = await ShopInWarehouse.findOne({
+                where: {
+                    shopId: product.shopId,
+                },
+            });
+            const productsInWarehouse = await Product.findAll({
+                where: {
+                    warehouseId: warehouse.warehouseId,
+                    productName: deletedNames,
+                },
+            });
+            const deletedProductsMap = new Map();
+
+            for (const product of productsInWarehouse) {
+                const key = product.productName;
+
+                if (!deletedProductsMap.has(key)) {
+                    deletedProductsMap.set(key, product.id);
+                }
+            }
+            // ToDo
+            // const productIds = productsInWarehouse.map(product => product.id);
+            const productIds = [...deletedProductsMap.values()];
+            console.log(productIds);
+            // Получи для каждого productIds его productQuantities
+            const quantities = await Promise.all(
+                productIds.map(async productId => {
+                    const product = await Product.findByPk(productId);
+                    const prodQuan = product.productQuantity;
+                    return prodQuan - 80;
+                })
+            );
+
+            // 3. Создаем новый заказ
+            await createOrder(quantities, productIds, product.shopId, warehouse.warehouseId);
+
+            // }
+        });
     }
 }

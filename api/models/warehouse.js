@@ -17,6 +17,7 @@ export default class Warehouse extends Model {
                 quantity: {
                     type: DataTypes.INTEGER,
                     allowNull: false,
+                    defaultValue: 10000,
                 },
                 coordId: {
                     type: DataTypes.UUID,
