@@ -46,10 +46,16 @@ function MapMenu(props) {
         coordinates: coordinates,
         type: "Point",
       },
-      properties: {
-        iconCaption: name,
-        "marker-color": "#1e98ff",
-      },
+      properties:
+        modalSpisokText === "Склад"
+          ? {
+              iconCaption: name,
+              "marker-color": "#1e98ff",
+            }
+          : {
+              iconCaption: name,
+              "marker-color": "#ed4543",
+            },
     };
     props.setListPoints((prev) => [data, ...prev]);
     setFiltredData((prev) => [data, ...prev]);
@@ -97,7 +103,6 @@ function MapMenu(props) {
   };
 
   const onHandleItem = (item) => {
-    console.log("www", props.listPoints);
     props.handleClickMenu([
       props.listPoints.find((el) => el.id === item.id).geometry.coordinates[1],
       props.listPoints.find((el) => el.id === item.id).geometry.coordinates[0],
