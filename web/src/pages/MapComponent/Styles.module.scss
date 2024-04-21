@@ -1,0 +1,151 @@
+.MapComponent {
+  overflow: hidden;
+  display: flex;
+
+  .map {
+    display: flex;
+  }
+  .menu {
+    display: flex;
+  }
+  .MapMenu {
+    position: absolute;
+    z-index: 200;
+    top: 0;
+    left: 0px;
+    width: 280px;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    padding: 15px 10px;
+    padding-left: 20px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    .button_block {
+      display: flex;
+      flex-direction: row;
+    }
+    .but_add {
+      display: flex;
+      background-color: #f37022;
+      border-radius: 8px;
+      color: #fff;
+      height: 32px;
+      padding: 0 10px;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    .back {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      padding-left: 0;
+      padding-top: 0;
+      user-select: none;
+      text-decoration: none;
+      margin-right: 0;
+
+      img {
+        margin-right: 10px;
+      }
+      span {
+        font-weight: 500;
+        font-size: 16px;
+        user-select: none;
+        color: #000000;
+        text-decoration: none;
+      }
+    }
+    .container {
+      overflow-y: auto;
+      overflow-x: hidden;
+      width: 100%;
+      height: 80%;
+    }
+
+    .shearch {
+      width: 85%;
+      margin-bottom: 10px;
+      input {
+        width: 100%;
+        padding: 8px;
+        border-radius: 8px;
+        border: 1px solid #cccccc;
+        outline: none;
+      }
+    }
+
+    .MapMenu_span {
+      cursor: pointer;
+      display: flex;
+      width: 80%;
+      padding: 8px;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .MapMenu_span:hover {
+      background-color: #e1e1e1;
+      transition: 0.1s linear all;
+      border-radius: 8px;
+    }
+
+    .modalWind {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+      width: 138px;
+      padding: 10px;
+      z-index: 201;
+      box-shadow: 0px 0px 4px #d7d7d7;
+      border-radius: 8px;
+      span {
+        display: flex;
+        width: 100%;
+        cursor: pointer;
+        padding: 3px;
+        padding-right: 10px;
+      }
+    }
+    .button_container {
+      display: flex;
+      width: 100%;
+      padding-bottom: 10px;
+
+      .all {
+        display: flex;
+        cursor: pointer;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px;
+        background-color: #eeeeee;
+        border-radius: 8px;
+        width: 100px;
+        height: 32px;
+        span {
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+  .container::-webkit-scrollbar {
+    background-color: #ffffff;
+    width: 4px;
+    margin-bottom: 8px;
+    border: none;
+  }
+
+  .container::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+    border-radius: 8px;
+  }
+
+  .container::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 0px 0px 8px 8px;
+    background-color: #ffffff;
+    border: none;
+  }
+}
