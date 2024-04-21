@@ -6,6 +6,7 @@ import EnumProductsName from '../enums/product.js';
 import createOrder from '../utils/createOrder.js';
 import Warehouse from './warehouse.js';
 import ShopInWarehouse from './shopInWarehouse.js';
+import Shop from './shop.js';
 export default class Product extends Model {
     static initialize(sequelize) {
         Product.init(
@@ -106,10 +107,8 @@ export default class Product extends Model {
                 },
                 paranoid: false,
             });
-            console.log(product.shopId);
             const deletedNames = prod.map(prod => prod.productName);
 
-            console.log(deletedNames);
             // По deletedNames найди такие же продукты ( с таким же названием) в складе, который связан с этим магазином, откуда товары удалялись
 
             const warehouse = await ShopInWarehouse.findOne({
@@ -132,10 +131,7 @@ export default class Product extends Model {
                     deletedProductsMap.set(key, product.id);
                 }
             }
-            // ToDo
-            // const productIds = productsInWarehouse.map(product => product.id);
             const productIds = [...deletedProductsMap.values()];
-            console.log(productIds);
             // Получи для каждого productIds его productQuantities
             const quantities = await Promise.all(
                 productIds.map(async productId => {
@@ -144,11 +140,17 @@ export default class Product extends Model {
                     return prodQuan - 80;
                 })
             );
-
+            const shop = await ShopInWarehouse.findOne({
+                where: {
+                    shopId: product.shopId,
+                },
+            });
+            const shopForProducty = await Shop.findByPk(shop.shopId);
             // 3. Создаем новый заказ
-            await createOrder(quantities, productIds, product.shopId, warehouse.warehouseId);
-
-            // }
+            if (shopForProducty.quantity - quantities.reduce((acc, val) => acc + val, 0) < 500) {
+                // Создаем новый заказ для этих товаров
+                await createOrder(quantities, productIds, product.shopId, warehouse.warehouseId);
+            }
         });
     }
 }

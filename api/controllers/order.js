@@ -48,7 +48,6 @@ export default {
 
     async changeStatusOrder({ params: { orderId }, body: { status: newStatus, carrierId } }, res) {
         const order = await Order.findByPk(orderId);
-        console.log(order);
         if (!order) {
             throw new Error('Order not found');
         }

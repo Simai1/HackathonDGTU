@@ -43,7 +43,6 @@ export default async function createOrder(quantities, productIds, shopId, wareho
                 }
             })
         );
-        console.log(warehouseId);
         // Создаем заказ
         const order = await Order.create({
             warehouseId,
@@ -84,9 +83,7 @@ export default async function createOrder(quantities, productIds, shopId, wareho
 
                 // Увеличиваем количество товара в магазине
                 const shop = await Shop.findByPk(shopId);
-                if (!shop) {
-                    throw new Error('Shop not found');
-                }
+
                 await shop.increment('quantity', { by: quantity });
             })
         );
