@@ -3,6 +3,9 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    .ProductData__coord__inner{
+        display: flex;
+    }
     .ProductData {
       width: 90%;
       background-color: #fff;
@@ -102,4 +105,16 @@
       margin: 12px;
     }
   }
+}
+.Button__block{
+    position: relative;
+    top: 150px;
+    Button{
+        margin-bottom: 16px;
+        transition: 0.15s linear all;
+    }
+    Button:hover{
+        opacity: 0.6;
+        cursor: pointer;
+    }
 }

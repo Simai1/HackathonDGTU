@@ -17,8 +17,9 @@ export default class Shop extends Model {
                 quantity: {
                     type: DataTypes.INTEGER,
                     allowNull: false,
+                    defaultValue: 1000,
                 },
-                coordsId: {
+                coordId: {
                     type: DataTypes.UUID,
                     allowNull: false,
                 },

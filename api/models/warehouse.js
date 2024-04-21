@@ -14,18 +14,15 @@ export default class Warehouse extends Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                coordsId: {
+                quantity: {
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                    defaultValue: 10000,
+                },
+                coordId: {
                     type: DataTypes.UUID,
                     allowNull: true,
                 },
-                shopId: {
-                    type: DataTypes.UUID,
-                    allowNull: true,
-                },
-                productId: {
-                    type: DataTypes.UUID,
-                    allowNull: true,
-                }
             },
             {
                 sequelize,
