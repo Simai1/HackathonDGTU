@@ -1,0 +1,29 @@
+.DataDisplay {
+  width: 500px;
+
+  thead {
+    tr {
+      text-align: left;
+    }
+  }
+
+  tbody {
+    tr {
+      .date {
+        width: 100px;
+        text-align: center;
+      }
+    }
+    td {
+      padding: 0 !important;
+      font-weight: 500;
+      font-size: 18px;
+
+      p {
+        background-color: hsla(22, 90%, 54%, 0.2);
+        padding: 7px;
+        border-radius: 18px;
+      }
+    }
+  }
+}
