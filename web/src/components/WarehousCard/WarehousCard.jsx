@@ -47,7 +47,7 @@ function WarehousCard(props) {
           `${response.data.address.state}, ${response.data.address.suburb}, ${response.data.address.road}, ${response.data.address.house_number}`
         );
       } catch (error) {
-        console.error("Error fetching address:", error);
+        console.log("Error fetching address:", error);
       }
     };
     fetchData();

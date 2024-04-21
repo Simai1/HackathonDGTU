@@ -63,10 +63,10 @@ export const GetProductsDataShop = async (data) => {
   }
 };
 
-export const createOffer = async (data) => {
+export const getAllOrders = async () => {
   try {
-    const response = await axios.post(`${server}/auth/login`, data);
-    return response;
+    const response = await axios.get(`${server}/order/getAllOrders`);
+    return response.data;
   } catch (error) {
     console.error("Error:", error);
     throw error;
