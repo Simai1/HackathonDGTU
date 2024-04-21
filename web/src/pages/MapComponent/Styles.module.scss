@@ -190,6 +190,7 @@
         flex-direction: column;
 
         .container_1_rig_inner {
+          position: relative;
           border: 1px solid #dfdfdf;
           padding: 7px;
           border-radius: 8px;
@@ -197,6 +198,24 @@
           display: flex;
           height: 22px;
           justify-content: space-between;
+          .litsmodal {
+            display: flex;
+            position: absolute;
+            background-color: #fff;
+            flex-direction: column;
+            width: 127px;
+            top: -1px;
+            left: -1px;
+            border: 1px solid #c2c2c2;
+            border-radius: 8px;
+            padding: 4px;
+            box-sizing: border-box;
+            span {
+              cursor: pointer;
+              padding-left: 8px;
+              padding-top: 6px;
+            }
+          }
           cursor: pointer;
           span {
             width: 80%;

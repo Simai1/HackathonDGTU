@@ -2,13 +2,57 @@ import React, { useEffect, useState } from "react";
 import styles from "./Styles.module.scss";
 import { Link } from "react-router-dom";
 
+import { AddressSuggestions } from "react-dadata";
+import "react-dadata/dist/react-dadata.css";
+
 function MapMenu(props) {
   const [filtredData, setFiltredData] = useState(props.listPoints);
   const [sortData, setSortData] = useState(props.listPoints);
   const [modalWindShow, setModalWindShow] = useState("Все");
   const [modalWindText, setmodalWindText] = useState(false);
-  const [modalAddShow, setModalAddShow] = useState(true);
+  const [modalAddShow, setModalAddShow] = useState(false);
+  const [modalSpisokShow, setModalSpisokShow] = useState(false);
+  const [modalSpisokText, setModalSpisokText] = useState("Склад");
+  const [name, setNmae] = useState("");
+  const [adres, sertAdres] = useState("");
+  const [index, setIndex] = useState(props.listPoints.length);
+
+  const inpName = (el) => {
+    setNmae(el.target.value);
+  };
+
+  useEffect(() => {
+    setFiltredData(props.listPoints);
+    setSortData(props.listPoints);
+  }, [props.listPoints]);
+
   console.log(props.listPoints);
+
+  const addFunClick = () => {
+    console.log(adres.data.geo_lat, adres.data.geo_lon, modalSpisokText, name);
+    const lon = parseFloat(adres.data.geo_lon);
+    const lat = parseFloat(adres.data.geo_lat);
+    const coordinates = [lon, lat];
+    const data = {
+      type: "Feature",
+      id: index + 1,
+      geometry: {
+        coordinates: coordinates,
+        type: "Feature",
+      },
+      properties: {
+        iconCaption: name,
+        "marker-color": "#1e98ff",
+      },
+    };
+    props.setListPoints((prev) => [data, ...prev]);
+    setFiltredData((prev) => [data, ...prev]);
+    setSortData((prev) => [data, ...prev]);
+    setNmae("");
+    setModalAddShow(false);
+    sertAdres("");
+    setIndex(index + 1);
+  };
 
   useEffect(() => {
     const fd = props.listPoints;
@@ -68,6 +112,11 @@ function MapMenu(props) {
   //   window.open(url, "_blank");
   // };
 
+  const onList = (el) => {
+    setModalSpisokShow(false);
+    setModalSpisokText(el.target.innerText);
+  };
+
   return (
     <div className={styles.MapMenu}>
       <div className={styles.back}>
@@ -108,12 +157,22 @@ function MapMenu(props) {
             <div className={styles.container_1}>
               <div className={styles.container_1_left}>
                 <span>Название</span>
-                <input type="text"></input>
+                <input onChange={inpName} type="text"></input>
               </div>
               <div className={styles.container_1_rig}>
                 <span>Тип объекта</span>
-                <div className={styles.container_1_rig_inner}>
-                  <span>Склад</span>
+                <div
+                  onClick={() => setModalSpisokShow(!modalSpisokShow)}
+                  className={styles.container_1_rig_inner}
+                >
+                  <span>{modalSpisokText}</span>
+                  {modalSpisokShow && (
+                    <div className={styles.litsmodal}>
+                      <span onClick={onList}>Склад</span>
+                      <span onClick={onList}>Клиент</span>
+                    </div>
+                  )}
+
                   <img src="./img/arrow_bottom.png" alt=">"></img>
                 </div>
               </div>
@@ -121,7 +180,12 @@ function MapMenu(props) {
             <div className={styles.container_2}>
               <div className={styles.bottom}>
                 <span>Адрес</span>
-                <input type="text"></input>
+                <AddressSuggestions
+                  token="fd4b34d07dd2ceb6237300e7e3d50298509830e0"
+                  value={adres}
+                  onChange={sertAdres}
+                />
+                {/* <input type="text"></input> */}
               </div>
             </div>
             <div className={styles.button}>
@@ -131,7 +195,9 @@ function MapMenu(props) {
               >
                 Отклонить
               </div>
-              <div className={styles.button_rig}>Добавить</div>
+              <div className={styles.button_rig} onClick={addFunClick}>
+                Добавить
+              </div>
             </div>
           </div>
         </div>
