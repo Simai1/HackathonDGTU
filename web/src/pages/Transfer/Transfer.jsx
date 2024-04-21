@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Transfer.module.scss";
 import Button from "../../ui/Button/Button";
 import deleteImg from "./../../img/deleteImg.svg";
 import redaction from "./../../img/redaction.svg";
 import Editing from "./Editing";
+import { getAllOrders } from "../../Api/Api";
 
 function Transfer(props) {
   const [activeButton, setActiveButton] = useState("Ожидаемые");
   const [editingShow, setEditingShow] = useState(false);
   const [editingShowData, setEditingShowData] = useState([]);
+  const [orderData, setOrderData] = useState([]);
+
+  useEffect(() => {
+    getAllOrders().then((data) => {
+      setOrderData(data);
+      console.log("orderData", data);
+    });
+  }, []);
 
   const modalShowFun = () => {
     setEditingShow(false);
@@ -84,11 +93,14 @@ function Transfer(props) {
                   <td>
                     <img
                       onClick={() => onClrickRed(item)}
-                      src={deleteImg} alt="deleteImg"
+                      src={deleteImg}
+                      alt="deleteImg"
                     ></img>
                   </td>
                   <td>
-                    <img src={redaction} alt="redaction"></img>
+                    <div className={style.img_bac}>
+                      <img src="./img/musor.svg" alt="redaction"></img>
+                    </div>
                   </td>
                 </tr>
               ))}
