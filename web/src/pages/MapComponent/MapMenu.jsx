@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { AddressSuggestions } from "react-dadata";
 import "react-dadata/dist/react-dadata.css";
+import { funMarshrutDecstra } from "./Diecstra";
 
 function MapMenu(props) {
   const [filtredData, setFiltredData] = useState(props.listPoints);
@@ -16,6 +17,58 @@ function MapMenu(props) {
   const [name, setNmae] = useState("");
   const [adres, sertAdres] = useState("");
   const [index, setIndex] = useState(props.listPoints.length);
+
+  
+      const [graph, setGraph] = useState({
+        A: { B: 1949, C: 2040 },
+        B: { A: 2161, C: 2168, D: 1114 },
+        C: { A: 1838, B: 1992, D: 1650 },
+        D: { B: 874, C: 1812 },
+      });
+      
+      const [startNode, setStartNode] = useState('A');
+      const [endNode, setEndNode] = useState('D');
+      const [shortestPath, setShortestPath] = useState([]);
+    
+      const dijkstra = (graph, start, end) => {
+        const visitedNodes = {};
+        const distances = {};
+        const predecessors = {};
+        let unvisitedNodes = Object.keys(graph);
+    
+        unvisitedNodes.forEach(node => {
+          distances[node] = Infinity;
+          predecessors[node] = null;
+        });
+    
+        distances[start] = 0;
+    
+        while (unvisitedNodes.length) {
+          const currentNode = unvisitedNodes.reduce((minNode, node) => {
+            return distances[node] < distances[minNode] ? node : minNode;
+          }, unvisitedNodes[0]);
+    
+          unvisitedNodes = unvisitedNodes.filter(node => node !== currentNode);
+    
+          Object.keys(graph[currentNode]).forEach(neighbor => {
+            const weight = graph[currentNode][neighbor];
+            const totalDistance = distances[currentNode] + weight;
+            if (totalDistance < distances[neighbor]) {
+              distances[neighbor] = totalDistance;
+              predecessors[neighbor] = currentNode;
+            }
+          });
+        }
+    
+        const path = [];
+        let current = end;
+        while (current !== null) {
+          path.unshift(current);
+          current = predecessors[current];
+        }
+        return path;
+    }
+
 
   const inpName = (el) => {
     setNmae(el.target.value);
@@ -111,15 +164,46 @@ function MapMenu(props) {
   };
 
   const funMarshrut = () => {
-    const pointC = `${props.listPoints[2].geometry.coordinates[1]},${props.listPoints[2].geometry.coordinates[0]}`; // координаты точки C
-    const pointM = `${props.listPoints[3].geometry.coordinates[1]},${props.listPoints[3].geometry.coordinates[0]}`; // координаты точки M
-    const pointB = `${props.listPoints[0].geometry.coordinates[1]},${props.listPoints[0].geometry.coordinates[0]}`; // координаты точки B
-    const pointA = `${props.listPoints[1].geometry.coordinates[1]},${props.listPoints[1].geometry.coordinates[0]}`; // координаты точки A
+    // funMarshrutDecstra(); Алгорит декстры
+    const path = dijkstra(graph, startNode, endNode);
 
-    const url = `https://yandex.ru/maps/?rtext=${pointA}~${pointB}~${pointC}~${pointM}&rtt=auto`;
+    const C = `${props.listPoints[2].geometry.coordinates[1]},${props.listPoints[2].geometry.coordinates[0]}`; // координаты точки C
+    const D = `${props.listPoints[3].geometry.coordinates[1]},${props.listPoints[3].geometry.coordinates[0]}`; // координаты точки M
+    const B = `${props.listPoints[0].geometry.coordinates[1]},${props.listPoints[0].geometry.coordinates[0]}`; // координаты точки B
+    const A = `${props.listPoints[1].geometry.coordinates[1]},${props.listPoints[1].geometry.coordinates[0]}`; // координаты точки A
+
+    let data = []
+  path.map((el)=>{
+    if(el === "A"){
+      data.push(A);
+    }
+    if(el === "B"){
+      data.push(B)
+    }
+    if(el === "C"){
+      data.push(C)
+
+    }
+    if(el === "D"){
+      data.push(D)
+    }
+  })
+  let text = "";
+  for(let i = 0; i < data.length; i++){
+    if(i>0){
+      text =`${text}~${data[i]}`
+    }
+    else{
+      text =`${data[i]}`
+    }
+  }
+   
+  const url = `https://yandex.ru/maps/?rtext=${text}&rtt=auto`;
+    // const url = `https://yandex.ru/maps/?rtext=${A}~${B}~${C}~${D}&rtt=auto`;
 
     window.open(url, "_blank");
   };
+  
 
   const onList = (el) => {
     setModalSpisokShow(false);

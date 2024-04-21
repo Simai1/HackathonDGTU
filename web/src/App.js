@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import DataContext from "./context";
 import { useState } from "react";
 import MapComponent from "./pages/MapComponent/MapComponent";
+import Dijkstra from "./pages/MapComponent/Decstrua2";
 
 function App() {
   const [UserData, setUserData] = useState({});
@@ -21,6 +22,7 @@ function App() {
             <Route path="/" element={<Auth />}></Route>
             <Route path="/HomePage" element={<HomePage />}></Route>
             <Route path="map" element={<MapComponent />}></Route>
+            <Route path="/Dijkstra" element={<Dijkstra />}></Route>
           </Routes>
         </main>
       </BrowserRouter>

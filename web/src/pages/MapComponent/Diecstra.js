@@ -1,7 +1,7 @@
-const funMarshrut = () => {
+export const funMarshrutDecstra = () => {
     // Генерация сетки узлов или получение её извне
-    const grid = generateGrid(); // Функция для генерации сетки узлов
-  
+    const grid = generateGrid(); 
+    
     // Получение начальной и конечной точек из списка точек
     const pointC = grid[2]; // Точка C
     const pointM = grid[3]; // Точка M
@@ -22,12 +22,25 @@ const funMarshrut = () => {
   
   // Генерация сетки узлов или её получение извне
   function generateGrid() {
-    // Здесь генерируйте вашу сетку узлов или получайте её извне
+    const grid = []
+    for (let i = 0; i < 4; i++) {
+         grid[i] = [];
+         for (let j = 0; j < 4; j++) {
+        grid[i][j] = new Node(i, j);
+        }
+        }
+      // Добавление соседей для каждого узла
+       for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 4; j++) {
+            grid[i][j].addNeighbors(grid);
+          }
+       }
+       return grid;
   }
   
   // Форматирование координат для URL
   function formatCoordinates(node) {
-    return `${node.y},${node.x}`; // Ваш формат координат
+    return `${node.y},${node.x}`; 
   }
   
   // Реализация алгоритма A* (оставлена без изменений)

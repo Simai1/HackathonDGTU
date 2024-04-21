@@ -60,7 +60,7 @@ function LeftMenu(props) {
             >
               Клиенты
             </li>
-            <li
+            {/* <li
               style={{
                 backgroundColor:
                   props.activeMenu === "Аналитика" ? "#F3702233" : "#FFFFFF",
@@ -68,7 +68,7 @@ function LeftMenu(props) {
               onClick={() => handleMenuClick("Аналитика")}
             >
               Аналитика
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
