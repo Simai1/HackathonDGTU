@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./HomePageData.module.scss";
 import ProgressBar from "../../ui/progress/ProgressBar";
+import Slider from "../../ui/slider/slider";
 
 function HomePageData(props) {
   const testData = [
@@ -114,25 +115,13 @@ function HomePageData(props) {
       <div className={style.container_box}>
         <div className={style.HomePage__zapr}>
           <h1>Ожидаемые перевозки</h1>
-
-          <div classDataZaprosTestName={style.HomePage__table}>
-            <div className={style.HomePage__table__innername}>
-              <div className={style.name}>
-                <div className={style.name__inner}>
-                    {dataDost.map((item,index)=>(
-                         <p>{item.name}</p>
-                    ))}
-                </div>
-              </div>
-            </div>
-          </div>
+          <Slider data={dataDost} />
         </div>
 
         
       </div>
       <div className={style.HomePage__history}>
           <h1>История доставок</h1>
-
           <div className={style.HomePage__history__inner}>
                 {HistoryDost.map((item,index) => (
                     <div className={style.history__block}>

@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import style from "./StoreCard.module.scss";
 import rezwernutimg from "./../../img/rezwernut.svg";
-import { GetProductsDataShop } from "../../Api/Api";
+import { GetDataClientsExport, GetProductsDataShop, SendDataClientsExport } from "../../Api/Api";
 import axios from "axios";
+import Button from "../../ui/Button/Button";
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 function StoreCard(props) {
   const [ProductsDataShops, setProductsDataShops] = useState([]);
   const [ProductDataOpenShop, setProductDataOpenShop] = useState(false);
-
+  const [CountId,setCountId] = useState(1);
   const [adress, setAdress] = useState("");
   const [massadress, setmassAdress] = useState([]);
 
   const getId = (index) => {
     const id = props.data[index].id;
+    setCountId(id)
     GetProductsDataShop(id).then((data) => {
       const dataArray = Array.isArray(data) ? data : [data];
       setProductsDataShops(dataArray);
@@ -82,6 +86,26 @@ function StoreCard(props) {
     fetchAddresses();
   }, [props.data]);
 
+     //импорт файл
+const getDataShops = () => {
+    const data = {id:CountId}
+    
+    GetDataClientsExport(data).then((data) => {
+        generateAndDownloadExcel(data.data)
+    }).catch((error) => {
+        console.error("An error occurred while fetching data:", error);
+    });
+};
+
+const generateAndDownloadExcel = (data) => {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const excelData = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    saveAs(excelData, 'your_filename.xlsx');
+};
+
   return (
     <div className={style.StoreCard}>
       <div className={style.StoreCard__inner}>
@@ -90,10 +114,16 @@ function StoreCard(props) {
             <div className={style.ProductData__block1}>
               <h3>{ProductsDataShops[0].name}</h3>
               <div className={style.ProductData__coord}>
-                <div>
-                  <p>Адрес:</p>
+                <div className={style.ProductData__coord__inner}>
+                    <div>
+                    <p>Адрес:</p>
+                    </div>
+                    <div className={style.ProductData__coordDate}>{adress}</div>
                 </div>
-                <div className={style.ProductData__coordDate}>{adress}</div>
+                <div className={style.Button__block}>    
+                    <Button  text="Экспортировать" handleLogin={getDataShops} Bg="#fff" w="200px" h="50px" textColot="#0061D9"  border="2px solid #0061D9"/>
+                    <Button  text="Продать товар" Bg="#F37022" w="200px" h="50px" textColot="#fff"  />
+                </div>
               </div>
             </div>
             <div className={style.ProductData__block2}>
