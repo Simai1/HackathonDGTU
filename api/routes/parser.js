@@ -25,6 +25,11 @@ router
         upload.single('file'),
         asyncRoute(parserController.parseFromXlsx)
     );
+router.route('/downloadProductsFromWarehouse')
+    .post(
+        upload.single('file'),
+        asyncRoute(parserController.downloadProductsFromWarehouse)
+    );
 
 
 export default router;
