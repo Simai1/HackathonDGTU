@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import DataContext from "../../context.js";
 function Auth() {
     const {setUserData} = useContext(DataContext)
-    const [LoginData, setLoginData] = useState("")
-    const [passwordData, setpasswordData] = useState("")
+    const [LoginData, setLoginData] = useState("admin@mail.com")
+    const [passwordData, setpasswordData] = useState("123321")
     const navigate = useNavigate();
 
 
@@ -18,8 +18,13 @@ function Auth() {
             password: passwordData
           };
         Login(data).then((response) => {
-            setUserData(response.data)
-            navigate('/HomePage');
+            if(response.status === 200){
+                setUserData(response.data)
+                navigate('/HomePage');
+            }
+           else{
+            alert("Неправильно введены данные!")
+           }
         });
       };
 
@@ -31,7 +36,7 @@ function Auth() {
                 <div>
                     <h1 className={style.Auth__title}>Авторизация</h1>
                     <Input placeholder="ivanov@gmail.com" type="text" labelText="Эл.почта" setData={setLoginData} defaultValue="admin@mail.com"/>
-                    <Input placeholder="****" type="text" labelText="Пароль" setData={setpasswordData}/>
+                    <Input placeholder="****" type="password" labelText="Пароль" setData={setpasswordData}defaultValue="123321"/>
                     <Button Bg="#F37022" text="Войти" textColot="#fff" w="288px" h="58px" handleLogin={handleLogin} />
                 </div>
             </div>

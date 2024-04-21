@@ -28,11 +28,15 @@ function StoreCard(props) {
       }
     });
   }, [ProductsDataShops]);
+useEffect(()=>{
+    console.log(props.data)
+
+},[props.data])
 
   return (
     <div className={style.StoreCard}>
       <div className={style.StoreCard__inner}>
-      {/* {ProductDataOpenShop && (
+      {ProductDataOpenShop && (
           <div className={style.ProductData}>
             <div className={style.ProductData__block1}>
                 <h3>{ProductsDataShops[0].name}</h3>
@@ -80,7 +84,7 @@ function StoreCard(props) {
             </table>
             </div>
           </div>
-        )} */}
+        )}
         {props.data?.map((item, index) => (
           <div key={index} className={style.StoreCard__data}>
             <h3>{item.name}</h3>

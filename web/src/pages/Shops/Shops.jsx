@@ -16,7 +16,7 @@ useEffect(()=>{
 
   return (
    <div className={style.Shop}>
-        <h1>Склады</h1>
+        <h1>Магазины</h1>
         <StoreCard data={dataShopCard}/>
    </div>
   );

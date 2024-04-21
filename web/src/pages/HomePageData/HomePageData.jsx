@@ -6,7 +6,6 @@ import DataZapr from "../../ui/DataZapros/Data.zapr";
 
 function HomePageData(props) {
   const testData = [
-    { bgcolor: "#F37022", completed: 15 },
     { bgcolor: "#F37022", completed: 30 },
     { bgcolor: "#F37022", completed: 55 },
     { bgcolor: "#F37022", completed: 180 },
@@ -116,6 +115,9 @@ function HomePageData(props) {
             </div>
           </div>
         </div>
+      </div>
+      <div classDataZaprosTestName={style.HomePage__table}>
+
       </div>
     </div>
   );
