@@ -109,25 +109,12 @@ function MapMenu(props) {
     ]);
     props.setActiveItem(item.id);
   };
-
   const funMarshrut = () => {
-    const pointC = [
-      props.listPoints[2].geometry.coordinates[1],
-      props.listPoints[2].geometry.coordinates[0],
-    ]; // координаты точки А
-    const pointM = [
-      props.listPoints[3].geometry.coordinates[1],
-      props.listPoints[3].geometry.coordinates[0],
-    ]; // координаты точки А
-    const pointB = [
-      props.listPoints[0].geometry.coordinates[1],
-      props.listPoints[0].geometry.coordinates[0],
-    ]; // координаты точки А
-    const pointA = [
-      props.listPoints[1].geometry.coordinates[1],
-      props.listPoints[1].geometry.coordinates[0],
-    ]; // координаты точки Б
-    console.log(pointB, pointA);
+    const pointC = `${props.listPoints[2].geometry.coordinates[1]},${props.listPoints[2].geometry.coordinates[0]}`; // координаты точки C
+    const pointM = `${props.listPoints[3].geometry.coordinates[1]},${props.listPoints[3].geometry.coordinates[0]}`; // координаты точки M
+    const pointB = `${props.listPoints[0].geometry.coordinates[1]},${props.listPoints[0].geometry.coordinates[0]}`; // координаты точки B
+    const pointA = `${props.listPoints[1].geometry.coordinates[1]},${props.listPoints[1].geometry.coordinates[0]}`; // координаты точки A
+
     const url = `https://yandex.ru/maps/?rtext=${pointA}~${pointB}~${pointC}~${pointM}&rtt=auto`;
 
     window.open(url, "_blank");
@@ -141,7 +128,7 @@ function MapMenu(props) {
   return (
     <div className={styles.MapMenu}>
       <div className={styles.back}>
-        <Link style={{ textDecoration: "none" }} to="/">
+        <Link to="/../HomePage" style={{ textDecoration: "none" }}>
           <img width={22} src="./img/arrow.png" alt="<" />
           <span>Назад</span>
         </Link>
