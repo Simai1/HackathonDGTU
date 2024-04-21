@@ -10,7 +10,6 @@ router.get('/getProductByShop');
 router.delete('/deleteProduct');
 
 router.post('/changeStatusOrder/:orderId', asyncRoute(orderController.changeStatusOrder));
-router.post('/createOrder', asyncRoute(orderController.createOrder));
 router.get('/getAllOrders', asyncRoute(orderController.getAllOrders));
 
 export default router;

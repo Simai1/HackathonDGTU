@@ -30,6 +30,7 @@ export default class Order extends Model {
                 userId: {
                     type: DataTypes.UUID,
                     allowNull: true,
+                    defaultValue: null,
                 },
                 shopId: {
                     type: DataTypes.UUID,
