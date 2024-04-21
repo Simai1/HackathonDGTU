@@ -78,14 +78,17 @@ function MapMenu(props) {
       <div className={styles.shearch}>
         <input placeholder="Поиск..." type="text" onChange={shearch} />
       </div>
-      <div className={styles.button_container}>
-        <div
-          className={styles.all}
-          onClick={() => setmodalWindText(!modalWindText)}
-        >
-          <span>{modalWindShow}</span>
-          <img width={10} src="./img/arrow_bottom.png" alt=">"></img>
+      <div className={styles.button_block}>
+        <div className={styles.button_container}>
+          <div
+            className={styles.all}
+            onClick={() => setmodalWindText(!modalWindText)}
+          >
+            <span>{modalWindShow}</span>
+            <img width={10} src="./img/arrow_bottom.png" alt=">"></img>
+          </div>
         </div>
+        <div className={styles.but_add}>Добавить</div>
       </div>
       {/* <button onClick={funMarshrut}>Маршрут </button> */}
       {modalWindText && (

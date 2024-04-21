@@ -1,6 +1,7 @@
 .MapComponent {
   overflow: hidden;
   display: flex;
+
   .map {
     display: flex;
   }
@@ -19,6 +20,23 @@
     padding-left: 20px;
     border-radius: 8px;
     box-sizing: border-box;
+    .button_block {
+      display: flex;
+      flex-direction: row;
+    }
+    .but_add {
+      display: flex;
+      background-color: #f37022;
+      border-radius: 8px;
+      color: #fff;
+      height: 32px;
+      padding: 0 10px;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      margin-right: 20px;
+      cursor: pointer;
+    }
     .back {
       display: flex;
       align-items: center;
@@ -27,6 +45,7 @@
       padding-top: 0;
       user-select: none;
       text-decoration: none;
+      margin-right: 0;
 
       img {
         margin-right: 10px;
