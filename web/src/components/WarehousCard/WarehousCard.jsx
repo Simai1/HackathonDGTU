@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import style from "./WarehousCard.module.scss";
 import rezwernutimg from "./../../img/rezwernut.svg";
-import { GetProductsDataWarehouse } from "../../Api/Api";
+import { GetDataClients, GetDataWarehousExport, GetProductsDataWarehouse, SendDataWarehous, SendDataWarehousExport } from "../../Api/Api";
 import axios from "axios";
+import Button from "../../ui/Button/Button";
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 function WarehousCard(props) {
   const [ProductsDataWarehouse, setProductsDataWarehouse] = useState([]);
@@ -78,6 +81,37 @@ function WarehousCard(props) {
     fetchAddresses();
   }, [props.data]);
 
+  //импорт файла
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    console.log("Файл:", file);
+    SendDataWarehous(file)
+      .then((data) => {
+        console.log("Успешно загружено:", data);
+      })
+      .catch((error) => {
+        console.error("Ошибка при загрузке файла:", error);
+      });
+  };
+
+const getDataWarehous = () => {
+    console.log("Вызвал функцию импорта файла");
+    GetDataWarehousExport().then((data) => {
+        generateAndDownloadExcel(data.data)
+    }).catch((error) => {
+        console.error("An error occurred while fetching data:", error);
+    });
+};
+const generateAndDownloadExcel = (data) => {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const excelData = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    saveAs(excelData, 'your_filename.xlsx');
+};
+
+
   return (
     <div className={style.WarehousCard}>
       <div className={style.WarehousCard__inner}>
@@ -86,10 +120,31 @@ function WarehousCard(props) {
             <div className={style.ProductData__block1}>
               <h3>{ProductsDataWarehouse[0].name}</h3>
               <div className={style.ProductData__coord}>
-                <div>
-                  <p>Адрес:</p>
+                <div className={style.ProductData__coord__inner}>
+                    <div>
+                    <p>Адрес:</p>
+                    </div>
+                    <div className={style.ProductData__coordDate}>{adress}</div>
                 </div>
-                <div className={style.ProductData__coordDate}>{adress}</div>
+                <div className={style.Button__block}>
+                    <Button
+                        handleLogin={() => document.getElementById('fileInput').click()}
+                        text="Импортировать"
+                        Bg="#fff"
+                        w="200px"
+                        h="50px"
+                        textColot="#00C300"
+                        border="2px solid #00C300"
+                    />
+                    <input
+                        type="file"
+                        id="fileInput"
+                        style={{ display: 'none' }}
+                        onChange={handleFileUpload}
+                    />      
+                    <Button  text="Экспортировать" handleLogin={getDataWarehous} Bg="#fff" w="200px" h="50px" textColot="#0061D9"  border="2px solid #0061D9"/>
+                    <Button  text="Продать товар" Bg="#F37022" w="200px" h="50px" textColot="#fff"  />
+                </div>
               </div>
             </div>
             <div className={style.ProductData__block2}>

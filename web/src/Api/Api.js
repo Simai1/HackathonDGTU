@@ -72,3 +72,50 @@ export const getAllOrders = async () => {
     throw error;
   }
 };
+
+export const GetDataClientsExport = async (data) => {
+    try {
+      const response = await axios.post(`${server}/parser/downloadProductsFromShop`, data);
+      return response.data;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
+  export const GetDataWarehousExport = async () => {
+    try {
+      const response = await axios.get(`${server}/parser/downloadProductsFromWarehouse`);
+      return response.data;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
+  export const SendDataClientsExport = async (file) => {
+    try {
+      const response = await axios.post(`${server}/parser/uploadProducts`, file);
+      return response.data;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
+  export const SendDataWarehous = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      const response = await axios.post(`${server}/parser/uploadProducts`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Произошла ошибка:", error);
+      throw error;
+    }
+  };

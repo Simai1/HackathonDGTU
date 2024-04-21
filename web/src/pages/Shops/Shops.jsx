@@ -9,6 +9,7 @@ function Shops(props) {
 useEffect(()=>{
     GetdataShop().then((data)=>{
         setdataShopCard(data)
+        console.log("shop", data)
     });
     
 
@@ -16,7 +17,7 @@ useEffect(()=>{
 
   return (
    <div className={style.Shop}>
-        <h1>Магазины</h1>
+        <h1>Клиенты</h1>
         <StoreCard data={dataShopCard}/>
    </div>
   );

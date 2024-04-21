@@ -131,7 +131,7 @@ const HomePage = () => {
       {activeMenu === "Запросы" &&(
         <Transfer data={DataZaprosTesting}/>
       )}
-      {activeMenu === "Магазины" &&(
+      {activeMenu === "Клиенты" &&(
         <Shops/>
       )}
      </div>

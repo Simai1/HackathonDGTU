@@ -1,0 +1,36 @@
+
+.slider {
+    display: flex;
+    background-color: #fff;
+    width: 134vh;
+    height: auto;
+    justify-content: space-between;
+    border-radius: 8px;
+    .slider__inner__data{
+        display: flex;
+    }
+    .slider__firstIMG{  
+        transform: rotate(180deg);
+    }
+    .slider__backIMG{
+        position: relative;
+        top: 5px;
+    }
+    .slider__data{
+        white-space: nowrap;
+        border-radius: 8px;
+        background-color: rgba(243, 110, 32, 0.2);
+        padding: 10px;
+        margin: 12px;
+        position: relative;
+        top: 8px;
+        font-size: 20px;
+    }
+    img{
+        transition: 0.15s linear all;
+    }
+    img:hover{
+        opacity: 0.6;
+        cursor: pointer;
+    }
+  }
