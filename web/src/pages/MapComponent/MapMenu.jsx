@@ -7,6 +7,7 @@ function MapMenu(props) {
   const [sortData, setSortData] = useState(props.listPoints);
   const [modalWindShow, setModalWindShow] = useState("Все");
   const [modalWindText, setmodalWindText] = useState(false);
+  const [modalAddShow, setModalAddShow] = useState(true);
   console.log(props.listPoints);
 
   useEffect(() => {
@@ -88,7 +89,9 @@ function MapMenu(props) {
             <img width={10} src="./img/arrow_bottom.png" alt=">"></img>
           </div>
         </div>
-        <div className={styles.but_add}>Добавить</div>
+        <div onClick={() => setModalAddShow(true)} className={styles.but_add}>
+          Добавить
+        </div>
       </div>
       {/* <button onClick={funMarshrut}>Маршрут </button> */}
       {modalWindText && (
@@ -98,6 +101,42 @@ function MapMenu(props) {
           <span onClick={() => setModalFunck("Клиенты")}>Клиенты</span>
         </div>
       )}
+      {modalAddShow && (
+        <div className={styles.addModal_shadow}>
+          <div className={styles.addModal}>
+            <h3>Добавление объекта</h3>
+            <div className={styles.container_1}>
+              <div className={styles.container_1_left}>
+                <span>Название</span>
+                <input type="text"></input>
+              </div>
+              <div className={styles.container_1_rig}>
+                <span>Тип объекта</span>
+                <div className={styles.container_1_rig_inner}>
+                  <span>Склад</span>
+                  <img src="./img/arrow_bottom.png" alt=">"></img>
+                </div>
+              </div>
+            </div>
+            <div className={styles.container_2}>
+              <div className={styles.bottom}>
+                <span>Адрес</span>
+                <input type="text"></input>
+              </div>
+            </div>
+            <div className={styles.button}>
+              <div
+                onClick={() => setModalAddShow(false)}
+                className={styles.button_left}
+              >
+                Отклонить
+              </div>
+              <div className={styles.button_rig}>Добавить</div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className={styles.container}>
         <div>
           {filtredData.map((item) => (
