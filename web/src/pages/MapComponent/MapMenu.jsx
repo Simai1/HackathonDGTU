@@ -88,8 +88,17 @@ function MapMenu(props) {
       )}
       <div className={styles.container}>
         <div>
-          {filtredData.map((item) => (
-            <span key={item.id} className={styles.MapMenu_span}>
+          {filtredData.map((item, index) => (
+            <span
+              onClick={() =>
+                props.handleClickMenu([
+                  props.listPoints[index].geometry.coordinates[1],
+                  props.listPoints[index].geometry.coordinates[0],
+                ])
+              }
+              key={item.id}
+              className={styles.MapMenu_span}
+            >
               {item.properties.iconCaption}
             </span>
           ))}

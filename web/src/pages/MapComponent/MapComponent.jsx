@@ -43,10 +43,17 @@ function MapComponent() {
       map.current.setCenter(placemarkCoords);
     }
   };
+
+  const handleClickMenu = (coor) => {
+    const placemarkCoords = coor;
+    if (map.current) {
+      map.current.setCenter(placemarkCoords);
+    }
+  };
   return (
     <div className={styles.MapComponent}>
       <div className={styles.menu}>
-        <MapMenu handleClick={handleClick} listPoints={listPoints} />
+        <MapMenu handleClickMenu={handleClickMenu} listPoints={listPoints} />
       </div>
 
       <div className={styles.map} style={{ height: "100vh", width: "100%" }}>
