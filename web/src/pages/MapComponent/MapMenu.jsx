@@ -110,20 +110,28 @@ function MapMenu(props) {
     props.setActiveItem(item.id);
   };
 
-  // const funMarshrut = () => {
-  //   const pointB = [
-  //     props.listPoints[0].geometry.coordinates[1],
-  //     props.listPoints[0].geometry.coordinates[0],
-  //   ]; // координаты точки А
-  //   const pointA = [
-  //     props.listPoints[1].geometry.coordinates[1],
-  //     props.listPoints[1].geometry.coordinates[0],
-  //   ]; // координаты точки Б
-  //   console.log(pointB, pointA);
-  //   const url = `https://yandex.ru/maps/?rtext=${pointA}~${pointB}&rtt=auto`;
+  const funMarshrut = () => {
+    const pointC = [
+      props.listPoints[2].geometry.coordinates[1],
+      props.listPoints[2].geometry.coordinates[0],
+    ]; // координаты точки А
+    const pointM = [
+      props.listPoints[3].geometry.coordinates[1],
+      props.listPoints[3].geometry.coordinates[0],
+    ]; // координаты точки А
+    const pointB = [
+      props.listPoints[0].geometry.coordinates[1],
+      props.listPoints[0].geometry.coordinates[0],
+    ]; // координаты точки А
+    const pointA = [
+      props.listPoints[1].geometry.coordinates[1],
+      props.listPoints[1].geometry.coordinates[0],
+    ]; // координаты точки Б
+    console.log(pointB, pointA);
+    const url = `https://yandex.ru/maps/?rtext=${pointA}~${pointB}~${pointC}~${pointM}&rtt=auto`;
 
-  //   window.open(url, "_blank");
-  // };
+    window.open(url, "_blank");
+  };
 
   const onList = (el) => {
     setModalSpisokShow(false);
@@ -155,7 +163,6 @@ function MapMenu(props) {
           Добавить
         </div>
       </div>
-      {/* <button onClick={funMarshrut}>Маршрут </button> */}
       {modalWindText && (
         <div className={styles.modalWind}>
           <span onClick={() => setModalFunck("Все")}>Все</span>
@@ -233,6 +240,9 @@ function MapMenu(props) {
             </span>
           ))}
         </div>
+      </div>
+      <div className={styles.btn_marsh} onClick={funMarshrut}>
+        Маршрут
       </div>
     </div>
   );
