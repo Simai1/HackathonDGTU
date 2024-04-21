@@ -9,6 +9,7 @@ import fs from "fs"
 import ProductDto from "../dtos/product-dto.js";
 import { map as productNameMap } from '../enums/product.js';
 import { map as measureMap } from '../enums/measure.js';
+import path from 'path';
 
 export default {
     async parseFromXlsx(req, res) {
@@ -110,49 +111,53 @@ export default {
                     warehouseId: existWarehouse.id,
                 }
             })
-
+            const productDtos = [];
+            for(const product of products) {    
+                productDtos.push(new ProductDto(product)); 
+            }
+            res.json({ data: productDtos})
             // Создание нового XLSX файла
-            const workbook = new ExcelJS.Workbook();
-            const worksheet = workbook.addWorksheet('Warehouse');
+            // const workbook = new ExcelJS.Workbook();
+            // const worksheet = workbook.addWorksheet('Warehouse');
 
-            worksheet.columns = [
-                { Header: "S no.", key: "s_no"},
-                { header: 'Product_Name', key: 'name', },
-                { header: 'Product_Cost', key: 'productCost', },
-                { header: 'Manufacture_Date', key: 'manufactureDate', width: 25},
-                { header: 'Expiry_Date', key: 'expiryDate', width: 25},
-                { header: 'SKU', key: 'sku', },
-                { header: 'Region', key: 'region', },
-                { header: 'Product_Amount', key: 'productAmount', },
-                { header: 'Product_Measure', key: 'productMeasure', },
-                { header: 'Product_Volume', key: 'productVolume', },
-                { header: 'Manufacturer', key: 'manufacture', width: 35},
-                { header: 'Product_Quantity', key: 'productQuantity', },
-            ];
-            let counter = 1;
-            // Добавление данных в таблицу
-            products.forEach(product => {
-                product.s_no = counter;
-                product.name = productNameMap[product.productName];
-                product.productMeasure = measureMap[product.productMeasure];
-                console.log(product);
-                worksheet.addRow(product);
-                counter++;
-            });
+            // worksheet.columns = [
+            //     { Header: "S no.", key: "s_no"},
+            //     { header: 'Product_Name', key: 'name', },
+            //     { header: 'Product_Cost', key: 'productCost', },
+            //     { header: 'Manufacture_Date', key: 'manufactureDate', width: 25},
+            //     { header: 'Expiry_Date', key: 'expiryDate', width: 25},
+            //     { header: 'SKU', key: 'sku', },
+            //     { header: 'Region', key: 'region', },
+            //     { header: 'Product_Amount', key: 'productAmount', },
+            //     { header: 'Product_Measure', key: 'productMeasure', },
+            //     { header: 'Product_Volume', key: 'productVolume', },
+            //     { header: 'Manufacturer', key: 'manufacture', width: 35},
+            //     { header: 'Product_Quantity', key: 'productQuantity', },
+            // ];
+            // let counter = 1;
+            // // Добавление данных в таблицу
+            // products.forEach(product => {
+            //     product.s_no = counter;
+            //     product.name = productNameMap[product.productName];
+            //     product.productMeasure = measureMap[product.productMeasure];
+            //     console.log(product);
+            //     worksheet.addRow(product);
+            //     counter++;
+            // });
 
-            const currentDate = new Date().toISOString().slice(0, 10);
+            // const currentDate = new Date().toISOString().slice(0, 10).replace('-','_').replace('-','_');
+            
+            // //const savedPath = path.join(process.env.USERPROFILE, 'Saved');
+            // const fileName = `${name}_${currentDate}.xlsx`.replace('д ','д_');
+            // console.log(fileName);
+            // const filePath = path.join("./download/", fileName);
+            // workbook.xlsx.writeFile(`./download/${filePath}`)
 
-            // Создание пути к файлу с использованием текущей даты
-            const filePath = `${name}_${currentDate}.xlsx`;
-
-            workbook.xlsx.writeFile(`./download/${filePath}`)
-
-            .then(() => {
-                console.log('File saved!')
-                res.json({ status: "File saved"})
-            });
-        
-
+            // .then(() => {
+            //     console.log('File saved!')
+            //     res.json({ status: "File saved"})
+            // });
+            
         } catch (error) {
             console.error(error);
             res.status(500).send('Error exporting data to Excel');
