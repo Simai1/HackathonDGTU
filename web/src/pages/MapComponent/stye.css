@@ -1,0 +1,14 @@
+.iconCaption {
+  position: absolute;
+  background-color: #ffffffe7;
+  transform: translate(30px);
+  box-shadow: 0 0 1px #9f9f9f;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  z-index: -1;
+  white-space: nowrap;
+  padding: 4px;
+  border-radius: 4px;
+}

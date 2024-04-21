@@ -1,0 +1,55 @@
+version: '3'
+services:
+  db:
+    container_name:
+      db
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PWD}
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    ports:
+      - '5432:5432'
+    networks:
+      - axenix-network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  server:
+    container_name: server
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - '3000:3000'
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_USERNAME=${DB_USER}
+      - DB_PASSWORD=${DB_PWD}
+      - DB_PORT=${DB_PORT}
+      - DB_HOST=db
+    networks:
+      - axenix-network
+  
+  client:
+    depends_on:
+      - server
+    container_name: client
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    restart: always
+    networks:
+    - axenix-network
+ 
+networks:
+  axenix-network:
+
+volumes:
+  pgdata:

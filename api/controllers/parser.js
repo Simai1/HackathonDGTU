@@ -4,8 +4,11 @@ import map from "../enums/measure.js"
 import Warehouse from "../models/warehouse.js";
 import Product from "../models/product.js";
 import mapProduct from "../enums/product.js"
+import ExcelJS from "exceljs";
 import fs from "fs"
 import ProductDto from "../dtos/product-dto.js";
+import { map as productNameMap } from '../enums/product.js';
+import { map as measureMap } from '../enums/measure.js';
 
 export default {
     async parseFromXlsx(req, res) {
@@ -85,7 +88,6 @@ export default {
                     console.log(e)
                     return res.status(400).json({ status: "error", message: e.message });
                 }
-
             }
             else console.log(id);
         }
@@ -111,56 +113,49 @@ export default {
 
             // Создание нового XLSX файла
             const workbook = new ExcelJS.Workbook();
-            const worksheet = workbook.addWorksheet('Cities');
-
-            // "id": "882b80d1-fce6-4f60-bc24-829412104d1e", 
-            // "name": "Сливочное масло", наименование товара
-            // "cost": 655.2, - стоимость покупки со склада
-            // "manufactureDate": "1970-01-01T00:00:45.398Z", дата изготовления продукта
-            // "expiryDate": "1970-01-01T00:00:45.404Z", дата, когда продукт испортится
-            // "sku": 1039, обозначающий идентификатор товарной позиции (артикул)
-            // "region": "Санкт-Петербург", регион, где товар производится
-            // "amount": 600, - вес (литры, граммы,) (зависити от measure) в 1 единице продукта
-            // "measure": "г", - мера измерения продукта
-            // "volume": 0.0006, - (пока неиспользуемое поле) - скоко в процентах занимает склад 
-            // "manufacturer": "Маслозавод \"Сливка\"", - производитель
-            // "quantity": 100, - количетсво позиций на складе
-            // "orderId": null - привязка к ордеру
-            // Добавление заголовков столбцов
-            // Product_Name	Product_Cost	Manufacture_Date	Expiry_Date	SKU	Region	Product_Amount	Product_Measure	Product_Volume	Manufacturer	Product_Quantity	Name_Warehouse
+            const worksheet = workbook.addWorksheet('Warehouse');
 
             worksheet.columns = [
+                { Header: "S no.", key: "s_no"},
                 { header: 'Product_Name', key: 'name', },
-                { header: 'Product_Cost', key: '', },
-                { header: 'Manufacture_Date', key: '', },
-                { header: 'Expiry_Date', key: '', },
-                { header: 'SKU', key: '', },
-                { header: 'Region', key: '', },
-                { header: 'Product_Amount', key: '', },
-                { header: 'Product_Measure', key: '', },
-                { header: 'Product_Volume', key: '', },
-                { header: 'Manufacturer', key: '', },
-                { header: 'Product_Quantity', key: '', },
-                { header: 'Name_Warehouse', key: '', },
+                { header: 'Product_Cost', key: 'productCost', },
+                { header: 'Manufacture_Date', key: 'manufactureDate', width: 25},
+                { header: 'Expiry_Date', key: 'expiryDate', width: 25},
+                { header: 'SKU', key: 'sku', },
+                { header: 'Region', key: 'region', },
+                { header: 'Product_Amount', key: 'productAmount', },
+                { header: 'Product_Measure', key: 'productMeasure', },
+                { header: 'Product_Volume', key: 'productVolume', },
+                { header: 'Manufacturer', key: 'manufacture', width: 35},
+                { header: 'Product_Quantity', key: 'productQuantity', },
             ];
-
+            let counter = 1;
             // Добавление данных в таблицу
             products.forEach(product => {
-                const productDto = new ProductDto(product);
-                console.log(productDto);
-                const { city_id, ...cityData } = city.dataValues;
-                worksheet.addRow(cityData);
+                product.s_no = counter;
+                product.name = productNameMap[product.productName];
+                product.productMeasure = measureMap[product.productMeasure];
+                console.log(product);
+                worksheet.addRow(product);
+                counter++;
             });
 
-            // Сохранение файла и отправка его пользователю
-            const buffer = await workbook.xlsx.writeBuffer();
-            res.setHeader('Content-Disposition', 'attachment; filename=cities.xlsx');
-            res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            res.send(buffer);
+            const currentDate = new Date().toISOString().slice(0, 10);
+
+            // Создание пути к файлу с использованием текущей даты
+            const filePath = `${name}_${currentDate}.xlsx`;
+
+            workbook.xlsx.writeFile(`./download/${filePath}`)
+
+            .then(() => {
+                console.log('File saved!')
+                res.json({ status: "File saved"})
+            });
+        
+
         } catch (error) {
             console.error(error);
             res.status(500).send('Error exporting data to Excel');
         }
     }
 }
-
